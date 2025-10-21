@@ -1,0 +1,29 @@
+{
+  "name": "travelapp-project-back-end",
+  "version": "1.0.0",
+  "description": "Travel App - Back-end Web Application Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DellieKate/travelApp-project-back-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DellieKate/travelApp-project-back-end/issues"
+  },
+  "homepage": "https://github.com/DellieKate/travelApp-project-back-end#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "validator": "^13.15.15"
+  }
+}
