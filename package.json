@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Travel App - Back-end Web Application Project",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node src/index.js",
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js"

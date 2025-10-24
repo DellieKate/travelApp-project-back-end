@@ -1,6 +1,7 @@
 import express from "express";
-const app = express();
 import helmet from "helmet";
+
+const app = express();
 
 app.use(helmet());
 
