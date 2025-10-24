@@ -2,6 +2,10 @@
 // such as connecting, disconnecting, seeding, and deleting from the database
 
 import mongoose from "mongoose";
+import { UserModel } from "./entities/User.js";
+import { CityModel } from "./entities/City.js";
+import { WishListModel } from "./entities/wishlist.js";
+
 
 async function dbConnect(){
     try {

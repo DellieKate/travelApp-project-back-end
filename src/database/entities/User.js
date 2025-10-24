@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { validator } from "validator";
+//import { validate } from "validator";
 import * as crypto from "crypto";
 
 let UserSchema = new mongoose.Schema(
@@ -7,6 +7,7 @@ let UserSchema = new mongoose.Schema(
         username: {
             type: String,
             required: true,
+            unique: true,
             minLength: 2
         },
         email: {
@@ -66,6 +67,6 @@ let UserSchema = new mongoose.Schema(
 
 const UserModel = mongoose.model("User", UserSchema);
 
-exports = {
+export {
     UserSchema, UserModel
 }

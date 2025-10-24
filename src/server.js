@@ -1,5 +1,6 @@
 import express from "express";
 import helmet from "helmet";
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -7,6 +8,8 @@ app.use(helmet());
 
 //CORS to help limit what the front-end users can access our API
 import cors from "cors";
+
+
 let corsOption = {
     origin: [
         "http://localhost:5000",
@@ -27,6 +30,15 @@ app.get("/", (request, response) => {
         message: "Hello! Welcome to your Travel App!"
     });
 });
+
+app.get("/databaseHealth", (request, response) => {
+    response.json({
+        models: mongoose.connection.modelNames(),
+        host: mongoose.connection.host
+    });
+});
+
+
 
 //404 route handler, if no route has been activated
 app.all(/.*/, (request, response) => {
