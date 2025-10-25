@@ -20,8 +20,9 @@ const ActivitiesSchema = new mongoose.Schema({
 
 })
 
-const ActivitiesModel = mongoose.model("Activities", ActivitiesSchema);
+//const ActivitiesModel = mongoose.model("Activities", ActivitiesSchema);
 
 export {
-    ActivitiesSchema, ActivitiesModel
+    ActivitiesSchema, 
+    //ActivitiesModel
 }

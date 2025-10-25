@@ -17,8 +17,9 @@ const CityWishListSchema = new mongoose.Schema({
 
 })
 
-const CityWishListModel = mongoose.model("CityWishList", CityWishListSchema);
+//const CityWishListModel = mongoose.model("CityWishList", CityWishListSchema);
 
 export {
-    CityWishListSchema, CityWishListModel
+    CityWishListSchema, 
+    //CityWishListModel
 }

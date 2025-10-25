@@ -16,8 +16,9 @@ const PackingEssentialsSchema = new mongoose.Schema({
     }
 });
 
-const PackingEssentialsModel = mongoose.model("PackingEssentials", PackingEssentialsSchema);
+//const PackingEssentialsModel = mongoose.model("PackingEssentials", PackingEssentialsSchema);
 
 export {
-    PackingEssentialsSchema, PackingEssentialsModel
+    PackingEssentialsSchema, 
+    // PackingEssentialsModel
 }

@@ -17,8 +17,9 @@ const VaxReqSchema = new mongoose.Schema({
 
 });
 
-const VaxReqModel = mongoose.model("VaxReq", VaxReqSchema);
+//const VaxReqModel = mongoose.model("VaxReq", VaxReqSchema);
 
 export {
-    VaxReqSchema, VaxReqModel
+    VaxReqSchema, 
+    //VaxReqModel
 }
