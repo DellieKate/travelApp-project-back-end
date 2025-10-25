@@ -1,6 +1,7 @@
 import express from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
+import router from "./controllers/users/UserRoutes.js";
 
 const app = express();
 
@@ -37,7 +38,8 @@ app.get("/databaseHealth", (request, response) => {
         host: mongoose.connection.host
     });
 });
-
+const userRouter = router
+app.use("/users", userRouter)
 
 
 //404 route handler, if no route has been activated
