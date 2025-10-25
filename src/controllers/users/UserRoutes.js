@@ -1,4 +1,5 @@
 import express from "express";
+import { updateOneUser } from "./UserFunctions.js";
 const router = express.Router();
 
 /* USER ROUTER ENDPOINTS:
@@ -44,10 +45,11 @@ router.post("/one", async (request, response) => {
     });
 });
 
-router.patch("/one", async (request, response) => {
+router.patch("/one/:targetUserID", async (request, response) => {
+    let result = await updateOneUser(request.params.targetUserId, request.body);
 
     response.json({
-        message: "Empty!"
+        result: result
     });
 });
 
