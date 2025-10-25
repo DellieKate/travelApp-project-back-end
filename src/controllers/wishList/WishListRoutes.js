@@ -1,29 +1,14 @@
 import express from "express";
 const router = express.Router();
 
-/* USER ROUTER ENDPOINTS:
-POST login
-POST register
-GET all
-GET one
+/* wishList ROUTER ENDPOINTS:
+GET/READ all
+GET/READ one
 CREATE one
 UPDATE one
 DELETE one
 */
 
-router.post("/login", async (request, response) => {
-
-    response.json({
-        message: "Congratulations! You are now logged in!"
-    });
-});
-
-router.post("/register", async (request, response) => {
-
-    response.json({
-        message: "Congratulations! You are now registered!"
-    });
-});
 router.get("/all", async (request, response) => {
 
     response.json({
