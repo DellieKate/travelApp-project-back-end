@@ -7,18 +7,19 @@ const app = express();
 
 app.use(helmet());
 
-//CORS to help limit what the front-end users can access our API
+
+//CORS (cross-origin resource sharing) - security feature that controls which external websites 
+// are allowed to make requests to our server
 import cors from "cors";
 
-
-let corsOption = {
-    origin: [
-        "http://localhost:5000",
-        "https://deployedReact.App.com"
+let corsOption = {                      // configuration for allowed frontends
+    origin: [                           // list of trusted sites that can call API
+        "http://localhost:5000",        // React app running locally for development
+        "https://travelReact.App.com"   // React app running live for production
     ],
     optionsSuccessStatus: 200
 }
-app.use(cors(corsOption));
+app.use(cors(corsOption)); // activates CORS on the Express server 
 
 
 //Receive JSON body data on requests
@@ -38,6 +39,7 @@ app.get("/databaseHealth", (request, response) => {
         host: mongoose.connection.host
     });
 });
+
 const userRouter = router
 app.use("/users", userRouter)
 
