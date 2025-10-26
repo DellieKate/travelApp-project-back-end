@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const CityWishListSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true, 
-        unique: true
-    },
     city: {
         type: mongoose.Types.ObjectId,
         ref: "City"
@@ -17,9 +12,9 @@ const CityWishListSchema = new mongoose.Schema({
 
 })
 
-//const CityWishListModel = mongoose.model("CityWishList", CityWishListSchema);
+const CityWishListModel = mongoose.model("CityWishList", CityWishListSchema);
 
 export {
     CityWishListSchema, 
-    //CityWishListModel
+    CityWishListModel
 }

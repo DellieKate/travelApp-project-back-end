@@ -4,11 +4,6 @@ import { ActivitiesSchema } from "./Activities.js";
 import { CountrySchema } from "./Country.js";
 
 const CitySchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true, 
-        unique: true
-    },
     name: {
         type: String,
         required: true,

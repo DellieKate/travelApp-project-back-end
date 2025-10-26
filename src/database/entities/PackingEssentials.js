@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
 
 const PackingEssentialsSchema = new mongoose.Schema({
-    id: {
-        type: String,
-        required: true, 
-        unique: true
-    },
     items: [{
         type: String,
     }],
@@ -16,9 +11,9 @@ const PackingEssentialsSchema = new mongoose.Schema({
     }
 });
 
-//const PackingEssentialsModel = mongoose.model("PackingEssentials", PackingEssentialsSchema);
+const PackingEssentialsModel = mongoose.model("PackingEssentials", PackingEssentialsSchema);
 
 export {
     PackingEssentialsSchema, 
-    // PackingEssentialsModel
+    PackingEssentialsModel
 }
