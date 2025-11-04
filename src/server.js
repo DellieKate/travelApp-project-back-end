@@ -2,6 +2,9 @@ import express from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import router from "./controllers/users/UserRoutes.js";
+import countryRouter from "./controllers/country/CountryRoutes.js";
+import vaxRouter from "./controllers/vax/VaxReqRoutes.js";
+import activitiesRouter from "./controllers/activities/ActivityRoutes.js";
 
 const app = express();
 
@@ -41,7 +44,10 @@ app.get("/databaseHealth", (request, response) => {
 });
 
 const userRouter = router
-app.use("/users", userRouter)
+app.use("/users", userRouter);
+app.use("/countries", countryRouter);
+app.use("/vax", vaxRouter);
+app.use("/activities", activitiesRouter);
 
 
 //404 route handler, if no route has been activated
