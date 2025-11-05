@@ -5,6 +5,10 @@ import router from "./controllers/users/UserRoutes.js";
 import countryRouter from "./controllers/country/CountryRoutes.js";
 import vaxRouter from "./controllers/vax/VaxReqRoutes.js";
 import activitiesRouter from "./controllers/activities/ActivityRoutes.js";
+import cityRouter from "./controllers/city/CityRoutes.js";
+import cityWishRouter from "./controllers/cityWishList/CityWishListRoutes.js";
+import packingRouter from "./controllers/packingEssentials/PackingEssentialsRoutes.js";
+import wishListRouter from "./controllers/wishList/WishListRoutes.js";
 
 const app = express();
 
@@ -48,6 +52,10 @@ app.use("/users", userRouter);
 app.use("/countries", countryRouter);
 app.use("/vax", vaxRouter);
 app.use("/activities", activitiesRouter);
+app.use("/cities", cityRouter);
+app.use("/citywish", cityWishRouter);
+app.use("/packing", packingRouter);
+app.use("/wishlist", wishListRouter);
 
 
 //404 route handler, if no route has been activated

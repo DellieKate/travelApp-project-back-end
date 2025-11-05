@@ -1,4 +1,12 @@
 import express from "express";
+import {
+    getAllCities, 
+    getOneCityByID, 
+    createCity, 
+    updateOneCity, 
+    deleteOneCityByID
+} from "./CItyFunctions.js";
+
 const router = express.Router();
 
 /* City ROUTER ENDPOINTS:
@@ -9,37 +17,48 @@ UPDATE one
 DELETE one
 */
 
-router.get("/all", async (request, response) => {
+// GET all
+router.get("/", async (request, response) => {
+    let result = await getAllCities();
 
     response.json({
-        message: "Displayed all data!"
+        result: result
     });
 });
 
-router.get("/one", async (request, response) => {
+// GET one
+router.get("/:targetCityId", async (request, response) => {
+    let result = await getOneCityByID(request.params.targetCityId);
 
     response.json({
-        message: "Displayed one data!"
-    });
-});
-router.post("/one", async (request, response) => {
-
-    response.json({
-        message: "Empty!"
+        result: result
     });
 });
 
-router.patch("/one", async (request, response) => {
+// CREATE one
+router.post("/", async (request, response) => {
+    let result = await createCity(request.body);
 
     response.json({
-        message: "Empty!"
+        result: result
     });
 });
 
-router.delete("/one", async (request, response) => {
+// UPDATE one
+router.patch("/:targetCityId", async (request, response) => {
+    let result = await updateOneCity(request.params.targetCityId, request.body);
 
     response.json({
-        message: "Deleted!"
+        result: result
+    });
+});
+
+// DELETE one
+router.delete("/:targetCityId", async (request, response) => {
+    let result = await deleteOneCityByID(request.params.targetCityId);
+
+    response.json({
+        result: result
     });
 });
 
