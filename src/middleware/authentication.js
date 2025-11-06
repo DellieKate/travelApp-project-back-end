@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-function authenticationToken( request, response, next) {
+function authToken( request, response, next) {
     let token = request.headers.authorization;
 
     if (token) {
@@ -11,7 +11,7 @@ function authenticationToken( request, response, next) {
     }
     
     if (!token) {
-        console.error("Atuthorization failed: No token provided");
+        console.error("Authorization failed: No token provided");
         return response.status(401).json({ error: "Access denied. No token provided."});
     }
 
@@ -26,5 +26,5 @@ function authenticationToken( request, response, next) {
 };
 
 export { 
-    authenticationToken
+    authToken
 };
