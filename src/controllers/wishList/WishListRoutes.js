@@ -1,4 +1,12 @@
 import express from "express";
+import {
+    getAllWishLists,
+    getOneWishListById,
+    createWishList,
+    updateWishList,
+    deleteWishListByID
+} from "./WishListFunctions.js";
+
 const router = express.Router();
 
 /* wishList ROUTER ENDPOINTS:
@@ -9,37 +17,48 @@ UPDATE one
 DELETE one
 */
 
-router.get("/all", async (request, response) => {
+// GET all
+router.get("/", async (request, response) => {
+    let result = await getAllWishLists();
 
     response.json({
-        message: "Displayed all data!"
+        result: result
     });
 });
 
-router.get("/one", async (request, response) => {
+// GET one
+router.get("/:targetWishListId", async (request, response) => {
+    let result = await getOneWishListById(request.params.targetWishListId);
 
     response.json({
-        message: "Displayed one data!"
-    });
-});
-router.post("/one", async (request, response) => {
-
-    response.json({
-        message: "Empty!"
+        result: result
     });
 });
 
-router.patch("/one", async (request, response) => {
+// CREATE one
+router.post("/", async (request, response) => {
+    let result = await createWishList(request.body);
 
     response.json({
-        message: "Empty!"
+        result: result
     });
 });
 
-router.delete("/one", async (request, response) => {
+// UPDATE one
+router.patch("/:targetWishListId", async (request, response) => {
+    let result = await updateWishList(request.params.targetWishListId, request.body);
 
     response.json({
-        message: "Deleted!"
+        result: result
+    });
+});
+
+// DELETE one
+router.delete("/:targetWishListId", async (request, response) => {
+    let result = await deleteWishListByID(request.params.targetWishListId);
+
+    response.json({
+        result: result
     });
 });
 
