@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { VaxReqSchema } from "./VaxReq.js";
-
 
 const CountrySchema = new mongoose.Schema({
         name: {
@@ -18,14 +16,12 @@ const CountrySchema = new mongoose.Schema({
         language: {
             type: String,
         },
-        vax_req: {
-            type: [VaxReqSchema],
-            required: true
+        vaxReq: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "VaxReq"
         }
     });
 
 const CountryModel = mongoose.model("Country", CountrySchema);
 
-export {
-    CountrySchema, CountryModel
-}
+export { CountrySchema, CountryModel }

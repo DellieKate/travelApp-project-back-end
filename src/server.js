@@ -10,6 +10,7 @@ import cityWishRouter from "./controllers/cityWishList/CityWishListRoutes.js";
 import packingRouter from "./controllers/packingEssentials/PackingEssentialsRoutes.js";
 import wishListRouter from "./controllers/wishList/WishListRoutes.js";
 
+
 const app = express();
 
 app.use(helmet());
