@@ -1,4 +1,4 @@
-import { CityModel } from "../database/entities/City.js";
+import { CityModel } from "../../database/entities/City.js";
 
 // Get all cities
 async function getAllCities() {

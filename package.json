@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js"
+    "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
+    "seed": "node src/database/seed.js"
   },
   "repository": {
     "type": "git",

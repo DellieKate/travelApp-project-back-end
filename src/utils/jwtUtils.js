@@ -1,7 +1,4 @@
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-
-dotenv.env.config();
 
 function generateJwt(targetUser) {
     let tokenPayLoad = {
@@ -21,6 +18,6 @@ function generateJwt(targetUser) {
     return newJWT;
 }
 
-exports = {
+export {
     generateJwt
 }
