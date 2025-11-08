@@ -4,13 +4,12 @@
   "description": "Travel App - Back-end Web Application Project",
   "main": "index.js",
   "type": "module",
-"scripts": {
-  "start": "node src/index.js",
-  "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
-  "seed": "node src/database/seed.js",
-  "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles"
-}
-,
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
+    "seed": "node src/database/seed.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DellieKate/travelApp-project-back-end.git"
@@ -25,6 +24,7 @@
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "jsonwebtoken": "^9.0.2",

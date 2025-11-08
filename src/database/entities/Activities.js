@@ -11,6 +11,9 @@ const ActivitiesSchema = new mongoose.Schema({
     city: {
         type: mongoose.Types.ObjectId,
         ref: "City"
+    },
+    location: {
+        type: String,
     }
 })
 

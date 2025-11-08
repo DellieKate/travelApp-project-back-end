@@ -1,35 +1,31 @@
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import validator from "validator";
 import { UserModel } from "../../database/entities/User.js";
 import { generateJwt } from "../../utils/jwtUtils.js";
 
-
-// Register User
-async function registerUser (user) {
-  // Checking for existing email
-  if (await UserModel.findOne ({ email: user.email })) {
+// Register a new user
+async function registerUser(userData) {
+  // Check if email already exists
+  if (await UserModel.findOne({ email: userData.email })) {
     const error = new Error("Email already in use. Try another one.");
     error.status = 409;
     throw error;
-    }
+  }
 
-  // Checking for existing username
-  if (await UserModel.findOne ({ username: user.username })) {
+  // Check if username already exists
+  if (await UserModel.findOne({ username: userData.username })) {
     const error = new Error("Username already in use. Try another one.");
     error.status = 409;
     throw error;
-    }
+  }
 
-  //Create new user
-  const newUser = new UserModel(user);
+  // Create new user
+  const newUser = new UserModel(userData);
   await newUser.save();
   return newUser;
 }
 
-// Login a user 
-async function loginUser ({email, password }) {
-  // Find user by email
+// Login a user
+async function loginUser({ email, password }) {
   const user = await UserModel.findOne({ email });
   if (!user) {
     const error = new Error("Invalid email!");
@@ -37,7 +33,6 @@ async function loginUser ({email, password }) {
     throw error;
   }
 
-  // Compare password
   const isPasswordValid = await user.comparePassword(password);
   if (!isPasswordValid) {
     const error = new Error("Invalid password!");
@@ -45,57 +40,53 @@ async function loginUser ({email, password }) {
     throw error;
   }
 
-  // Generate JWT
-  const token = generateJwt({ id: user._id });
-
-  // Return user data with token
-  return {user, token };
+  const token = generateJwt(user);
+  return { user, token };
 }
 
-// Get all users 
+// Get all users
 async function getAllUsers() {
   return await UserModel.find();
 }
 
-// Get one user by ID
-async function getOneUserByID(UserId) {
+// Get a single user by ID
+async function getOneUserByID(userId) {
   const user = await UserModel.findById(userId);
   if (!user) {
-    const error = new Error ("User not found.");
+    const error = new Error("User not found.");
     error.status = 404;
     throw error;
   }
   return user;
 }
 
-// Update one user
-async function updateOneUser(UserId, newData) {
-  const updatedUser = await UserModel.findByIdAndUpdate(userId, newData, {new: true});
+// Update a user by ID
+async function updateOneUser(userId, newData) {
+  const updatedUser = await UserModel.findByIdAndUpdate(userId, newData, { new: true });
   if (!updatedUser) {
-    const error = new Error ("User not found.");
+    const error = new Error("User not found.");
     error.status = 404;
     throw error;
   }
   return updatedUser;
 }
 
-// Delete one user
-async function deleteOneUserByID(UserId) {
+// Delete a user by ID
+async function deleteOneUserByID(userId) {
   const deletedUser = await UserModel.findByIdAndDelete(userId);
   if (!deletedUser) {
-    const error = new Error ("User not found.");
+    const error = new Error("User not found.");
     error.status = 404;
     throw error;
   }
   return deletedUser;
 }
 
-
-export { 
-    registerUser, 
-    loginUser,
-    getAllUsers, 
-    getOneUserByID,
-    updateOneUser, 
-    deleteOneUserByID
+export {
+  registerUser,
+  loginUser,
+  getAllUsers,
+  getOneUserByID,
+  updateOneUser,
+  deleteOneUserByID
 };

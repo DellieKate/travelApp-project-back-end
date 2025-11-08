@@ -31,13 +31,18 @@ export const getActivityById = async (req, res) => {
 
 export const updateActivity = async (req, res) => {
   try {
-    const activity = await ActivitiesModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    const activity = await ActivitiesModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true } 
+    );
     if (!activity) return res.status(404).json({ message: "Activity not found" });
     res.json(activity);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
+
 
 export const deleteActivity = async (req, res) => {
   try {
