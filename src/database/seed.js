@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import { dbConnect, dbClose } from "./connectionManager.js"
 import { ActivitiesModel } from "./entities/Activities.js"
 import { CityModel } from "./entities/City.js"
@@ -9,15 +8,15 @@ import { UserModel } from "./entities/User.js"
 import { VaxReqModel } from "./entities/VaxReq.js"
 import { WishListModel } from "./entities/WishList.js"
 
-const country = [
-  { name: "Poland", visa_req: "Yes", currency: "Zloty", language: "Polish" }, 
-  { name: "Canada", visa_req: "Yes", currency: "Canadian Dollar", language: "English" }, 
-  { name: "Brazil", visa_req: "Yes", currency: "Brazilian Real", language: "Portuguese" }, 
-  { name: "China", visa_req: "Yes", currency: "Yuan", language: "Mandarin" }
+const vaxReqs = [
+  { vaxReq: "DTP, Polio, MMR, Hep B & A, Varicella, Meningococcal, Influenza, Pneumococcal, COVID 19"}
 ];
 
-const vaxReq = [
-  { vaxReq: "DTP, Polio, MMR, Hep B & A, Varicella, Meningococcal, Influenza, Pneumococcal, COVID 19"}
+const countries = [
+  { name: "Poland", visaReq: "Yes", currency: "Zloty", language: "Polish" }, 
+  { name: "Canada", visaReq: "Yes", currency: "Canadian Dollar", language: "English" }, 
+  { name: "Brazil", visaReq: "Yes", currency: "Brazilian Real", language: "Portuguese" }, 
+  { name: "China", visaReq: "Yes", currency: "Yuan", language: "Mandarin" }
 ];
 
 const activities = [
@@ -28,9 +27,9 @@ const activities = [
 ];
 
 const packingEssentials = [
-    { items: "winter: warm coat, fleece, rain jacket, warm accessories"},
-    { items: "summer: breathable clothing, thongs, sunscreen"},
-    { items: "general: comfortable shoes, sunscreen, hat, bottled water, travel adaptor"},
+    { season: "winter", items: ["warm coat, fleece, rain jacket, warm accessories"]},
+    { season: "summer", items: ["breathable clothing, thongs, sunscreen"]},
+    { season: "general", items: ["comfortable shoes, sunscreen, hat, bottled water, travel adaptor"]},
 ];
 
 const cityData = [
@@ -83,7 +82,9 @@ async function seedDatabase() {
     await dbConnect();
     console.log ("Database connected.");
   
-  const collections = [
+
+// Drop all collections
+  const models = [
     ActivitiesModel,
     CityModel,
     CityWishListModel,
@@ -95,41 +96,42 @@ async function seedDatabase() {
   ];
 
 await Promise.all (
-  collections.map(async (model) => {
+  models.map(async (model) => {
     try {
       await model.collection.drop();
-      console.log(`Dropped collection: ${model.collection.collectionName}`);
+      console.log(`Dropped models: ${model.collection.collectionName}`);
     } catch (error) {
-      if (error.code === 26) {
-        console.log(`Collection ${model.collection.collectionName} does not exist, skipping drop.`);
-      } else throw error;
-    }
+      if (error.code !== 26) throw error;}
   })
 ); 
   
-  //Insert new data
-  const insertedVaxReqs = await VaxReqModel.insertMany(vaxReq);
-  const countriesWithVax = country.map(country => ({...country, vaxReq: insertedVaxReqs[0]._id }));
-  const insertedCountries = await CountryModel.insertMany(countriesWithVax);
+// Insert Data
+  const insertedVaxReqs = await VaxReqModel.insertMany(vaxReqs);
+
+  const insertedCountries = await CountryModel.insertMany(
+    countries.map(c => ({...c, vaxReq: insertedVaxReqs[0]._id }))
+  );
 
   const insertedActivities = await ActivitiesModel.insertMany(activities);
   const insertedEssentials = await PackingEssentialsModel.insertMany(packingEssentials);
 
-  const city = cityData.map(city => ({
-    name: city.name,
-    bestMonths: city.bestMonths,
-    country: insertedCountries.find(c => c.name === city.countryName)?._id,
-    activities: (city.activityNames || []).map(name => insertedActivities.find(a => a.name === name)?._id),
-    packingEssentials: (city.packingKeyWords || []).map(key => insertedEssentials.find(e => e.items.includes(key))?._id),
-
-
-  })) 
-
-  await CityModel.insertMany(city);
+  const insertedCities = await CityModel.insertMany(
+    cityData.map(c => ({
+    name: c.name,
+    bestMonths: c.bestMonths,
+    bestWeather: c.bestWeather,
+    country: insertedCountries.find(co => co.name === c.countryName)?._id,
+    activities: (c.activityNames || []).map(a => insertedActivities.find(act => act.name === a)?._id),
+    packingEssentials: (c.packingKeyWords || []).map(s => insertedEssentials.find(e => e.season === s)?._id)
+    })) 
+  );
   console.log("Cities seeded successfully.");
   
   await UserModel.insertMany(users);
   console.log("Users seeded successfully.");
+
+  //const populatedCities = await CityModel.find();
+  //console.log("Seeded cities with populated data:", json.stringify(populatedCities, null, 2));
 
 
   console.log("Database seeded successfully.");

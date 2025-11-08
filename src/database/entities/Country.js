@@ -5,7 +5,7 @@ const CountrySchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        visa_req: {
+        visaReq: {
             type: String,
             required: true,
         },
@@ -15,6 +15,7 @@ const CountrySchema = new mongoose.Schema({
         },
         language: {
             type: String,
+            required: true,
         },
         vaxReq: {
             type: mongoose.Schema.Types.ObjectId,
