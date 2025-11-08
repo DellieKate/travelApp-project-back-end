@@ -24,7 +24,6 @@ describe("Country API Endpoints", () => {
       visaReq: "Visa on arrival",
       currency: "TST",
       language: "Testish",
-      vaxReq: null
     });
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("_id");
