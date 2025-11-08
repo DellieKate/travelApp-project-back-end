@@ -1,10 +1,12 @@
 import mongoose from "mongoose";
 
 const PackingEssentialsSchema = new mongoose.Schema({
+    season: {
+        type: String,
+    },
     items: [{
         type: String,
     }],
-    // Foreign key relation
     city: {
         type: mongoose.Types.ObjectId,
         ref: "City"

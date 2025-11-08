@@ -1,35 +1,41 @@
 import mongoose from "mongoose";
-import { PackingEssentialsSchema } from "./PackingEssentials.js";
-import { ActivitiesSchema } from "./Activities.js";
-import { CountrySchema } from "./Country.js";
 
 const CitySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
     },
-    bestMonths: {
-        type: String,
-    },
-    bestWeather: {
-        type: String,
-    },
+    bestMonths: String,
+    bestWeather: String,
+    
     country: {
-        type: [CountrySchema],
-        required: true
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Country",
     },
-    activities: {
-        type: [ActivitiesSchema],
-        required: true
-    },
-    packingEssentials: {
-        type: [PackingEssentialsSchema],
-        required: true
-    }
+
+    activities: [{
+        type: mongoose. Schema.Types.ObjectId,
+        ref: "Activities"
+    }],
+
+    packingEssentials: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PackingEssentials"
+    }]
 });
+
+// Auto-populate
+function autoPopulateCity (next) {
+  this.populate(
+    { path: "country", select: "name visaReq currency language -_id", 
+        populate: { path: "vaxReq", select: "vaxReq -_id" }})
+    .populate({ path: "activities", select: "name description -_id"})
+    .populate({ path: "packingEssentials", select: "season items -_id" });
+  next();
+};
+
+CitySchema.pre(/^find/, autoPopulateCity);
 
 const CityModel = mongoose.model("City", CitySchema);
 
-export {
-    CitySchema, CityModel
-}
+export { CitySchema, CityModel }

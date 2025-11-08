@@ -1,4 +1,12 @@
 import express from "express";
+import {
+    getAllWishLists,
+    getOneWishListById,
+    createWishList,
+    updateWishList,
+    deleteWishListByID
+} from "./WishListFunctions.js";
+
 const router = express.Router();
 
 /* wishList ROUTER ENDPOINTS:
@@ -9,38 +17,44 @@ UPDATE one
 DELETE one
 */
 
-router.get("/all", async (request, response) => {
-
-    response.json({
-        message: "Displayed all data!"
-    });
+// GET all
+router.get("/", async (request, response, next) => {
+    try {
+        const wishlist = await getAllWishLists();
+        response.status(200).json({ message: "WishLists retrieved successfully!", wishlist });
+    } catch (error) { next (error); }
 });
 
-router.get("/one", async (request, response) => {
-
-    response.json({
-        message: "Displayed one data!"
-    });
-});
-router.post("/one", async (request, response) => {
-
-    response.json({
-        message: "Empty!"
-    });
+// GET one
+router.get("/:targetWishListId", async (request, response, next) => {
+    try {
+        const wishlist = await getOneWishListById(request.params.targetWishListId);
+        response.status(200).json({ message: "WishList retrieved successfully!", wishlist });
+    } catch (error) { next (error); }
 });
 
-router.patch("/one", async (request, response) => {
-
-    response.json({
-        message: "Empty!"
-    });
+// CREATE one
+router.post("/", async (request, response, next) => {
+    try {
+        const wishlist = await createWishList(request.body);
+        response.status(201).json({ message: "WishList created successfully!", wishlist });
+    } catch (error) { next (error); }
 });
 
-router.delete("/one", async (request, response) => {
+// UPDATE one
+router.patch("/:targetWishListId", async (request, response, next) => {
+    try {
+        const wishlist = await updateWishList(request.params.targetWishListId, request.body);
+        response.status(200).json({ message: "WishList updated successfully!", wishlist });
+    } catch (error) { next (error); }
+});
 
-    response.json({
-        message: "Deleted!"
-    });
+// DELETE one
+router.delete("/:targetWishListId", async (request, response, next) => {
+    try {
+        const wishlist = await deleteWishListByID(request.params.targetWishListId);
+        response.status(200).json({ message: "WishLists deleted successfully!", wishlist });
+    } catch (error) { next (error); }
 });
 
 export default router;

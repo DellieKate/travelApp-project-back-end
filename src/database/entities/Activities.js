@@ -12,7 +12,6 @@ const ActivitiesSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "City"
     }
-
 })
 
 const ActivitiesModel = mongoose.model("Activities", ActivitiesSchema);
