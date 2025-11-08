@@ -8,7 +8,7 @@ async function getAllCityWishLists() {
 
 // Get one CityWishList
 async function getOneCityWishListByID(targetCityWishListId) {
-    let getOneResult = await CityWishListModel.findById(targetEssentialId);
+    let getOneResult = await CityWishListModel.findById(targetCityWishListId);
     return getOneResult;
 }
 
