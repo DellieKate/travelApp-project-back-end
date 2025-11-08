@@ -1,11 +1,12 @@
 import express from "express";
 import { 
-    registerUser, 
-    loginUser,
-    getAllUsers, 
-    getOneUserByID,
-    updateOneUser, 
-    deleteOneUserByID } from "./UserFunctions.js";
+  registerUser, 
+  loginUser,
+  getAllUsers, 
+  getOneUserByID,
+  updateOneUser, 
+  deleteOneUserByID 
+} from "./UserFunctions.js";
 
 const router = express.Router();
 

@@ -1,10 +1,10 @@
 import express from "express";
 import {
-    getAllEssentials,
-    getOneEssentialByID,
-    createEssential,
-    updateOneEssential,
-    deleteOneEssentialByID
+  getAllEssentials,
+  getOneEssentialByID,
+  createEssential,
+  updateOneEssential,
+  deleteOneEssentialByID
 } from "./PackingEssentialsFunctions.js";
 
 const router = express.Router();
@@ -19,42 +19,42 @@ DELETE one
 
 // GET all
 router.get("/", async (request, response, next) => {
-    try {
-        const packessent = await getAllEssentials();
-        response.status(200).json({ message: "Packing Essentials retrieved successfully!", packessent });
-    } catch (error) { next (error); }
+  try {
+      const packessent = await getAllEssentials();
+      response.status(200).json({ message: "Packing Essentials retrieved successfully!", packessent });
+  } catch (error) { next (error); }
 });
 
 // GET one
 router.get("/:targetEssentialId", async (request, response, next) => {
-    try {
-        const packessent = await getOneEssentialByID(request.params.targetEssentialId);
-        response.status(200).json({ message: "Packing Essential retrieved successfully!", packessent });
-    } catch (error) { next (error); }
+  try {
+      const packessent = await getOneEssentialByID(request.params.targetEssentialId);
+      response.status(200).json({ message: "Packing Essential retrieved successfully!", packessent });
+  } catch (error) { next (error); }
 });
 
 // CREATE one
 router.post("/", async (request, response, next) => {
-    try {
-        const packessent = await createEssential(request.body);
-        response.status(201).json({ message: "Packing Essential created successfully!", packessent });
-    } catch (error) { next (error); }
+  try {
+      const packessent = await createEssential(request.body);
+      response.status(201).json({ message: "Packing Essential created successfully!", packessent });
+  } catch (error) { next (error); }
 });
 
 // UPDATE one
 router.patch("/:targetEssentialId", async (request, response, next) => {
-    try {
-        const packessent = await updateOneEssential(request.params.targetEssentialId, request.body);
-        response.status(200).json({ message: "Packing Essential updated successfully!", packessent });
-    } catch (error) { next (error); }
+  try {
+      const packessent = await updateOneEssential(request.params.targetEssentialId, request.body);
+      response.status(200).json({ message: "Packing Essential updated successfully!", packessent });
+  } catch (error) { next (error); }
 });
 
 // DELETE one
 router.delete("/:targetEssentialId", async(request, response, next) => {
-    try {
-        const packessent = await deleteOneEssentialByID(request.params.targetEssentialId);
-        response.status(200).json({ message: "Packing Essential deleted successfully!", packessent });
-    } catch (error) { next (error); }
+  try {
+      const packessent = await deleteOneEssentialByID(request.params.targetEssentialId);
+      response.status(200).json({ message: "Packing Essential deleted successfully!", packessent });
+  } catch (error) { next (error); }
 });
 
 export default router;

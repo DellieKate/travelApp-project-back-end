@@ -1,6 +1,3 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import validator from "validator";
 import { UserModel } from "../../database/entities/User.js";
 import { generateJwt } from "../../utils/jwtUtils.js";
 
@@ -25,7 +22,7 @@ async function registerUser (user) {
   const newUser = new UserModel(user);
   await newUser.save();
   return newUser;
-}
+};
 
 // Login a user 
 async function loginUser ({email, password }) {
@@ -35,7 +32,7 @@ async function loginUser ({email, password }) {
     const error = new Error("Invalid email!");
     error.status = 401;
     throw error;
-  }
+  };
 
   // Compare password
   const isPasswordValid = await user.comparePassword(password);
@@ -43,19 +40,19 @@ async function loginUser ({email, password }) {
     const error = new Error("Invalid password!");
     error.status = 401;
     throw error;
-  }
+  };
 
   // Generate JWT
   const token = generateJwt({ id: user._id });
 
   // Return user data with token
   return {user, token };
-}
+};
 
 // Get all users 
 async function getAllUsers() {
   return await UserModel.find();
-}
+};
 
 // Get one user by ID
 async function getOneUserByID(UserId) {
@@ -66,7 +63,7 @@ async function getOneUserByID(UserId) {
     throw error;
   }
   return user;
-}
+};
 
 // Update one user
 async function updateOneUser(UserId, newData) {
@@ -77,7 +74,7 @@ async function updateOneUser(UserId, newData) {
     throw error;
   }
   return updatedUser;
-}
+};
 
 // Delete one user
 async function deleteOneUserByID(UserId) {
@@ -88,14 +85,14 @@ async function deleteOneUserByID(UserId) {
     throw error;
   }
   return deletedUser;
-}
+};
 
 
 export { 
-    registerUser, 
-    loginUser,
-    getAllUsers, 
-    getOneUserByID,
-    updateOneUser, 
-    deleteOneUserByID
+  registerUser, 
+  loginUser,
+  getAllUsers, 
+  getOneUserByID,
+  updateOneUser, 
+  deleteOneUserByID
 };
