@@ -21,7 +21,7 @@ DELETE one
 
 
 // Register
-router.post("/register", async (request, response) => {
+router.post("/register", async (request, response, next) => {
   try {
     const newUser = await registerUser( req.body);
     response.status(201).json({
@@ -32,7 +32,7 @@ router.post("/register", async (request, response) => {
 
 
 // Login
-router.post("/login", async (request, response) => {
+router.post("/login", async (request, response, next) => {
   try {
     const { user , token } = await loginUser(request.body);
     response.status(200).json({
@@ -42,45 +42,37 @@ router.post("/login", async (request, response) => {
 });
 
 // Get all users
-router.get("/all", async (request, response) => {
+router.get("/all", async (request, response, next) => {
   try {
     const users = await getAllUsers();
-    response.status(200).json(users);
+    response.status(200).json({ message: "Users retrieved successfully!", users });
   } catch (error) { next (error); }
 });
 
 
 // Get one user
-router.get("/one/:userId", async (request, response) => {
+router.get("/one/:userId", async (request, response, next) => {
   try {
     const user = await getOneUserByID(req.params.userId);
-    response.status(200).json(user);
+    response.status(200).json({ message: "User retrieved successfully!", user });
   } catch (error) { next (error); }
 });
+
 
 // Update one user
-router.post("/one/:userId", async (request, response) => {
+router.patch("/one/:userId", async (request, response, next) => {
   try {
     const updatedUser = await updateOneUser(req.params.userId, req.body);
-    response.status(200).json(updatedUser);
-  } catch (error) { next (error); }
-});
-
-
-// Patch one user
-router.patch("/one/:userID", async (request, response) => {
-  try {
-    const updatedUser = await updateOneUser(req.params.userId, req.body);
-    response.status(200).json(updatedUser);
+    response.status(200).json({ message: "User updated successfully!", updatedUser });
   } catch (error) { next (error); }
 });
 
 
 // Delete one user
-router.delete("/one/:userId", async (request, response) => {
+router.delete("/one/:userId", async (request, response, next) => {
   try {
     const deletedUser = await deleteOneUserByID(req.params.userId);
-    response.status(200).json({message: "User deleted", deletedUser });
+    response.status(200).json({ message: "User deleted successfully!", deletedUser });
   } catch (error) { next (error); }
 });
 

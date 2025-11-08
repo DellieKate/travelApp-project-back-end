@@ -18,48 +18,43 @@ DELETE one
 */
 
 // GET all
-router.get("/", async (request, response) => {
-    let result = await getAllCityWishLists();
-
-    response.json({ 
-        result: result
-    });
+router.get("/", async (request, response, next) => {
+    try {
+        const citywshl = await getAllCityWishLists();
+        response.status(200).json({ message: "City WishLists retrieved successfully!", citywshl })
+    } catch (error) { next (error); }
 });
 
 // GET one
-router.get("/:targetCityWishListId", async (request, response) => {
-    let result = await getOneCityWishListByID(request.params.targetCityWishListId);
-
-    response.json({
-        result: result
-    });
+router.get("/:targetCityWishListId", async (request, response, next) => {
+    try {
+        const citywshl = await getOneCityWishListByID(request.params.targetCityWishListId);
+        response.status(200).json({ message: "City WishList retrieved successfully!", citywshl });
+    } catch (error) { next (error); }
 });
 
 // CREATE one
-router.post("/", async (request, response) => {
-    let result = await createCityWishList(request.body);
-
-    response.json({
-        result: result
-    });
+router.post("/", async (request, response, next) => {
+    try {
+        const citywshl = await createCityWishList(request.body);
+        response.status(201).json({ message: "City WishList created successfully!", citywshl });
+    } catch (error) { next (error); }
 });
 
 // UPDATE one
-router.patch("/:targetCityWishListId", async (request, response) => {
-    let result = await updateOneCityWishList(request.params.targetCityWishListId, request.body);
-
-    response.json({
-        result: result
-    });
+router.patch("/:targetCityWishListId", async (request, response, next) => {
+    try {
+        const citywshl = await updateOneCityWishList(request.params.targetCityWishListId, request.body);
+        response.status(200).json({ message: "City WishList updated successfully!", citywshl });
+    } catch (error) { next (error); }
 });
 
 // DELETE one
-router.delete("/:targetCityWishListId", async(request, response) => {
-    let result = await deleteOneCityWishListByID(request.params.targetCityWishListId);
-
-    response.json({
-        result: result
-    });
+router.delete("/:targetCityWishListId", async(request, response, next) => {
+    try {
+        const citywshl = await deleteOneCityWishListByID(request.params.targetCityWishListId);
+        response.status(200).json({ message: "City WishList deleted successfully!", citywshl });
+    } catch (error) { next (error); }
 });
 
 export default router;
