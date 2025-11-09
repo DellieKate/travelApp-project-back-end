@@ -23,7 +23,7 @@ This project is part of a full-stack web application built using the MERN stack 
 
 # Project Overview
 
-**TravelApp (DreamTravel)** is designed to simplify travel planning by allowing vax to:
+**TravelApp** is designed to simplify travel planning by allowing vax to:
 - Explore cities and their best visiting months and weather.
 - See country-specific activities and packing essentials.
 - Maintain up-to-date travel information through CRUD operations.
