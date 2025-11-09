@@ -38,33 +38,41 @@ The application follows modern MERN stack architecture with a RESTful API backen
 # Technologies Used
 
 ## Software and Packages
-1. **MongoDB**, a NoSQL database, allows flexible schema design for varying travel data. Scalable and widely used in web applications.
-2. **Express.js** provides a lightweight backend framewrok optimized for REST APIs. It is an industry standard in Node.js apps.
-3. **Node.js** ensures high-performance, event-driven backend execution. Industry standard for Javascript backend.
-4. **Mongoose**, a ODM (Object Data Modeling) for MongoDB, simplifies data modeling and validation.
+1. **MongoDB**, a NoSQL document-based database that allows flexible schema design for varying travel-related data. Scalable and widely used in web applications like Uber and ebay.
+2. **Express.js** provides a lightweight backend framework optimized for REST APIs. It is an industry standard in Node.js apps, supported by a massive open-source community.
+3. **Node.js** ensures high-performance, event-driven backend execution ideal for real-time web applications. Industry standard for Javascript backend and used by Netflix and Paypal.
+4. **Mongoose**, an ODM (Object Data Modeling) library for MongoDB, simplifies data modeling and validation. Commonly used in production-grade Node.js applications.
 5. **bcrypt** handles secure password storage with industry standard hashing algorithms.
 6. **CORS** enables controlled access to the API from various client applications.
-7. **Helmet** protects against common web vulnerabilites bby setting appropriate security headers.
-8. **jsonwebtoken** manages token based authentication, improving scalability.
-9. **jest** provides testing framework for comprehensive unit and integration testing.
-10. **supertest** facilitates HTTP assertion testing to verify API endpoints.
+7. **Helmet** protects against common web vulnerabilites by setting appropriate security headers.
+8. **jsonwebtoken** manages token based authentication for secure and scalable user sessions.
+9. **jest** provides testing framework for comprehensive unit and integration testing. Most popular testing framework.
+10. **supertest** facilitates HTTP assertion testing to verify API endpoints. Commonly paired with Jest.
 
 ## Hardware Requirements
 - Minimum: 4GB RAM, dual-core CPU, 10GB free disk space
-- Recommended: 8GB+ RAM, quad-core CPU, SSD storage for faster development
+- Recommended: 8GB+ RAM, quad-core CPU, SSD storage for faster build times
 - Internet connection for API calls and package installation
 
 ## Alternatives & Comparison
 1. **Database:** MongoDB vs PostgreSQL, MySQL
-    - MongoDb is schema-less, making it ideal for evolving travel data, while PostgreSQL is relational and  enforces strict schemas.
+    - MongoDb is schema-less, making it ideal for evolving data models, while PostgreSQL is relational and  enforces strict schemas.
 
 2. **Backend:** Express.js vs Koa.js
     - Express has more community support and middleware libraries. Koa is more minimal but requires more setup.
+    
+3. **Language** Node.js vs Python(Flask/Django)
+    - Node.js provides a single-language environment (JavaScript), unlike Python which uses multi-language method.
+
+4. **Testing** Jest + Supertest vs Mocha/Chai
+    - Easier to setup with ES modules.
+
 
 ## Licensing
-All used technologies are open-source with permissive licenses (mainly MIT; MongoDB is server-side license).
+1. MongoDB - server side public license (SSPL)
+2. Express.js, Node.js, Mongoose, bcrypt, CORS, Helmet, JWT, Jest, Supertest - MIT License
 
-
+All technologies used are open-source with permissive licenses that allow reuse, modification and distribution.
 
 # Code Style and Conventions
 The project applies consistent code style and conventions across all files (Airbnb's Javascript Style Guide).
@@ -132,34 +140,38 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## Vaccination Requirements (VaxReq)
         Endpoint                              
------------------------
+|-----------------------------|
+
 /vax/   
 /vax/<int:vax_id>    
 
 ## Activities
-        Endpoint                              
------------------------
+       Endpoint                              
+|-----------------------------|
+
 /activities/   
 /activities/<int:activities_id> 
 
 ## PackingEssentials
         Endpoint                              
------------------------
+|-----------------------------|
+
 /packing/   
 /packing/<int:packing_id>    
 
 
 ## WishList
-       Endpoint                              
------------------------
+        Endpoint                              
+|-----------------------------|
+
 /wishlist/   
 /wishlist/<int:wishlist_id>    
 
 
 ## Users
-
         Endpoint                              
------------------------
+|-----------------------------|
+
 /users/   
 /users/<int:users_id>    
 
