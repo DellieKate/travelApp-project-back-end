@@ -19,51 +19,51 @@ const countries = [
 ];
 
 const activities = [
-    { name: "museum", description: "Explore cultural sites and art galleries."},
-    { name: "restaurants", description: "Dine at local and international sopts."},
-    { name: "hiking", description: "Adventure through natural landscapes."},
-    { name: "beach", description: "Relax and enjoy coastal vibes."}
+  { name: "museum", description: "Explore cultural sites and art galleries."},
+  { name: "restaurants", description: "Dine at local and international sopts."},
+  { name: "hiking", description: "Adventure through natural landscapes."},
+  { name: "beach", description: "Relax and enjoy coastal vibes."}
 ];
 
 const packingEssentials = [
-    { season: "winter", items: ["warm coat, fleece, rain jacket, warm accessories"]},
-    { season: "summer", items: ["breathable clothing, thongs, sunscreen"]},
-    { season: "general", items: ["comfortable shoes, sunscreen, hat, bottled water, travel adaptor"]},
+  { season: "winter", items: ["warm coat, fleece, rain jacket, warm accessories"]},
+  { season: "summer", items: ["breathable clothing, thongs, sunscreen"]},
+  { season: "general", items: ["comfortable shoes, sunscreen, hat, bottled water, travel adaptor"]},
 ];
 
 const cityData = [
   {
-      name: "Lublin", 
-      bestMonths: "May to September",
-      bestWeather: "Spring to Autumn",
-      countryName: "Poland",
-      activityNames: ["museum"],
-      packingKeyWords: ["summer"],
-    },
-    { 
-      name: "Vancouver", 
-      bestMonths: "June to September",
-      bestWeather: "Summer",
-      countryName: "Canada",
-      activityNames: ["hiking"],
-      packingKeyWords: ["summer"]
-    },
-    { 
-      name: "Rio de Janeiro", 
-      bestMonths: "April to May, September to November",
-      bestWeather: "Shoulder season (mild and warm)",
-      countryName: "Brazil",
-      activityNames: ["beach"],
-      packingKeyWords: ["summer"]
-    },
-    { 
-      name: "Shanghai", 
-      bestMonths: "April to May, October to November",
-      bestWeather: "Spring to Autumn",
-      countryName: "China",
-      activityNames: ["restaurants"],
-      packingKeyWords: ["general"]
-    }
+    name: "Lublin", 
+    bestMonths: "May to September",
+    bestWeather: "Spring to Autumn",
+    countryName: "Poland",
+    activityNames: ["museum"],
+    packingKeyWords: ["summer"],
+  },
+  { 
+    name: "Vancouver", 
+    bestMonths: "June to September",
+    bestWeather: "Summer",
+    countryName: "Canada",
+    activityNames: ["hiking"],
+    packingKeyWords: ["summer"]
+  },
+  { 
+    name: "Rio de Janeiro", 
+    bestMonths: "April to May, September to November",
+    bestWeather: "Shoulder season (mild and warm)",
+    countryName: "Brazil",
+    activityNames: ["beach"],
+    packingKeyWords: ["summer"]
+  },
+  { 
+    name: "Shanghai", 
+    bestMonths: "April to May, October to November",
+    bestWeather: "Spring to Autumn",
+    countryName: "China",
+    activityNames: ["restaurants"],
+    packingKeyWords: ["general"]
+  }
 ]; 
 
 const users = [
@@ -86,7 +86,6 @@ async function seedDatabase() {
   const models = [
     ActivitiesModel,
     CityModel,
-    CityWishListModel,
     CountryModel,
     PackingEssentialsModel,
     UserModel,
@@ -128,10 +127,6 @@ await Promise.all (
   
   await UserModel.insertMany(users);
   console.log("Users seeded successfully.");
-
-  //const populatedCities = await CityModel.find();
-  //console.log("Seeded cities with populated data:", json.stringify(populatedCities, null, 2));
-
 
   console.log("Database seeded successfully.");
   } catch (error) {

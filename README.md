@@ -5,7 +5,7 @@ Repo link: https://github.com/DellieKate/travelApp-project-back-end
 Back End Deployment link: https://travelapp-project-back-end.onrender.com
                    
 
-This project is part of a full-staack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows vax to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
+This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
 
 # Table of Contents
 1. [Project Overview](#project-overview)
@@ -23,7 +23,7 @@ This project is part of a full-staack web application built using the MERN stack
 
 # Project Overview
 
-**TravelApp (DreamTravel)** is designed to simplify travel planning by allowing vax to:
+**TravelApp (DreamTravel)** is designed to simplify travel planning by allowing users to:
 - Explore cities and their best visiting months and weather.
 - See country-specific activities and packing essentials.
 - Maintain up-to-date travel information through CRUD operations.

@@ -1,23 +1,23 @@
 import jwt from "jsonwebtoken";
 
 function generateJwt(targetUser) {
-    let tokenPayLoad = {
-        id: targetUserInstance.id
-    };
+  let tokenPayLoad = {
+    id: targetUserInstance.id
+  };
 
-    if (!process.env.JWT_SECRET){
-        throw new Error("Please provide a JWT secret key in the server .env file.");  
-    };
+  if (!process.env.JWT_SECRET){
+    throw new Error("Please provide a JWT secret key in the server .env file.");  
+  };
 
-    let newJWT = jwt.sign(
-        tokenPayLoad,
-        process.env.JWT_SECRET,
-        {expiresIn: "24hr"}
-    );
+  let newJWT = jwt.sign(
+    tokenPayLoad,
+    process.env.JWT_SECRET,
+    {expiresIn: "24hr"}
+  );
 
-    return newJWT;
-}
+  return newJWT;
+};
 
 export {
     generateJwt
-}
+};
