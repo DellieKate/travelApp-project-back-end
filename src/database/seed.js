@@ -1,7 +1,6 @@
 import { dbConnect, dbClose } from "./connectionManager.js"
 import { ActivitiesModel } from "./entities/Activities.js"
 import { CityModel } from "./entities/City.js"
-import { CityWishListModel } from "./entities/CityWishList.js"
 import { CountryModel } from "./entities/Country.js"
 import { PackingEssentialsModel } from "./entities/PackingEssentials.js"
 import { UserModel } from "./entities/User.js"

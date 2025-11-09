@@ -38,7 +38,6 @@ app.use("/countries", countryRouter);
 app.use("/vax", vaxRouter);
 app.use("/activities", activitiesRouter);
 app.use("/cities", cityRouter);
-app.use("/citywish", cityWishRouter);
 app.use("/packing", packingRouter);
 app.use("/wishlist", wishListRouter);
 
