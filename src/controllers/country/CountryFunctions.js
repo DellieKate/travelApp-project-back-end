@@ -1,55 +1,55 @@
 import { CountryModel } from "../../database/entities/Country.js";
 
 // CREATE Country
-export const createCountry = async (req, res) => {
+export const createCountry = async (request, response) => {
   try {
-    const country = new CountryModel(req.body);
+    const country = new CountryModel(request.body);
     await country.save();
-    res.status(201).json(country);
+    response.status(201).json(country);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    response.status(400).json({ message: error.message });
   }
 };
 
 // READ all Countries
-export const getCountries = async (req, res) => {
+export const getCountries = async (request, response) => {
   try {
     const countries = await CountryModel.find();
-    res.json(countries);
+    response.json(countries);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
 
 // READ one Country
-export const getCountryById = async (req, res) => {
+export const getCountryById = async (request, response) => {
   try {
-    const country = await CountryModel.findById(req.params.id);
-    if (!country) return res.status(404).json({ message: "Country not found" });
-    res.json(country);
+    const country = await CountryModel.findById(request.params.id);
+    if (!country) return response.status(404).json({ message: "Country not found" });
+    response.json(country);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
 
 // UPDATE Country
-export const updateCountryById = async (req, res) => {
+export const updateCountryById = async (request, response) => {
   try {
-    const country = await CountryModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!country) return res.status(404).json({ message: "Country not found" });
-    res.json(country);
+    const country = await CountryModel.findByIdAndUpdate(request.params.id, request.body, { new: true });
+    if (!country) return response.status(404).json({ message: "Country not found" });
+    response.json(country);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    response.status(400).json({ message: error.message });
   }
 };
 
 // DELETE Country
-export const deleteCountryById = async (req, res) => {
+export const deleteCountryById = async (request, response) => {
   try {
-    const country = await CountryModel.findByIdAndDelete(req.params.id);
-    if (!country) return res.status(404).json({ message: "Country not found" });
-    res.json({ message: "Country deleted successfully" });
+    const country = await CountryModel.findByIdAndDelete(request.params.id);
+    if (!country) return response.status(404).json({ message: "Country not found" });
+    response.json({ message: "Country deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };

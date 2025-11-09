@@ -1,4 +1,4 @@
-import bcrypt from "bcrypt";
+
 import { UserModel } from "../../database/entities/User.js";
 import { generateJwt } from "../../utils/jwtUtils.js";
 
@@ -50,7 +50,7 @@ async function getAllUsers() {
 };
 
 // Get a single user by ID
-async function getOneUserByID(userId) {
+async function getOneUserById(userId) {
   const user = await UserModel.findById(userId);
   if (!user) {
     const error = new Error("User not found.");
@@ -61,7 +61,7 @@ async function getOneUserByID(userId) {
 };
 
 // Update a user by ID
-async function updateOneUser(userId, newData) {
+async function updateOneUserById(userId, newData) {
   const updatedUser = await UserModel.findByIdAndUpdate(userId, newData, { new: true });
   if (!updatedUser) {
     const error = new Error("User not found.");
@@ -72,7 +72,7 @@ async function updateOneUser(userId, newData) {
 };
 
 // Delete a user by ID
-async function deleteOneUserByID(userId) {
+async function deleteOneUserById(userId) {
   const deletedUser = await UserModel.findByIdAndDelete(userId);
   if (!deletedUser) {
     const error = new Error("User not found.");
@@ -86,7 +86,7 @@ export {
   registerUser,
   loginUser,
   getAllUsers,
-  getOneUserByID,
-  updateOneUser,
-  deleteOneUserByID
+  getOneUserById,
+  updateOneUserById,
+  deleteOneUserById
 };

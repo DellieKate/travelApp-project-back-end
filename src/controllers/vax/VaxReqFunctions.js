@@ -1,50 +1,50 @@
 import { VaxReqModel } from "../../database/entities/VaxReq.js";
 
-export const createVaxReq = async (req, res) => {
+export const createVaxReq = async (request, response) => {
   try {
-    const vaxReq = new VaxReqModel(req.body);
+    const vaxReq = new VaxReqModel(request.body);
     await vaxReq.save();
-    res.status(201).json(vaxReq);
+    response.status(201).json(vaxReq);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    response.status(400).json({ message: error.message });
   }
 };
 
-export const getVaxReqs = async (req, res) => {
+export const getVaxReqs = async (request, response) => {
   try {
     const vaxReqs = await VaxReqModel.find();
-    res.json(vaxReqs);
+    response.json(vaxReqs);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
 
-export const getVaxReqById = async (req, res) => {
+export const getVaxReqById = async (request, response) => {
   try {
-    const vaxReq = await VaxReqModel.findById(req.params.id);
-    if (!vaxReq) return res.status(404).json({ message: "Vax requirement not found" });
-    res.json(vaxReq);
+    const vaxReq = await VaxReqModel.findById(request.params.id);
+    if (!vaxReq) return response.status(404).json({ message: "Vax requirement not found" });
+    response.json(vaxReq);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
 
-export const updateVaxReqById = async (req, res) => {
+export const updateVaxReqById = async (request, response) => {
   try {
-    const vaxReq = await VaxReqModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!vaxReq) return res.status(404).json({ message: "Vax requirement not found" });
-    res.json(vaxReq);
+    const vaxReq = await VaxReqModel.findByIdAndUpdate(request.params.id, request.body, { new: true });
+    if (!vaxReq) return response.status(404).json({ message: "Vax requirement not found" });
+    response.json(vaxReq);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    response.status(400).json({ message: error.message });
   }
 };
 
-export const deleteVaxReqById = async (req, res) => {
+export const deleteVaxReqById = async (request, response) => {
   try {
-    const vaxReq = await VaxReqModel.findByIdAndDelete(req.params.id);
-    if (!vaxReq) return res.status(404).json({ message: "Vax requirement not found" });
-    res.json({ message: "Vax requirement deleted successfully" });
+    const vaxReq = await VaxReqModel.findByIdAndDelete(request.params.id);
+    if (!vaxReq) return response.status(404).json({ message: "Vax requirement not found" });
+    response.json({ message: "Vax requirement deleted successfully" });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    response.status(500).json({ message: error.message });
   }
 };
