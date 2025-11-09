@@ -4,8 +4,8 @@ import {
   createActivity,
   getActivities,
   getActivityById,
-  updateActivity,
-  deleteActivity
+  updateActivityById,
+  deleteActivityById
 } from "./ActivitiesFunctions.js";
 
 const router = express.Router();
@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/", createActivity);
 router.get("/", getActivities);
 router.get("/:id", getActivityById);
-router.put("/:id", updateActivity);
-router.delete("/:id", deleteActivity);
+router.patch("/:id", updateActivityById);
+router.delete("/:id", deleteActivityById);
 
 export default router;

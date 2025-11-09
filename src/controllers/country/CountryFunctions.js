@@ -33,7 +33,7 @@ export const getCountryById = async (req, res) => {
 };
 
 // UPDATE Country
-export const updateCountry = async (req, res) => {
+export const updateCountryById = async (req, res) => {
   try {
     const country = await CountryModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!country) return res.status(404).json({ message: "Country not found" });
@@ -44,7 +44,7 @@ export const updateCountry = async (req, res) => {
 };
 
 // DELETE Country
-export const deleteCountry = async (req, res) => {
+export const deleteCountryById = async (req, res) => {
   try {
     const country = await CountryModel.findByIdAndDelete(req.params.id);
     if (!country) return res.status(404).json({ message: "Country not found" });
