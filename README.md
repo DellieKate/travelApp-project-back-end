@@ -1,11 +1,13 @@
-# travelApp Back-end Web Application Project
+# TravelApp Backend Project
 
 Repo link: https://github.com/DellieKate/travelApp-project-back-end 
 
 Back End Deployment link: https://travelapp-project-back-end.onrender.com
-                        DreamTravel (custom name)
+                   
 
-This project is part of a full-staack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
+This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
+
+
 
 # Table of Contents
 1. [Project Overview](#project-overview)
@@ -20,40 +22,57 @@ This project is part of a full-staack web application built using the MERN stack
 6. [Usage](#usage)
 7. [Deployment](#deployment)
 
+
+
 # Project Overview
 
-DreamTravel is designed to simplify travel planning by allowing users to:
+**TravelApp** is designed to simplify travel planning by allowing vax to:
 - Explore cities and their best visiting months and weather.
 - See country-specific activities and packing essentials.
 - Maintain up-to-date travel information through CRUD operations.
 
 The application follows modern MERN stack architecture with a RESTful API backend and a responsive REACT frontend (development in progress.)
 
+
+
 # Technologies Used
 
 ## Software and Packages
-1. MongoDB, a NoSQL database, allows flexible schema design for varying travel data. Scalable and widely used in web applications.
-2. Express.js provides a lightweight backend framewrok optimized for REST APIs. It is an industry standard in Node.js apps.
-3. Node.js ensures high-performance, event-driven backend execution. Industry standard for Javascript backend.
-4. Mongoose, a ODM (Object Data Modeling) for MongoDB, simplifies data modeling and validation.
-5. bcrypt handles secure password storage with industry standard hashing algorithms.
-6. CORS enables controlled access to the API from various client applications.
-7. Helmet protects against common web vulnerabilites bby setting appropriate security headers.
-8. jsonwebtoken manages token based authentication, improving scalability.
+1. **MongoDB**, a NoSQL document-based database that allows flexible schema design for varying travel-related data. Scalable and widely used in web applications like Uber and ebay.
+2. **Express.js** provides a lightweight backend framework optimized for REST APIs. It is an industry standard in Node.js apps, supported by a massive open-source community.
+3. **Node.js** ensures high-performance, event-driven backend execution ideal for real-time web applications. Industry standard for Javascript backend and used by Netflix and Paypal.
+4. **Mongoose**, an ODM (Object Data Modeling) library for MongoDB, simplifies data modeling and validation. Commonly used in production-grade Node.js applications.
+5. **bcrypt** handles secure password storage with industry standard hashing algorithms.
+6. **CORS** enables controlled access to the API from various client applications.
+7. **Helmet** protects against common web vulnerabilites by setting appropriate security headers.
+8. **jsonwebtoken** manages token based authentication for secure and scalable user sessions.
+9. **jest** provides testing framework for comprehensive unit and integration testing. Most popular testing framework.
+10. **supertest** facilitates HTTP assertion testing to verify API endpoints. Commonly paired with Jest.
 
 ## Hardware Requirements
 - Minimum: 4GB RAM, dual-core CPU, 10GB free disk space
-- Recommended: 8GB+ RAM, quad-core CPU, SSD storage for faster development
+- Recommended: 8GB+ RAM, quad-core CPU, SSD storage for faster build times
 - Internet connection for API calls and package installation
 
 ## Alternatives & Comparison
-1. Database: MongoDB vs PostgreSQL, MySQL
-    - MongoDb is schema-less, making it ideal for evolving travel data, while PostgreSQL is relational and  enforces strict schemas.
-2. Backend: Express.js vs Koa.js
+1. **Database:** MongoDB vs PostgreSQL, MySQL
+    - MongoDb is schema-less, making it ideal for evolving data models, while PostgreSQL is relational and  enforces strict schemas.
+
+2. **Backend:** Express.js vs Koa.js
     - Express has more community support and middleware libraries. Koa is more minimal but requires more setup.
+    
+3. **Language** Node.js vs Python(Flask/Django)
+    - Node.js provides a single-language environment (JavaScript), unlike Python which uses multi-language method.
+
+4. **Testing** Jest + Supertest vs Mocha/Chai
+    - Easier to setup with ES modules.
+
 
 ## Licensing
-All used technologies are open-source with permissive licenses (mainly MIT; MongoDB is server-side license).
+1. MongoDB - server side public license (SSPL)
+2. Express.js, Node.js, Mongoose, bcrypt, CORS, Helmet, JWT, Jest, Supertest - MIT License
+
+All technologies used are open-source with permissive licenses that allow reuse, modification and distribution.
 
 # Code Style and Conventions
 The project applies consistent code style and conventions across all files (Airbnb's Javascript Style Guide).
@@ -67,33 +86,96 @@ The project applies consistent code style and conventions across all files (Airb
 
 This ensures readable, maintainable and scalable code with no breaches in coding standards.
 
+
+
 # Installation and Setup
 1. Clone the repository
-`git clone https://github.com/DellieKate/travelApp-project-back-end`
-`cd travelApp`
+
+    `git clone https://github.com/DellieKate/travelApp-project-back-end`
+
+    `cd travelApp`
+
 2. Install dependencies
-`npm install`
+
+    `npm install`
+
 3. Start server
-`npm start`
+
+    `npm start`
+
+
 
 # Database Seeding
 Seed the database with initial travel data:
-`npm run seed`
+    
+   `npm run seed`
 
 This populates cities, countries, activities, and packing essentials.
+
+
 
 # Usage
 - Access `http://localhost:3000` 
 - Use the REST API endpoints to fetch, create, update or delete travel data: 
 
-/users
-/countries
-/vax
-/activities
-/cities
-/citywish
-/packing
-/wishlist
+## Cities
+
+Description              | Methods    |     Endpoint                              
+------------------------ |----------  |----------------------------------
+Create a new city        | POST       | /cities/                    
+Get all cities           | GET        | /cities/         
+Get a single city by Id  | GET        | /cities/<int:cities_id>
+Update city              | PATCH      | /cities/<int:cities_id>
+Delete city              | DELETE     | /cities/<int:cities_id>
+
+## Countries
+
+Description                    | Methods    |     Endpoint                              
+------------------------------ |----------  |----------------------------------
+Create a new country           | POST       | /countries/      
+Get all countries              | GET        | /countries/                                            
+Get a single country by Id     | GET        | /countries/<int:countries_id>              
+Update country details         | PATCH      | /countries/<int:countries_id> 
+Delete country record          | DELETE     | /countries/<int:countries_id>    
+
+## Vaccination Requirements (VaxReq)
+        Endpoint                              
+|-----------------------------|
+
+/vax/   
+/vax/<int:vax_id>    
+
+## Activities
+       Endpoint                              
+|-----------------------------|
+
+/activities/   
+/activities/<int:activities_id> 
+
+## PackingEssentials
+        Endpoint                              
+|-----------------------------|
+
+/packing/   
+/packing/<int:packing_id>    
+
+
+## WishList
+        Endpoint                              
+|-----------------------------|
+
+/wishlist/   
+/wishlist/<int:wishlist_id>    
+
+
+## Users
+        Endpoint                              
+|-----------------------------|
+
+/users/   
+/users/<int:users_id>    
+
+
 
 # Deployment
 

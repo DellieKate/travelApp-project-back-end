@@ -22,4 +22,4 @@ const CountrySchema = new mongoose.Schema({
 
 const CountryModel = mongoose.model("Country", CountrySchema);
 
-export { CountrySchema, CountryModel }
+export { CountrySchema, CountryModel };

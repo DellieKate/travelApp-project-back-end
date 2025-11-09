@@ -1,20 +1,19 @@
 import mongoose from "mongoose";
 
 const VaxReqSchema = new mongoose.Schema({
-    vaxReq: [{
-        type: String,
-    }],
-    // Foreign key relation
-    country: {
-        type: mongoose.Types.ObjectId,
-        ref: "Country"
-    }
-
+	vaxReq: [{
+			type: String,
+	}],
+	// Foreign key relation
+	country: {
+			type: mongoose.Types.ObjectId,
+			ref: "Country"
+	}
 });
 
 const VaxReqModel = mongoose.model("VaxReq", VaxReqSchema);
 
 export {
-    VaxReqSchema, 
-    VaxReqModel
-}
+	VaxReqSchema, 
+	VaxReqModel
+};

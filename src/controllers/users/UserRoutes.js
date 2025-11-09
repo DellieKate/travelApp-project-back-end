@@ -1,11 +1,11 @@
 import express from "express";
-import {
-  registerUser,
+import { 
+  registerUser, 
   loginUser,
-  getAllUsers,
-  getOneUserByID,
-  updateOneUser,
-  deleteOneUserByID
+  getAllUsers, 
+  getOneUserById,
+  updateOneUserById, 
+  deleteOneUserById, 
 } from "./UserFunctions.js";
 
 const router = express.Router();

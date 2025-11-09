@@ -29,7 +29,7 @@ export const getVaxReqById = async (req, res) => {
   }
 };
 
-export const updateVaxReq = async (req, res) => {
+export const updateVaxReqById = async (req, res) => {
   try {
     const vaxReq = await VaxReqModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!vaxReq) return res.status(404).json({ message: "Vax requirement not found" });
@@ -39,7 +39,7 @@ export const updateVaxReq = async (req, res) => {
   }
 };
 
-export const deleteVaxReq = async (req, res) => {
+export const deleteVaxReqById = async (req, res) => {
   try {
     const vaxReq = await VaxReqModel.findByIdAndDelete(req.params.id);
     if (!vaxReq) return res.status(404).json({ message: "Vax requirement not found" });

@@ -1,27 +1,28 @@
 import mongoose from "mongoose";
 
 const CitySchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    bestMonths: String,
-    bestWeather: String,
-    
-    country: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Country",
-    },
+  name: {
+      type: String,
+      required: true,
+      unique: true,
+  },
+  bestMonths: String,
+  bestWeather: String,
+  
+  country: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Country"
+  },
 
-    activities: [{
-        type: mongoose. Schema.Types.ObjectId,
-        ref: "Activities"
-    }],
+  activities: [{
+      type: mongoose. Schema.Types.ObjectId,
+      ref: "Activities"
+  }],
 
-    packingEssentials: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "PackingEssentials"
-    }]
+  packingEssentials: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PackingEssentials"
+  }]
 });
 
 // Auto-populate
@@ -38,4 +39,4 @@ CitySchema.pre(/^find/, autoPopulateCity);
 
 const CityModel = mongoose.model("City", CitySchema);
 
-export { CitySchema, CityModel }
+export { CitySchema, CityModel };

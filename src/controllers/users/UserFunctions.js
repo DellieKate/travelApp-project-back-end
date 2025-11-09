@@ -22,7 +22,7 @@ async function registerUser(userData) {
   const newUser = new UserModel(userData);
   await newUser.save();
   return newUser;
-}
+};
 
 // Login a user
 async function loginUser({ email, password }) {
@@ -31,14 +31,14 @@ async function loginUser({ email, password }) {
     const error = new Error("Invalid email!");
     error.status = 401;
     throw error;
-  }
+  };
 
   const isPasswordValid = await user.comparePassword(password);
   if (!isPasswordValid) {
     const error = new Error("Invalid password!");
     error.status = 401;
     throw error;
-  }
+  };
 
   const token = generateJwt(user);
   return { user, token };
@@ -47,7 +47,7 @@ async function loginUser({ email, password }) {
 // Get all users
 async function getAllUsers() {
   return await UserModel.find();
-}
+};
 
 // Get a single user by ID
 async function getOneUserByID(userId) {
@@ -58,7 +58,7 @@ async function getOneUserByID(userId) {
     throw error;
   }
   return user;
-}
+};
 
 // Update a user by ID
 async function updateOneUser(userId, newData) {
@@ -69,7 +69,7 @@ async function updateOneUser(userId, newData) {
     throw error;
   }
   return updatedUser;
-}
+};
 
 // Delete a user by ID
 async function deleteOneUserByID(userId) {
@@ -80,7 +80,7 @@ async function deleteOneUserByID(userId) {
     throw error;
   }
   return deletedUser;
-}
+};
 
 export {
   registerUser,

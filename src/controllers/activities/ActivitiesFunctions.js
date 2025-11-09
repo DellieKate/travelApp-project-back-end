@@ -29,7 +29,7 @@ export const getActivityById = async (req, res) => {
   }
 };
 
-export const updateActivity = async (req, res) => {
+export const updateActivityById = async (req, res) => {
   try {
     const activity = await ActivitiesModel.findByIdAndUpdate(
       req.params.id,
