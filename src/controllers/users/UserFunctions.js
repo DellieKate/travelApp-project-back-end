@@ -55,7 +55,7 @@ async function getAllUsers() {
 };
 
 // Get one user by ID
-async function getOneUserByID(UserId) {
+async function getOneUserById(userId) {
   const user = await UserModel.findById(userId);
   if (!user) {
     const error = new Error ("User not found.");
@@ -66,7 +66,7 @@ async function getOneUserByID(UserId) {
 };
 
 // Update one user
-async function updateOneUser(UserId, newData) {
+async function updateOneUserById(userId, newData) {
   const updatedUser = await UserModel.findByIdAndUpdate(userId, newData, {new: true});
   if (!updatedUser) {
     const error = new Error ("User not found.");
@@ -77,7 +77,7 @@ async function updateOneUser(UserId, newData) {
 };
 
 // Delete one user
-async function deleteOneUserByID(UserId) {
+async function deleteOneUserById(userId) {
   const deletedUser = await UserModel.findByIdAndDelete(userId);
   if (!deletedUser) {
     const error = new Error ("User not found.");
@@ -92,7 +92,7 @@ export {
   registerUser, 
   loginUser,
   getAllUsers, 
-  getOneUserByID,
-  updateOneUser, 
-  deleteOneUserByID
+  getOneUserById,
+  updateOneUserById, 
+  deleteOneUserById
 };

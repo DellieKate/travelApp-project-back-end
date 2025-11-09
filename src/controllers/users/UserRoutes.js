@@ -3,9 +3,9 @@ import {
   registerUser, 
   loginUser,
   getAllUsers, 
-  getOneUserByID,
-  updateOneUser, 
-  deleteOneUserByID 
+  getOneUserById,
+  updateOneUserById, 
+  deleteOneUserById, 
 } from "./UserFunctions.js";
 
 const router = express.Router();
@@ -24,7 +24,7 @@ DELETE one
 // Register
 router.post("/register", async (request, response, next) => {
   try {
-    const newUser = await registerUser( req.body);
+    const newUser = await registerUser( request.body);
     response.status(201).json({
         message: "Congratulations! You are now registered!"
     });
@@ -43,7 +43,7 @@ router.post("/login", async (request, response, next) => {
 });
 
 // Get all users
-router.get("/all", async (request, response, next) => {
+router.get("/", async (request, response, next) => {
   try {
     const users = await getAllUsers();
     response.status(200).json({ message: "Users retrieved successfully!", users });
@@ -52,27 +52,27 @@ router.get("/all", async (request, response, next) => {
 
 
 // Get one user
-router.get("/one/:userId", async (request, response, next) => {
+router.get("/:userId", async (request, response, next) => {
   try {
-    const user = await getOneUserByID(req.params.userId);
+    const user = await getOneUserById(request.params.userId);
     response.status(200).json({ message: "User retrieved successfully!", user });
   } catch (error) { next (error); }
 });
 
 
 // Update one user
-router.patch("/one/:userId", async (request, response, next) => {
+router.patch("/:userId", async (request, response, next) => {
   try {
-    const updatedUser = await updateOneUser(req.params.userId, req.body);
+    const updatedUser = await updateOneUserById(request.params.userId, request.body);
     response.status(200).json({ message: "User updated successfully!", updatedUser });
   } catch (error) { next (error); }
 });
 
 
 // Delete one user
-router.delete("/one/:userId", async (request, response, next) => {
+router.delete("/:userId", async (request, response, next) => {
   try {
-    const deletedUser = await deleteOneUserByID(req.params.userId);
+    const deletedUser = await deleteOneUserById(request.params.userId);
     response.status(200).json({ message: "User deleted successfully!", deletedUser });
   } catch (error) { next (error); }
 });
