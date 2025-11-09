@@ -7,6 +7,8 @@ Back End Deployment link: https://travelapp-project-back-end.onrender.com
 
 This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
 
+
+
 # Table of Contents
 1. [Project Overview](#project-overview)
 2. [Technologies Used](#technologies-used)
@@ -21,6 +23,7 @@ This project is part of a full-stack web application built using the MERN stack 
 7. [Deployment](#deployment)
 
 
+
 # Project Overview
 
 **TravelApp** is designed to simplify travel planning by allowing vax to:
@@ -29,6 +32,7 @@ This project is part of a full-stack web application built using the MERN stack 
 - Maintain up-to-date travel information through CRUD operations.
 
 The application follows modern MERN stack architecture with a RESTful API backend and a responsive REACT frontend (development in progress.)
+
 
 
 # Technologies Used
@@ -61,6 +65,7 @@ The application follows modern MERN stack architecture with a RESTful API backen
 All used technologies are open-source with permissive licenses (mainly MIT; MongoDB is server-side license).
 
 
+
 # Code Style and Conventions
 The project applies consistent code style and conventions across all files (Airbnb's Javascript Style Guide).
  - **ES6 modules:** import/export syntax used consistently
@@ -74,11 +79,12 @@ The project applies consistent code style and conventions across all files (Airb
 This ensures readable, maintainable and scalable code with no breaches in coding standards.
 
 
+
 # Installation and Setup
 1. Clone the repository
 
     `git clone https://github.com/DellieKate/travelApp-project-back-end`
-    
+
     `cd travelApp`
 
 2. Install dependencies
@@ -90,12 +96,14 @@ This ensures readable, maintainable and scalable code with no breaches in coding
     `npm start`
 
 
+
 # Database Seeding
 Seed the database with initial travel data:
     
    `npm run seed`
 
 This populates cities, countries, activities, and packing essentials.
+
 
 
 # Usage
@@ -124,6 +132,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## VaxReq
  - same methods (POST, GET, PATCH, DELETE)
+
         Endpoint                              
 -----------------------
 /vax/   
@@ -131,6 +140,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## Activities
  - same methods (POST, GET, PATCH, DELETE)
+
         Endpoint                              
 -----------------------
 /activities/   
@@ -138,6 +148,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## PackingEssentials
  - same methods (POST, GET, PATCH, DELETE)
+
         Endpoint                              
 -----------------------
 /packing/   
@@ -145,6 +156,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## WishList
  - same methods (POST, GET, PATCH, DELETE)
+
         Endpoint                              
 -----------------------
 /wishlist/   
@@ -152,10 +164,12 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 ## Users
  - same methods (POST, GET, PATCH, DELETE)
+
         Endpoint                              
 -----------------------
 /users/   
 /users/<int:users_id>    
+
 
 
 # Deployment
