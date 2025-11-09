@@ -10,71 +10,83 @@ import {
 
 const router = express.Router();
 
-/* USER ROUTER ENDPOINTS:
-POST login
-POST register
-GET all
-GET one
-CREATE one
-UPDATE one
-DELETE one
-*/
-
-
-// Register
-router.post("/register", async (request, response, next) => {
+// POST /users/register
+router.post("/register", async (req, res, next) => {
   try {
-    const newUser = await registerUser( request.body);
-    response.status(201).json({
-        message: "Congratulations! You are now registered!"
+    const newUser = await registerUser(req.body);
+    res.status(201).json({
+      message: "Congratulations! You are now registered!",
+      user: newUser
     });
-  } catch (error) { next (error); }
+  } catch (error) {
+    next(error);
+  }
 });
 
-
-// Login
-router.post("/login", async (request, response, next) => {
+// POST /users/login
+router.post("/login", async (req, res, next) => {
   try {
-    const { user , token } = await loginUser(request.body);
-    response.status(200).json({
-        message: "Congratulations! You are now logged in!", user, token 
+    const { user, token } = await loginUser(req.body);
+    res.status(200).json({
+      message: "Congratulations! You are now logged in!",
+      user,
+      token
     });
-  } catch (error) { next (error); }
+  } catch (error) {
+    next(error);
+  }
 });
 
-// Get all users
-router.get("/", async (request, response, next) => {
+// GET /users/all
+router.get("/all", async (req, res, next) => {
   try {
     const users = await getAllUsers();
-    response.status(200).json({ message: "Users retrieved successfully!", users });
-  } catch (error) { next (error); }
+    res.status(200).json({
+      message: "Users retrieved successfully!",
+      users
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-
-// Get one user
-router.get("/:userId", async (request, response, next) => {
+// GET /users/one/:userId
+router.get("/one/:userId", async (req, res, next) => {
   try {
-    const user = await getOneUserById(request.params.userId);
-    response.status(200).json({ message: "User retrieved successfully!", user });
-  } catch (error) { next (error); }
+    const user = await getOneUserByID(req.params.userId);
+    res.status(200).json({
+      message: "User retrieved successfully!",
+      user
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-
-// Update one user
-router.patch("/:userId", async (request, response, next) => {
+// PATCH /users/one/:userId
+router.patch("/one/:userId", async (req, res, next) => {
   try {
-    const updatedUser = await updateOneUserById(request.params.userId, request.body);
-    response.status(200).json({ message: "User updated successfully!", updatedUser });
-  } catch (error) { next (error); }
+    const updatedUser = await updateOneUser(req.params.userId, req.body);
+    res.status(200).json({
+      message: "User updated successfully!",
+      updatedUser
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
-
-// Delete one user
-router.delete("/:userId", async (request, response, next) => {
+// DELETE /users/one/:userId
+router.delete("/one/:userId", async (req, res, next) => {
   try {
-    const deletedUser = await deleteOneUserById(request.params.userId);
-    response.status(200).json({ message: "User deleted successfully!", deletedUser });
-  } catch (error) { next (error); }
+    const deletedUser = await deleteOneUserByID(req.params.userId);
+    res.status(200).json({
+      message: "User deleted successfully!",
+      deletedUser
+    });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export default router;
