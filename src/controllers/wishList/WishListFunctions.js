@@ -19,13 +19,13 @@ async function createWishList(targetWishList) {
 };
 
 // Update WishList
-async function updateWishList(targetWishListId, newData) {
+async function updateWishListById(targetWishListId, newData) {
   let updateResult = await WishListModel.findByIdAndUpdate(targetWishListId, newData, { new: true});
   return updateResult;
 };
 
 // Delete essential
-async function deleteWishListByID(targetWishListId) {
+async function deleteWishListById(targetWishListId) {
   let deleteResult = await WishListModel.findByIdAndDelete(targetWishListId);
   return deleteResult;
 };
@@ -34,6 +34,6 @@ export {
   getAllWishLists,
   getOneWishListById,
   createWishList,
-  updateWishList,
-  deleteWishListByID
+  updateWishListById,
+  deleteWishListById
 };

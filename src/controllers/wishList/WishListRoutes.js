@@ -3,8 +3,9 @@ import {
   getAllWishLists,
   getOneWishListById,
   createWishList,
-  updateWishList,
-  deleteWishListByID
+  updateWishListById,
+  deleteWishListById,
+
 } from "./WishListFunctions.js";
 
 const router = express.Router();
@@ -44,7 +45,7 @@ router.post("/", async (request, response, next) => {
 // UPDATE one
 router.patch("/:targetWishListId", async (request, response, next) => {
   try {
-      const wishlist = await updateWishList(request.params.targetWishListId, request.body);
+      const wishlist = await updateWishListById(request.params.targetWishListId, request.body);
       response.status(200).json({ message: "WishList updated successfully!", wishlist });
   } catch (error) { next (error); }
 });
@@ -52,7 +53,7 @@ router.patch("/:targetWishListId", async (request, response, next) => {
 // DELETE one
 router.delete("/:targetWishListId", async (request, response, next) => {
   try {
-      const wishlist = await deleteWishListByID(request.params.targetWishListId);
+      const wishlist = await deleteWishListById(request.params.targetWishListId);
       response.status(200).json({ message: "WishLists deleted successfully!", wishlist });
   } catch (error) { next (error); }
 });

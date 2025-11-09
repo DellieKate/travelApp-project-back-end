@@ -1,10 +1,10 @@
 import express from "express";
 import {
   getAllEssentials,
-  getOneEssentialByID,
+  getOneEssentialById,
   createEssential,
-  updateOneEssential,
-  deleteOneEssentialByID
+  updateOneEssentialById,
+  deleteOneEssentialById
 } from "./PackingEssentialsFunctions.js";
 
 const router = express.Router();
@@ -28,7 +28,7 @@ router.get("/", async (request, response, next) => {
 // GET one
 router.get("/:targetEssentialId", async (request, response, next) => {
   try {
-      const packessent = await getOneEssentialByID(request.params.targetEssentialId);
+      const packessent = await getOneEssentialById(request.params.targetEssentialId);
       response.status(200).json({ message: "Packing Essential retrieved successfully!", packessent });
   } catch (error) { next (error); }
 });
@@ -44,7 +44,7 @@ router.post("/", async (request, response, next) => {
 // UPDATE one
 router.patch("/:targetEssentialId", async (request, response, next) => {
   try {
-      const packessent = await updateOneEssential(request.params.targetEssentialId, request.body);
+      const packessent = await updateOneEssentialById(request.params.targetEssentialId, request.body);
       response.status(200).json({ message: "Packing Essential updated successfully!", packessent });
   } catch (error) { next (error); }
 });
@@ -52,7 +52,7 @@ router.patch("/:targetEssentialId", async (request, response, next) => {
 // DELETE one
 router.delete("/:targetEssentialId", async(request, response, next) => {
   try {
-      const packessent = await deleteOneEssentialByID(request.params.targetEssentialId);
+      const packessent = await deleteOneEssentialById(request.params.targetEssentialId);
       response.status(200).json({ message: "Packing Essential deleted successfully!", packessent });
   } catch (error) { next (error); }
 });

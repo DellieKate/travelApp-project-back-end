@@ -7,7 +7,7 @@ async function getAllEssentials() {
 };
 
 // Get one essential
-async function getOneEssentialByID(targetEssentialId) {
+async function getOneEssentialById(targetEssentialId) {
   let getOneResult = await PackingEssentialsModel.findById(targetEssentialId);
   return getOneResult;
 };
@@ -19,21 +19,21 @@ async function createEssential(targetEssential) {
 };
 
 // Update essential
-async function updateOneEssential(targetEssentialId, newData) {
+async function updateOneEssentialById(targetEssentialId, newData) {
   let updateResult = await PackingEssentialsModel.findByIdAndUpdate(targetEssentialId, newData, { new: true });
   return updateResult;
 };
 
 // Delete essential
-async function deleteOneEssentialByID(targetEssentialId) {
+async function deleteOneEssentialById(targetEssentialId) {
   let deleteResult = await PackingEssentialsModel.findByIdAndDelete(targetEssentialId);
   return deleteResult;
 };
 
 export {
   getAllEssentials, 
-  getOneEssentialByID, 
+  getOneEssentialById, 
   createEssential, 
-  updateOneEssential, 
-  deleteOneEssentialByID
+  updateOneEssentialById, 
+  deleteOneEssentialById
 };

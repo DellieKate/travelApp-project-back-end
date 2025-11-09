@@ -7,7 +7,7 @@ async function getAllCities() {
 };
 
 // Get one city
-async function getOneCityByID(targetCityId) {
+async function getOneCityById(targetCityId) {
   let getOneResult = await CityModel.findById(targetCityId);
   return getOneResult;
 };
@@ -19,21 +19,21 @@ async function createCity(targetCity) {
 };
 
 // Update one city
-async function updateOneCity(targetCityId, newData) {
+async function updateOneCitybyId(targetCityId, newData) {
   let updateResult = await CityModel.findByIdAndUpdate(targetCityId, newData, { new: true });
   return updateResult;
 };
 
 // Delete one city
-async function deleteOneCityByID(targetCityId) {
+async function deleteOneCityById(targetCityId) {
   let deleteResult = await CityModel.findByIdAndDelete(targetCityId);
   return deleteResult;
 };
 
 export {
   getAllCities, 
-  getOneCityByID, 
+  getOneCityById, 
   createCity, 
-  updateOneCity, 
-  deleteOneCityByID
+  updateOneCitybyId, 
+  deleteOneCityById
 };

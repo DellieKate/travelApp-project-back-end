@@ -1,10 +1,10 @@
 import express from "express";
 import {
   getAllCities, 
-  getOneCityByID, 
+  getOneCityById, 
   createCity, 
-  updateOneCity, 
-  deleteOneCityByID
+  updateOneCitybyId, 
+  deleteOneCityById
 } from "./CityFunctions.js";
 
 const router = express.Router();
@@ -44,7 +44,7 @@ router.post("/", async (request, response, next) => {
 // UPDATE one
 router.patch("/:targetCityId", async (request, response, next) => {
   try {
-      const city = await updateOneCity(request.params.targetCityId, request.body);
+      const city = await updateOneCitybyId(request.params.targetCityId, request.body);
       response.status(200).json({ message: "City updated successfully!", city });
   } catch (error) { next (error); }
 });
@@ -52,7 +52,7 @@ router.patch("/:targetCityId", async (request, response, next) => {
 // DELETE one
 router.delete("/:targetCityId", async (request, response, next) => {
   try {
-      const city = await deleteOneCityByID(request.params.targetCityId);
+      const city = await deleteOneCityById(request.params.targetCityId);
       response.status(200).json({ message: "City deleted successfully!", city });
   } catch (error) { next (error); }
 });
