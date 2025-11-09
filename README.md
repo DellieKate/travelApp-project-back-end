@@ -131,45 +131,44 @@ Update country details         | PATCH      | /countries/<int:countries_id>
 Delete country record          | DELETE     | /countries/<int:countries_id>    
 
 ## VaxReq
- - same methods (POST, GET, PATCH, DELETE)
 
         Endpoint                              
 -----------------------
 /vax/   
 /vax/<int:vax_id>    
+ - same methods (POST, GET, PATCH, DELETE)
 
 ## Activities
- - same methods (POST, GET, PATCH, DELETE)
 
         Endpoint                              
 -----------------------
 /activities/   
 /activities/<int:activities_id> 
+ - same methods (POST, GET, PATCH, DELETE)
 
 ## PackingEssentials
- - same methods (POST, GET, PATCH, DELETE)
 
         Endpoint                              
 -----------------------
 /packing/   
 /packing/<int:packing_id>    
+- same methods (POST, GET, PATCH, DELETE)
 
 ## WishList
- - same methods (POST, GET, PATCH, DELETE)
 
         Endpoint                              
 -----------------------
 /wishlist/   
 /wishlist/<int:wishlist_id>    
+- same methods (POST, GET, PATCH, DELETE)
 
 ## Users
- - same methods (POST, GET, PATCH, DELETE)
 
         Endpoint                              
 -----------------------
 /users/   
 /users/<int:users_id>    
-
+- same methods (POST, GET, PATCH, DELETE)
 
 
 # Deployment
