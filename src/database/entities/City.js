@@ -4,13 +4,14 @@ const CitySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
     },
     bestMonths: String,
     bestWeather: String,
     
     country: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Country",
+        ref: "Country"
     },
 
     activities: [{

@@ -4,6 +4,7 @@ const CountrySchema = new mongoose.Schema({
         name: {
             type: String,
             required: true,
+            unique: true
         },
         visaReq: {
             type: String,

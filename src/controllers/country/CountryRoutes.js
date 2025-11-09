@@ -3,8 +3,8 @@ import {
   createCountry,
   getCountries,
   getCountryById,
-  updateCountry,
-  deleteCountry
+  updateCountryById,
+  deleteCountryById
 } from "./CountryFunctions.js";
 
 const router = express.Router();
@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/", createCountry);
 router.get("/", getCountries);
 router.get("/:id", getCountryById);
-router.put("/:id", updateCountry);
-router.delete("/:id", deleteCountry);
+router.patch("/:id", updateCountryById);
+router.delete("/:id", deleteCountryById);
 
 export default router;

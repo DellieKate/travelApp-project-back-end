@@ -29,7 +29,7 @@ export const getActivityById = async (req, res) => {
   }
 };
 
-export const updateActivity = async (req, res) => {
+export const updateActivityById = async (req, res) => {
   try {
     const activity = await ActivitiesModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
     if (!activity) return res.status(404).json({ message: "Activity not found" });
@@ -39,7 +39,7 @@ export const updateActivity = async (req, res) => {
   }
 };
 
-export const deleteActivity = async (req, res) => {
+export const deleteActivityById = async (req, res) => {
   try {
     const activity = await ActivitiesModel.findByIdAndDelete(req.params.id);
     if (!activity) return res.status(404).json({ message: "Activity not found" });

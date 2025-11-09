@@ -1,4 +1,4 @@
-# travelApp Back-end Web Application Project
+# TravelApp Backend Project
 
 Repo link: https://github.com/DellieKate/travelApp-project-back-end 
 
@@ -20,26 +20,30 @@ This project is part of a full-staack web application built using the MERN stack
 6. [Usage](#usage)
 7. [Deployment](#deployment)
 
+
 # Project Overview
 
-DreamTravel is designed to simplify travel planning by allowing users to:
+**TravelApp (DreamTravel)** is designed to simplify travel planning by allowing users to:
 - Explore cities and their best visiting months and weather.
 - See country-specific activities and packing essentials.
 - Maintain up-to-date travel information through CRUD operations.
 
 The application follows modern MERN stack architecture with a RESTful API backend and a responsive REACT frontend (development in progress.)
 
+
 # Technologies Used
 
 ## Software and Packages
-1. MongoDB, a NoSQL database, allows flexible schema design for varying travel data. Scalable and widely used in web applications.
-2. Express.js provides a lightweight backend framewrok optimized for REST APIs. It is an industry standard in Node.js apps.
-3. Node.js ensures high-performance, event-driven backend execution. Industry standard for Javascript backend.
-4. Mongoose, a ODM (Object Data Modeling) for MongoDB, simplifies data modeling and validation.
-5. bcrypt handles secure password storage with industry standard hashing algorithms.
-6. CORS enables controlled access to the API from various client applications.
-7. Helmet protects against common web vulnerabilites bby setting appropriate security headers.
-8. jsonwebtoken manages token based authentication, improving scalability.
+1. **MongoDB**, a NoSQL database, allows flexible schema design for varying travel data. Scalable and widely used in web applications.
+2. **Express.js** provides a lightweight backend framewrok optimized for REST APIs. It is an industry standard in Node.js apps.
+3. **Node.js** ensures high-performance, event-driven backend execution. Industry standard for Javascript backend.
+4. **Mongoose**, a ODM (Object Data Modeling) for MongoDB, simplifies data modeling and validation.
+5. **bcrypt** handles secure password storage with industry standard hashing algorithms.
+6. **CORS** enables controlled access to the API from various client applications.
+7. **Helmet** protects against common web vulnerabilites bby setting appropriate security headers.
+8. **jsonwebtoken** manages token based authentication, improving scalability.
+9. **jest** provides testing framework for comprehensive unit and integration testing.
+10. **supertest** facilitates HTTP assertion testing to verify API endpoints.
 
 ## Hardware Requirements
 - Minimum: 4GB RAM, dual-core CPU, 10GB free disk space
@@ -47,13 +51,15 @@ The application follows modern MERN stack architecture with a RESTful API backen
 - Internet connection for API calls and package installation
 
 ## Alternatives & Comparison
-1. Database: MongoDB vs PostgreSQL, MySQL
+1. **Database:** MongoDB vs PostgreSQL, MySQL
     - MongoDb is schema-less, making it ideal for evolving travel data, while PostgreSQL is relational and  enforces strict schemas.
-2. Backend: Express.js vs Koa.js
+
+2. **Backend:** Express.js vs Koa.js
     - Express has more community support and middleware libraries. Koa is more minimal but requires more setup.
 
 ## Licensing
 All used technologies are open-source with permissive licenses (mainly MIT; MongoDB is server-side license).
+
 
 # Code Style and Conventions
 The project applies consistent code style and conventions across all files (Airbnb's Javascript Style Guide).
@@ -67,20 +73,28 @@ The project applies consistent code style and conventions across all files (Airb
 
 This ensures readable, maintainable and scalable code with no breaches in coding standards.
 
+
 # Installation and Setup
 1. Clone the repository
+
 `git clone https://github.com/DellieKate/travelApp-project-back-end`
 `cd travelApp`
+
 2. Install dependencies
+
 `npm install`
+
 3. Start server
+
 `npm start`
+
 
 # Database Seeding
 Seed the database with initial travel data:
 `npm run seed`
 
 This populates cities, countries, activities, and packing essentials.
+
 
 # Usage
 - Access `http://localhost:3000` 
@@ -94,6 +108,7 @@ This populates cities, countries, activities, and packing essentials.
 /citywish
 /packing
 /wishlist
+
 
 # Deployment
 

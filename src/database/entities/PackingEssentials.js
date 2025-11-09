@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const PackingEssentialsSchema = new mongoose.Schema({
     season: {
         type: String,
+        unique: true
     },
     items: [{
         type: String,

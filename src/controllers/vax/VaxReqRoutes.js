@@ -3,8 +3,8 @@ import {
   createVaxReq,
   getVaxReqs,
   getVaxReqById,
-  updateVaxReq,
-  deleteVaxReq
+  updateVaxReqById,
+  deleteVaxReqById
 } from "./VaxReqFunctions.js";
 
 const router = express.Router();
@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/", createVaxReq);
 router.get("/", getVaxReqs);
 router.get("/:id", getVaxReqById);
-router.put("/:id", updateVaxReq);
-router.delete("/:id", deleteVaxReq);
+router.patch("/:id", updateVaxReqById);
+router.delete("/:id", deleteVaxReqById);
 
 export default router;
