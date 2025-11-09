@@ -130,7 +130,7 @@ Get a single country by Id     | GET        | /countries/<int:countries_id>
 Update country details         | PATCH      | /countries/<int:countries_id> 
 Delete country record          | DELETE     | /countries/<int:countries_id>    
 
-## VaxReq
+## Vaccination Requirements (VaxReq)
         Endpoint                              
 -----------------------
 /vax/   
