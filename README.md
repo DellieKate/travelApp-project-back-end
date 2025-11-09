@@ -78,6 +78,7 @@ This ensures readable, maintainable and scalable code with no breaches in coding
 1. Clone the repository
 
     `git clone https://github.com/DellieKate/travelApp-project-back-end`
+    
     `cd travelApp`
 
 2. Install dependencies
