@@ -25,7 +25,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 
 let corsOption = {                   
   origin: [                           
-      "http://localhost:5000",        // React app running locally for development
+      "http://localhost:5173",        // React app running locally for development
       "https://travelReact.App.com"   // React app running live for production
   ],
   optionsSuccessStatus: 200
