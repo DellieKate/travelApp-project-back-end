@@ -17,7 +17,10 @@ const CountrySchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-
+        vaxReq: {
+            type: mongoose.Types.ObjectId,
+            ref: "VaxReq"
+        }
     });
 
 const CountryModel = mongoose.model("Country", CountrySchema);
