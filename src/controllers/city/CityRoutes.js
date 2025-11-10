@@ -28,7 +28,7 @@ router.get("/", async (request, response, next) => {
 // GET one
 router.get("/:targetCityId", async (request, response, next) => {
   try {
-      const city = await getOneCityByID(request.params.targetCityId);
+      const city = await getOneCityById(request.params.targetCityId);
       response.status(200).json({ message: "City retrieved successfully!", city });
   } catch (error) { next (error); }
 });
