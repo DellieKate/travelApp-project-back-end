@@ -4,7 +4,7 @@ export const createActivity = async (request, response) => {
   try {
     const activity = new ActivitiesModel(request.body);
     await activity.save();
-    responseponse.status(201).json(activity);
+    response.status(201).json(activity);
   } catch (error) {
     response.status(400).json({ message: error.message });
   }
