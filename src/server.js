@@ -4,11 +4,11 @@ import express from "express";
 import helmet from "helmet";
 import mongoose from "mongoose";
 import router from "./controllers/users/UserRoutes.js";
-import countryRouter from "./controllers/country/CountryRoutes.js";
 import vaxRouter from "./controllers/vax/VaxReqRoutes.js";
+import countryRouter from "./controllers/country/CountryRoutes.js";
 import activitiesRouter from "./controllers/activities/ActivityRoutes.js";
-import cityRouter from "./controllers/city/CityRoutes.js";
 import packingRouter from "./controllers/packingEssentials/PackingEssentialsRoutes.js";
+import cityRouter from "./controllers/city/CityRoutes.js";
 import wishListRouter from "./controllers/wishList/WishListRoutes.js";
 
 
@@ -25,7 +25,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 
 let corsOption = {                   
   origin: [                           
-      "http://localhost:5000",        // React app running locally for development
+      "http://localhost:5173",        // React app running locally for development
       "https://travelReact.App.com"   // React app running live for production
   ],
   optionsSuccessStatus: 200
