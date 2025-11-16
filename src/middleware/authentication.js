@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 function authToken ( request, response, next) {
+  console.log("why not authenticating?", request)
   let token = request.headers.authorization;
 
   if (token) {

@@ -26,6 +26,7 @@ async function registerUser(userData) {
 
 // Login a user
 async function loginUser({ email, password }) {
+  console.log ("Email and password received.", email, password);
   const user = await UserModel.findOne({ email });
   if (!user) {
     const error = new Error("Invalid email!");
@@ -33,7 +34,11 @@ async function loginUser({ email, password }) {
     throw error;
   };
 
+  console.log("password", user.password, password)
   const isPasswordValid = await user.comparePassword(password);
+
+  console.log("Is password valid", isPasswordValid)
+
   if (!isPasswordValid) {
     const error = new Error("Invalid password!");
     error.status = 401;
@@ -41,6 +46,7 @@ async function loginUser({ email, password }) {
   };
 
   const token = generateJwt(user);
+  console.log("token", token)
   return { user, token };
 }
 

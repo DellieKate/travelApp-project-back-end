@@ -25,6 +25,8 @@ router.post("/register", async (request, response, next) => {
 
 // POST /users/login
 router.post("/login", async (request, response, next) => {
+  console.log("testing 123");
+
   try {
     const { user, token } = await loginUser(request.body);
     response.status(200).json({

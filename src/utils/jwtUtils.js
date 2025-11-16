@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 function generateJwt(targetUser) {
+  console.log("Target user", targetUser)
   if (!process.env.JWT_SECRET) {
     throw new Error("Please provide a JWT secret key in the server .env file.");  
   }
