@@ -14,11 +14,6 @@ import wishListRouter from "./controllers/wishList/WishListRoutes.js";
 
 const app = express();
 
-app.use(helmet());
-
-//Receive JSON body data on requests
-app.use(express.json());
-
 //CORS (cross-origin resource sharing)
 import cors from "cors";
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -31,6 +26,11 @@ let corsOption = {
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOption)); // activates CORS on the Express server 
+
+app.use(helmet());
+
+//Receive JSON body data on requests
+app.use(express.json());
 
 const userRouter = router
 app.use("/users", userRouter);

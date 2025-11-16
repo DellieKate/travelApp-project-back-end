@@ -68,7 +68,7 @@ const cityData = [
 
 const users = [
   {
-    username: "Mia James",
+    username: "miajames",
     email: "miajames@email.com",
     citizenship: "citizenship",
     password: "Password123"
