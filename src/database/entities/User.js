@@ -5,15 +5,15 @@ import bcrypt from "bcrypt";
 // Define User Schema
 const UserSchema = new mongoose.Schema(
   {
-    username: {
+    name: {
       type: String,
-      required: true,
+      //required: true,
       unique: true,
       minlength: 2,
     },
     email: {
       type: String,
-      required: true,
+      //required: true,
       unique: true,
       validate: {
         validator: (newEmail) => validator.isEmail(newEmail),
@@ -22,7 +22,7 @@ const UserSchema = new mongoose.Schema(
     },
     citizenship: {
       type: String,
-      required: true,
+      //required: true,
     },
     password: {
       type: String,
@@ -43,16 +43,19 @@ const UserSchema = new mongoose.Schema(
         message: (props) =>
           `${props.value} is a weak password. Please use a mix of upper, lower, and numbers.`,
       },
-    isAdmin: {
-			type: Boolean,
-			required: false
-		},
-		isBanned: {
-			type: Boolean,
-			required: false
-    }},
   },
-  { timestamps: true }
+ /* isAdmin: {
+			type: Boolean,
+			required: false,
+      default: false,
+		},
+	isBanned: {
+			type: Boolean,
+			required: false,
+      default: false
+    }, */
+  }, 
+  {timestamps: true }
 );
 
 // 🔐 Hash password before saving
@@ -65,9 +68,9 @@ UserSchema.pre("save", async function (next) {
 
 // 🔍 Add method for comparing passwords during login
 UserSchema.methods.comparePassword = async function (inputPassword) {
-  const salt = await bcrypt.genSalt(10);
+/*  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
-  console.log("inputPassword, password", inputPassword, this.password);
+  console.log("inputPassword, password", inputPassword, this.password); */
   return bcrypt.compare(inputPassword, this.password);
 };
 
