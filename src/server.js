@@ -11,7 +11,6 @@ import packingRouter from "./controllers/packingEssentials/PackingEssentialsRout
 import cityRouter from "./controllers/city/CityRoutes.js";
 import wishListRouter from "./controllers/wishList/WishListRoutes.js";
 
-
 const app = express();
 
 //CORS (cross-origin resource sharing)
