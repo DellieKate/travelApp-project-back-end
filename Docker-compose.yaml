@@ -1,0 +1,20 @@
+name: TravelApp - backend
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+  express:
+    build: .
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      - "MONGO_URI=mongodb://mongo:27017/docker_travelApp-backend"
+
+volumes:
+  mongo-data:
+    driver: local
