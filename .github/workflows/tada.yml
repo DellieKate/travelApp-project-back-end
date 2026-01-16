@@ -6,7 +6,9 @@ jobs:
   travelApp-project-backend:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-          echo "Coder Academy is here!"
-          echo "Coder Academy is super cool!"
-      - run: echo "You've learned so much if you've already reached this point in the course! You're amazing!"
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with: 
+          node-version: 24
+      - run: npm ci
+      - run: npm test
