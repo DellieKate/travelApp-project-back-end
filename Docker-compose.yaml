@@ -13,7 +13,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - "MONGO_URI=mongodb://mongo:27017/docker_travelApp-backend"
+      - "MONGO_URI=${MONGO_URI}"
 
 volumes:
   mongo-data:

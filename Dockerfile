@@ -6,7 +6,7 @@ COPY . .
 
 RUN npm install
 
-ENV NODE_ENV=${NODE_ENV}
+ENV MONGO_URI=${MONGO_URI}
 
 CMD ["node", "src/index.js"]
 
