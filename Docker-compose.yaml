@@ -13,6 +13,7 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - IS_DOCKER=true
       - "MONGO_URI=${MONGO_URI}"
 
 volumes:
