@@ -11,6 +11,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: travelapp-backend
+  IS_CI: true
 
 jobs:
   build-and-push:

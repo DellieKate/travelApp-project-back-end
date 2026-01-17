@@ -32,8 +32,42 @@ services:
     restart: always
     environment:
       NODE_ENV: production
-      MONGO_INITDB_DATABASE: travelApp
-      MONGO_URI: ${MONGO_URI}
+      MONGO_INITDB_DATABASE: travelApp-project-backend
+
+on: 
+  push:
+    branches:
+      - docker-file
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: travelapp-backend
+  IS_CI: true
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    services:
+      mongo: 
+        image: mongo:6
+        ports:
+          - 27017:27017
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with: 
+          node-version: 24
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: |
+          npm test
     volumes:
       - mongo-data:/data/db
     networks:
