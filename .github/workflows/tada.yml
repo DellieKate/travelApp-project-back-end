@@ -56,7 +56,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           tag_prefix: "travelApp-v"
-          release_branches: docker-file
+          release_branches: release
           default_bump: patch
           dry_run: false
       
