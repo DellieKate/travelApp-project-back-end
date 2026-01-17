@@ -1,21 +1,54 @@
 name: TravelApp - backend
 
 services:
-  mongo:
-    image: mongo
-    restart: always
-    volumes:
-      - mongo-data:/data/db
   express:
-    build: .
-    depends_on:
-      - mongo
+    build: 
+      context: .
+      dockerfile: dockerfile
+    container_name: travel-express
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      IS_DOCKER: true
+      MONGO_URI: ${MONGO_URI}
     ports:
       - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - travel-network
+    healthcheck:
+      test: ["CMD", "wget", "-q0-", "http://localhost:3000/health"] 
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 15s
+    
+  mongo:
+    image: mongo
+    container_name: travel-mongo
+    restart: always
     environment:
-      - IS_DOCKER=true
-      - "MONGO_URI=${MONGO_URI}"
-
+      MONGO_INITDB_DATABASE: travelApp
+      MONGO_URI: ${MONGO_URI}
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - travel-network
+    healthcheck:
+      test: ["CMD", "mongo", "---eval", "db.adminCommand('ping')"] 
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 15s
+    
+  
 volumes:
   mongo-data:
     driver: local
+
+networks:
+  travel-network:
+    driver: bridge
