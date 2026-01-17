@@ -86,10 +86,10 @@ jobs:
           file: ./release
           platforms: linux/amd64
           push: true
-          tags:
+          tags: |
             ghcr.io/${{ github.repository_owner }}/travelapp-backend:latest
             ghcr.io/${{ github.repository_owner }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
-            
+
       # ------------ CREATE GITHUB RELEASE ------------ 
       - name: Create a GitHub release
         uses: ncipollo/release-action@v1
