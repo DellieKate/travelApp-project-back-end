@@ -9,10 +9,10 @@ if (process.env.JEST_WORKER_ID) {
     ? "mongodb://127.0.0.1:27017/travelApp_test" : "mongodb://127.0.0.1:27017/travelApp_test");
 } else if (process.env.IS_DOCKER === "true") {
   // Running in Docker, use mongo service
-  DatabaseUri = process.env.MONGO_URI || "mongodb://mongo:27017/travelApp-project-backend";
+  DatabaseUri = process.env.MONGO_URL_PROD
 } else {
   // Local development
-  DatabaseUri = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/travelApp-project-backend";
+  DatabaseUri = process.env.MONGO_URL
 }
 
 async function dbConnect(){
