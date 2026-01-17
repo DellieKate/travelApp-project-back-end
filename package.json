@@ -5,10 +5,11 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "NODE_ENV=dev node --env-file=.env src/index.js",
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
-    "seed": "node src/database/seed.js",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest --detectOpenHandles"
+    "seed": "NODE_ENV=dev node --env-file=.env src/database/seed.js",
+    "seed-prod": "NODE_ENV=prod node --env-file=.env src/database/seed.js",
+    "test": "NODE_ENV=test node --env-file=.env ./node_modules/.bin/jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",

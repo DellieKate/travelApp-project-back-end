@@ -6,7 +6,7 @@ import { dbConnect, dbClose } from "../database/connectionManager.js";
 import { jest } from "@jest/globals";
 jest.setTimeout(20000);
 
-let thisFileDatabaseName = process.env.TEST_DATABASE_URL;
+let thisFileDatabaseName = process.env.MONGO_URL_TEST;
 
 beforeAll(async () => {
   try {

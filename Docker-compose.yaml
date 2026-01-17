@@ -5,9 +5,11 @@ services:
     build: 
       context: .
     container_name: travel-express
+    env_file:
+      - .env
     environment:
-      MONGO_URL_PROD: mongodb://mongodb:27017/travelApp-project-backend
-      IS_DOCKER: true
+      NODE_ENV: prod
+      MONGO_URL_PROD: ${MONGO_URL}
     ports:
       - "3000:3000"
     depends_on:
