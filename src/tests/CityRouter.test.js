@@ -1,11 +1,12 @@
-jest.setTimeout(20000);
-
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
 import { CityModel } from "../database/entities/City.js";
 import { CountryModel } from "../database/entities/Country.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
+import { jest } from "@jest/globals";
+
+jest.setTimeout(20000);
 
 let thisFileDatabaseName = process.env.TEST_DATABASE_URL;
 

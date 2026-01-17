@@ -1,9 +1,12 @@
 import { jest } from "@jest/globals";
+jest.setTimeout(20000);
+
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
+import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-jest.setTimeout(20000);
+
 
 describe("Country API Endpoints", () => {
   let countryId;
@@ -48,8 +51,8 @@ describe("Country API Endpoints", () => {
     expect(response.body).toHaveProperty("_id", countryId);
   });
 
-  test("PUT /countries/:id - update country", async () => {
-    const response = await request(app).put(`/countries/${countryId}`).send({ currency: "TSTD" });
+  test("PATCH /countries/:id - update country", async () => {
+    const response = await request(app).patch(`/countries/${countryId}`).send({ currency: "TSTD" });
     expect(response.status).toBe(200);
     expect(response.body.currency).toBe("TSTD");
   });
