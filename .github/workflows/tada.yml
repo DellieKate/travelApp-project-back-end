@@ -3,12 +3,12 @@ name: travelApp-project-backend
 on: 
   push:
     branches:
-      - docker-file
+      - release
     tags: 
       - 'v*'  
   pull_request:
     branches:
-      - docker-file
+      - release
 
 env:
   REGISTRY: ghcr.io
