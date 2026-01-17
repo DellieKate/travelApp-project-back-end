@@ -9,7 +9,7 @@
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
     "seed": "NODE_ENV=dev node --env-file=.env src/database/seed.js",
     "seed-prod": "NODE_ENV=prod node --env-file=.env src/database/seed.js",
-    "test": "NODE_ENV=test node --env-file=.env ./node_modules/.bin/jest --detectOpenHandles"
+    "test": "NODE_ENV=test node ./node_modules/.bin/jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",

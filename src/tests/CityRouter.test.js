@@ -8,12 +8,10 @@ import { jest } from "@jest/globals";
 
 jest.setTimeout(20000);
 
-let thisFileDatabaseName = process.env.MONGO_URL_TEST;
-
 beforeAll(async () => {
   try {
     await dbClose();
-    await dbConnect(thisFileDatabaseName);
+    await dbConnect();
   } catch (error) {
     console.log(error);
   }

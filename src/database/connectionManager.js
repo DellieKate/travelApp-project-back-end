@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 
 let DatabaseUri;
 
-console.log("Env", process.env.NODE_ENV)
-
+console.log("DB Connection Env", process.env.NODE_ENV)
 if (process.env.NODE_ENV == "test") {
-  console.log("Here???", process.env.MONGO_URL_TEST)
-  DatabaseUri = process.env.MONGO_URL_TEST
+  DatabaseUri = process.env.MONGO_URL_TEST || "mongodb://127.0.0.1:27017/travelApp_test"
 } else if (process.env.NODE_ENV == "dev") {
   DatabaseUri = process.env.MONGO_URL_DEV
 } else {
