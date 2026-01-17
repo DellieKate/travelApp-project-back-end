@@ -9,7 +9,6 @@ services:
       - .env
     environment:
       NODE_ENV: prod
-      MONGO_URL_PROD: ${MONGO_URL}
     ports:
       - "3000:3000"
     depends_on:
