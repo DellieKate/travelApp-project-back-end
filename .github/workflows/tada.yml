@@ -20,12 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
 
-    services:
-      mongo: 
-        image: mongo:6
-        ports:
-          - 27017:27017
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
