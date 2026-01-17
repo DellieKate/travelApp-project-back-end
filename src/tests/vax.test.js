@@ -14,9 +14,15 @@ describe("Vax API Endpoints", () => {
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-  });
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
+    await dbClose();
+  }
+});
+
 
   test("POST /vax - create new vax requirement", async () => {
     const response = await request(app).post("/vax").send({

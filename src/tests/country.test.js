@@ -14,9 +14,15 @@ describe("Country API Endpoints", () => {
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-  });
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
+    await dbClose();
+  }
+});
+
 
   test("POST /countries - create a new country", async () => {
     const response = await request(app).post("/countries").send({

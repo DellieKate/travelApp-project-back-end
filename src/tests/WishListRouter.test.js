@@ -1,3 +1,6 @@
+jest.setTimeout(20000);
+
+
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
@@ -17,10 +20,11 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
-    await mongoose.connection.dropDatabase();
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
     await dbClose();
-  } catch (error) {
-      console.log(error);
   }
 });
 

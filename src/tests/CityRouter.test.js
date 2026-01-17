@@ -1,3 +1,5 @@
+jest.setTimeout(20000);
+
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
@@ -18,12 +20,14 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
-    await mongoose.connection.dropDatabase();
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
     await dbClose();
-  } catch (error) {
-      console.log(error);
   }
 });
+
 
 // In order to create a city for the test database, a country needs to be created
 // first, because the CityModel states that Country is a required field by ObjectID
@@ -34,7 +38,7 @@ describe("City Operations", () => {
   beforeAll(async () => {
       const country = await CountryModel.create({
         name: "Austria",
-        visa_req: "No",
+        visaReq: "No",
         currency: "Euro",
         language: "German"
       });

@@ -1,9 +1,10 @@
+jest.setTimeout(20000);
+
 import { jest } from "@jest/globals";
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
 
-jest.setTimeout(20000);
 
 describe("Activity API Endpoints", () => {
   let activityId;
@@ -13,10 +14,16 @@ describe("Activity API Endpoints", () => {
     await mongoose.connect(MONGO_URL);
   });
 
-  afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-  });
+ afterAll(async () => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
+    await dbClose();
+  }
+});
+
 
   test("POST /activities - create new activity", async () => {
     const response = await request(app).post("/activities").send({
