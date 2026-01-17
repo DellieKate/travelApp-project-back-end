@@ -31,6 +31,7 @@ services:
     container_name: travel-mongo
     restart: always
     environment:
+      NODE_ENV: production
       MONGO_INITDB_DATABASE: travelApp
       MONGO_URI: ${MONGO_URI}
     volumes:
