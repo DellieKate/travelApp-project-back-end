@@ -90,6 +90,11 @@ jobs:
           default_bump: patch
           dry_run: false
       
+  publish:
+    runs-on: ubuntu-latest
+    environment: prod
+    
+    steps:
       # ------------ BUILDX PRODUCTION IMAGE ------------ 
       - name: Build and push production image with Buildx
         uses: docker/build-push-action@v5
