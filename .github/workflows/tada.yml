@@ -14,6 +14,8 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: travelapp-backend
   IS_CI: true
+  OWNER_LC: ""
+  REPO_LC: ""
 
 jobs:
   build-and-push:
@@ -62,11 +64,12 @@ jobs:
       # ------------ LOWERCASE FOR DOCKER TAGS ------------ 
 
       - name: Set lowercase repository name
-        id: repo_lower
-        uses: ASzc/change-string-case-action@v2
-        with: 
-          string: ${{ github.repository}}
-          case: lower
+        run: |
+          echo "OWNER_LC=$OWNER,,}" >> $GITHUB_ENV
+          echo "REPO_LC=${REPO,,}" >> $GITHUB_ENV
+        env:
+          OWNER: '${{ github.repository_owner }}'
+          REPO: '${{ github.repository }}'
 
       # ------------ LOGIN TO GHCR ------------ 
       - name: Login to Docker Hub Container Registry
@@ -96,8 +99,8 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ steps.repo_lower.outputs.result }}/travelapp-backend:latest
-            ghcr.io/${{ steps.repo_lower.outputs.result }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
+            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:latest
+            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
 
       # ------------ CREATE GITHUB RELEASE ------------ 
       - name: Create a GitHub release
