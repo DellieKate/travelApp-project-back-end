@@ -95,6 +95,11 @@ jobs:
     environment: prod
     
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with: 
+            fetch-depth: 0
+            
       - name: Setup Docker
         uses: docker/setup-buildx-action@v3  
 
