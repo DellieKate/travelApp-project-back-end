@@ -99,7 +99,7 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:latest
+            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
 
       # ------------ CREATE GITHUB RELEASE ------------ 
       - name: Create a GitHub release
