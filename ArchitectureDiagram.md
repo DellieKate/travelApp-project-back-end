@@ -12,21 +12,24 @@ CI automation is implemented through GitHub actions, which builds Docker images,
 
 ### Logical Architecture Diagram
 
-___image
+![Logical Architecture](diagrams/logical_architecture.png)
 
 This diagram represents the backend's logical structure. External clients, such as Insomnia, a web browser, or a frontend, communicate with the Express API via HTTP requests. Express handles routing, middleware, and business logic before interacting with MongoDB, which stores all persistent travel data. Both services run in Docker containers, connected through a shared bridge network to ensure secure internal communication and environment consistency. The Express container depends on MongoDB, and both containers are orchestrated using Docker Compose. This design supports scalability, maintainability and portability. Additional services can be integrated in the future without restructuring the core system.
 
 
 ### Deployment and Infrastructure Architecture Diagram
 
-
-__ image ___
+![Deployment & Infrastructure](diagrams/deployment_infrastructure.png)
 
 This diagram illustrates the CI pipeline and potential cloud deployment. Code pushed to GitHub triggers GitHub Actions, which builds Docker images for the Express backend, injects secrets and launches the backend and MongoDB containers via Docker Compose. Automated health checks ensure both services are functioning before the pipeline completes.
+
+![AWS Deployment](diagrams/aws_deployment.png)
 
 For cloud deployment, the containerised backend can run on AWS ECS or EC2, with MongoDb either containerised or managed via MongoDB Atlas. This architecture ensures secure, scalable and cloud-ready deployment, reflecting professional practices.
 
 ### GitHub Actions Workflow
+
+![CI Workflow](diagrams/ci_workflow.png)
 
 The backend project implements a fully automated CI workflow usiing GitHub Actions. This workflow triggers on pushes to the `release` branch or when version tags matching `v*` are created. It automates testing, verification, containerisation, semantic versioning and production image building.
 
