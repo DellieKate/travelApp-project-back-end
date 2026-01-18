@@ -3,13 +3,13 @@ import request from "supertest";
 import { app } from "../server.js";
 import { PackingEssentialsModel } from "../database/entities/PackingEssentials.js";
 import { dbConnect, dbClose} from "../database/connectionManager.js";
-
-let thisFileDatabaseName = process.env.TEST_DATABASE_URL;
+import { jest } from "@jest/globals";
+jest.setTimeout(20000);
 
 beforeAll(async () => {
   try {
     await dbClose();
-    await dbConnect(thisFileDatabaseName);
+    await dbConnect();
   } catch (error) {
       console.log(error);
   }
@@ -17,12 +17,14 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
-    await mongoose.connection.dropDatabase();
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
     await dbClose();
-  } catch (error) {
-      console.log(error);
   }
 });
+
 
 describe("PackingEssentials Operations", () => {
   let fakePackingId;

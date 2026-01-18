@@ -45,6 +45,7 @@ async function loginUser({ email, password }) {
     throw error;
   };
 
+  //create JWT token
   const token = generateJwt(user);
   console.log("token", token)
   return { user, token };

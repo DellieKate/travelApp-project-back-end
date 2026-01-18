@@ -4,13 +4,14 @@ import { app } from "../server.js";
 import { CityModel } from "../database/entities/City.js";
 import { CountryModel } from "../database/entities/Country.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
+import { jest } from "@jest/globals";
 
-let thisFileDatabaseName = process.env.TEST_DATABASE_URL;
+jest.setTimeout(20000);
 
 beforeAll(async () => {
   try {
     await dbClose();
-    await dbConnect(thisFileDatabaseName);
+    await dbConnect();
   } catch (error) {
     console.log(error);
   }
@@ -18,12 +19,14 @@ beforeAll(async () => {
 
 afterAll(async () => {
   try {
-    await mongoose.connection.dropDatabase();
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
     await dbClose();
-  } catch (error) {
-      console.log(error);
   }
 });
+
 
 // In order to create a city for the test database, a country needs to be created
 // first, because the CityModel states that Country is a required field by ObjectID
@@ -34,7 +37,7 @@ describe("City Operations", () => {
   beforeAll(async () => {
       const country = await CountryModel.create({
         name: "Austria",
-        visa_req: "No",
+        visaReq: "No",
         currency: "Euro",
         language: "German"
       });

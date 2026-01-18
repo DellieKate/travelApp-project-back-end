@@ -1,19 +1,39 @@
 name: TravelApp - backend
 
 services:
-  mongo:
+  express:
+    build: 
+      context: .
+    container_name: travel-express
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: prod
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    healthcheck:
+      test: ["CMD", "wget", "-q0-", "http://localhost:3000/health"] 
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 15s
+
+  seed:
+    build: .
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URL_PROD=mongodb://mongodb:27017/travelApp-project-backend
+    command: ["npm", "run", "seed-prod"]
+    
+  mongodb:
     image: mongo
+    container_name: travel-mongo
     restart: always
     volumes:
       - mongo-data:/data/db
-  express:
-    build: .
-    depends_on:
-      - mongo
-    ports:
-      - "3000:3000"
-    environment:
-      - "MONGO_URI=mongodb://mongo:27017/docker_travelApp-backend"
 
 volumes:
   mongo-data:

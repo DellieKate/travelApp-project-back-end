@@ -1,10 +1,12 @@
 import { jest } from "@jest/globals";
+jest.setTimeout(20000);
+
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
+import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-jest.setTimeout(20000);
-
+process.env.JWT_SECRET = ""
 describe("Vax API Endpoints", () => {
   let vaxId;
 
@@ -14,9 +16,15 @@ describe("Vax API Endpoints", () => {
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
-    await mongoose.connection.close();
-  });
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
+    await dbClose();
+  }
+});
+
 
   test("POST /vax - create new vax requirement", async () => {
     const response = await request(app).post("/vax").send({
@@ -38,8 +46,8 @@ describe("Vax API Endpoints", () => {
     expect(response.body).toHaveProperty("_id", vaxId);
   });
 
-  test("PUT /vax/:id - update vax requirement", async () => {
-    const response = await request(app).put(`/vax/${vaxId}`).send({
+  test("PATCH /vax/:id - update vax requirement", async () => {
+    const response = await request(app).patch(`/vax/${vaxId}`).send({
       vaxReq: ["Yellow Fever", "COVID-19", "Hepatitis A"]
     });
     expect(response.status).toBe(200);

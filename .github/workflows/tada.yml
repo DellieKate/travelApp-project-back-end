@@ -1,0 +1,125 @@
+name: travelApp-project-backend
+
+on: 
+  push:
+    branches:
+      - release
+    tags: 
+      - 'v*'  
+  pull_request:
+    branches:
+      - release
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: travelapp-backend
+  IS_CI: true
+  OWNER_LC: ""
+  REPO_LC: ""
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    services:
+      mongo: 
+        image: mongo:6
+        ports:
+          - 27017:27017
+
+    steps:
+      # ------------ GIT + NODE ------------ 
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with: 
+            fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with: 
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+      
+      # ------------ TESTING ------------ 
+      - name: Run tests
+        run: npm test
+
+      - name: Creating blank .env file
+        run: touch .env  
+      
+      # ------------ DOCKER COMPOSE TEST PHASE ------------ 
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3  
+
+      - name: Build and start services for verification
+        run:  docker compose -f Docker-compose.yaml up -d --build
+
+      - name: Stop Docker services after verification
+        run: docker compose -f Docker-compose.yaml down
+      
+  tag-and-publish:
+    needs: build-and-verify
+    runs-on: ubuntu-latest
+    environment: prod
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with: 
+            fetch-depth: 0
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3  
+
+      # ------------ LOWERCASE FOR DOCKER TAGS ------------ 
+      - name: Set lowercase repository name
+        run: |
+          echo "OWNER_LC=$OWNER,,}" >> $GITHUB_ENV
+          echo "REPO_LC=${REPO,,}" >> $GITHUB_ENV
+        env:
+          OWNER: '${{ github.repository_owner }}'
+          REPO: '${{ github.repository }}'
+
+      # ------------ LOGIN TO GHCR ------------ 
+      - name: Login to Docker Hub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN}}
+
+      # ------------ VERSION TAGGING ------------ 
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          tag_prefix: "travelApp-v"
+          release_branches: release
+          default_bump: patch
+          dry_run: false
+
+      # ------------ BUILDX PRODUCTION IMAGE ------------ 
+      - name: Build and push production image with Buildx
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64, linux/arm64
+          push: true
+          tags: |
+            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:latest
+            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
+
+      # ------------ CREATE GITHUB RELEASE ------------ 
+      - name: Create a GitHub release
+        uses: ncipollo/release-action@v1
+        with:
+          tag: ${{ steps.tag_version.outputs.new_tag }}
+          name: Release ${{ steps.tag_version.outputs.new_tag }}
+          body: ${{ steps.tag_version.outputs.changelog }}
+      
