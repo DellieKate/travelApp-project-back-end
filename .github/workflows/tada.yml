@@ -95,6 +95,9 @@ jobs:
     environment: prod
     
     steps:
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3  
+
       # ------------ LOWERCASE FOR DOCKER TAGS ------------ 
       - name: Set lowercase repository name
         run: |
@@ -122,7 +125,7 @@ jobs:
           release_branches: release
           default_bump: patch
           dry_run: false
-              
+
       # ------------ BUILDX PRODUCTION IMAGE ------------ 
       - name: Build and push production image with Buildx
         uses: docker/build-push-action@v5
