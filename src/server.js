@@ -10,7 +10,6 @@ import activitiesRouter from "./controllers/activities/ActivityRoutes.js";
 import packingRouter from "./controllers/packingEssentials/PackingEssentialsRoutes.js";
 import cityRouter from "./controllers/city/CityRoutes.js";
 import wishListRouter from "./controllers/wishList/WishListRoutes.js";
-import swaggerJsDocOptions from "./utils/swagger-jsdoc.js";
 
 const app = express();
 
@@ -41,7 +40,6 @@ app.use("/cities", cityRouter);
 app.use("/packing", packingRouter);
 app.use("/wishlist", wishListRouter);
 
-expressJSDocSwagger(app)(swaggerJsDocOptions);
 
 //Homepage
 app.get("/", (request, response) => {
