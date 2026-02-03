@@ -67,6 +67,8 @@ jobs:
     needs: build-and-verify
     runs-on: ubuntu-latest
     environment: prod
+    outputs:
+      image_name: ${{ steps.image_meta.outputs.image }}
     
     steps:
       - name: Checkout repository
@@ -80,7 +82,7 @@ jobs:
       # ------------ LOWERCASE FOR DOCKER TAGS ------------ 
       - name: Set lowercase repository name
         run: |
-          echo "OWNER_LC=$OWNER,,}" >> $GITHUB_ENV
+          echo "OWNER_LC=${OWNER,,}" >> $GITHUB_ENV
           echo "REPO_LC=${REPO,,}" >> $GITHUB_ENV
         env:
           OWNER: '${{ github.repository_owner }}'
@@ -104,6 +106,13 @@ jobs:
           release_branches: release
           default_bump: patch
           dry_run: false
+
+      # ------------ IMAGE OUTPUT ------------ 
+      - name: Set image metadata
+        id: image_meta
+        run: |
+          IMAGE="ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}"
+          echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
       # ------------ BUILDX PRODUCTION IMAGE ------------ 
       - name: Build and push production image with Buildx
@@ -135,7 +144,7 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.3
         with: 
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image_url: ${{ needs.tag-and-publish.outputs }}
+          image_url: ${{ needs.tag-and-publish.outputs.image_name }}
           render-api-key: ${{ secrets.RENDER_API_KEY }}
           wait-for-deployment: true
 
