@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - release
+      - deployment
     tags: 
       - 'v*'  
   pull_request:
     branches:
       - release
+      - deployment
 
 env:
   REGISTRY: ghcr.io
