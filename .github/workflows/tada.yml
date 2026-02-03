@@ -144,7 +144,5 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.3
         with: 
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image_url: ${{ needs.tag-and-publish.outputs.image_name }}
-          render-api-key: ${{ secrets.RENDER_API_KEY }}
-          wait-for-deployment: true
+          image-url: ${{ needs.tag-and-publish.outputs.image_name }}
 
