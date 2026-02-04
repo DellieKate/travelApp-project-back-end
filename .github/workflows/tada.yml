@@ -144,5 +144,5 @@ jobs:
         uses: gh-actions-workflows/deploy-docker-render@v1.3
         with: 
           deploy-hook: ${{ secrets.RENDER_DEPLOY_HOOK }}
-          image-url: ${{ needs.tag-and-publish.outputs.image_name }}
+          image-url: docker pull ghcr.io/delliekate/travelapp-project-back-end/travelapp-backend:travelapp-v0.1.1-deployment.0
 
