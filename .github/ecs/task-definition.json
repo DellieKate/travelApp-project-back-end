@@ -60,7 +60,7 @@
         },
         {
             "name": "seed",
-            "image": "123456789012.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend:latest",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend:latest",
             "essential": false,
             "command": ["npm", "run", "seed-prod"],
             "environment": [
