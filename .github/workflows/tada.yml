@@ -114,7 +114,7 @@ jobs:
         id: set_image
         run: |
           IMAGE_TAG="${{ steps.tag_version.outputs.new_tag }}"
-          GHCR_IMAGE="ghcr.io/${{ github.repository_owner }}"/travelapp-backend:${IMAGE_TAG}"
+          GHCR_IMAGE="ghcr.io/${{ github.repository_owner }}/travelapp-backend:${IMAGE_TAG}"
           echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
           echo "ghcr_image=$GHCR_IMAGE" >> $FITHUB_OUTPUT
 
