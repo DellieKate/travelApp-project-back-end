@@ -60,7 +60,7 @@
         },
         {
             "name": "seed",
-            "image": "123456789012.dkr.ecr.ap-southeast-2.amazonaws.com/travel-seed:latest",
+            "image": "123456789012.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend:latest",
             "essential": false,
             "command": ["npm", "run", "seed-prod"],
             "environment": [
@@ -78,8 +78,15 @@
         },
         {
             "name": "mongodb",
-            "image": "mongo:latest",
-            "essential": true
+            "image": "public.ecr.aws/docker/library/mongo:latest",
+            "essential": true,
+            "portMappings":[
+                {
+                    "containerPort" : 27017,
+                    "hostPort" : 27017,
+                    "protocol" : "tcp"
+                }
+            ]
         }    
     ],
     "family": "travelapp-task",
