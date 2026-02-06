@@ -28,7 +28,8 @@ env:
   ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend
                                              
 permissions:
-  contents: read
+  contents: write
+  packages: write
 
 jobs:
   build-and-verify:
