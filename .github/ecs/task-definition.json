@@ -3,7 +3,6 @@
         {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend:latest",
-            "cpu": 0,
             "portMappings": [
                 {
                     "name": "travelapp-container-3000-tcp",
@@ -97,8 +96,8 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "512",
-    "memory": "1024",
+    "cpu": "1024",
+    "memory": "2048",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
