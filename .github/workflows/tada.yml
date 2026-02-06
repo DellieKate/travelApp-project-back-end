@@ -21,7 +21,7 @@ env:
   AWS_REGION: ap-southeast-2                                   
   ECS_SERVICE: travelapp-task-service-m5fybvnr    
   ECS_CLUSTER: able-flamingo-sp803j            
-  ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend
+  ECS_CONTAINER_NAME: travelapp-container
   ECS_TASK_DEFINITION: .github/ecs/task-definition.json
                                              
 permissions:
