@@ -21,7 +21,7 @@ env:
   AWS_REGION: ap-southeast-2                                   
   ECS_SERVICE: travelapp-task-service-m5fybvnr    
   ECS_CLUSTER: able-flamingo-sp803j            
-  ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travelapp-backend
+  ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend
   ECS_TASK_DEFINITION: .github/ecs/task-definition.json
                                              
 permissions:
@@ -205,7 +205,7 @@ jobs:
         id: set-ecr
         run: |
           IMAGE_TAG="${{ needs.tag-and-publish.outputs.IMAGE_TAG }}"
-          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travelapp-backend:${IMAGE_TAG}"
+          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travel-backend:${IMAGE_TAG}"
           echo "ecr_image=$ECR_IMAGE" >> $GITHUB_OUTPUT
 
       # ------------ PULL GHCR IMAGE AND PUSH TO ECR ------------ 
