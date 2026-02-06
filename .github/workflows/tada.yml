@@ -18,6 +18,17 @@ env:
   IS_CI: true
   OWNER_LC: ""
   REPO_LC: ""
+  AWS_REGION: ap-southeast-2                     
+  ECR_REPOSITORY: travelapp-backend               
+  ECS_SERVICE: travelapp-task-service-m5fybvnr    
+  ECS_CLUSTER: able-flamingo-sp803j                 
+  ECS_TASK_DEFINITION: arn:aws:ecs:ap-southeast-2:304619557163:task-definition/travelapp-task:3           
+                                              # set this to the path to your Amazon ECS task definition
+                                              # file, e.g. .aws/task-definition.json
+  ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend
+                                             
+permissions:
+  contents: read
 
 jobs:
   build-and-verify:
@@ -134,12 +145,61 @@ jobs:
           name: Release ${{ steps.tag_version.outputs.new_tag }}
           body: ${{ steps.tag_version.outputs.changelog }}
       
+  #deploy:
+  # needs: tag-and-publish
+  # runs-on: ubuntu-latest
+  # environment: prod
+
+  #  steps:
+  #    - name: Deploy to Render
+  #      run: curl -f ${{ secrets.RENDER_DEPLOY_HOOK }}
+          
+
   deploy:
-    needs: tag-and-publish
+    name: Deploy to Amazon ECS
     runs-on: ubuntu-latest
-    environment: prod
+    needs: tag-and-publish
+    environment: production
 
     steps:
-      - name: Deploy to Render
-        run: curl -f ${{ secrets.RENDER_DEPLOY_HOOK }}
-          
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6.0.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }} 
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push docker image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: travel-backend
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$REPOSITORY:$IMAGE_TAG
+          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      - name: Fill in the new image ID in the Amazon ECS task definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ env.ECS_TASK_DEFINITION }}
+          container-name: ${{ env.ECS_CONTAINER_NAME }}
+          image: ${{ steps.build-image.outputs.image }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+        
