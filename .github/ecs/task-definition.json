@@ -2,7 +2,7 @@
     "containerDefinitions": [
         {
             "name": "travelapp-container",
-            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travelapp-backend",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "cpu": 0,
             "portMappings": [
                 {
