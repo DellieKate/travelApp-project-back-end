@@ -1,4 +1,4 @@
-name: travelApp-project-backend
+name: CI/CD pipeline
 
 on: 
   push:
@@ -18,14 +18,11 @@ env:
   IS_CI: true
   OWNER_LC: ""
   REPO_LC: ""
-  AWS_REGION: ap-southeast-2                     
-  ECR_REPOSITORY: travelapp-backend               
+  AWS_REGION: ap-southeast-2                                   
   ECS_SERVICE: travelapp-task-service-m5fybvnr    
-  ECS_CLUSTER: able-flamingo-sp803j                 
-  ECS_TASK_DEFINITION: arn:aws:ecs:ap-southeast-2:304619557163:task-definition/travelapp-task:3           
-                                              # set this to the path to your Amazon ECS task definition
-                                              # file, e.g. .aws/task-definition.json
+  ECS_CLUSTER: able-flamingo-sp803j            
   ECS_CONTAINER_NAME: 304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend
+  ECS_TASK_DEFINITION: .github/ecs/task-definition.json
                                              
 permissions:
   contents: write
@@ -80,8 +77,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     outputs:
-      image_tag: ${{ steps.tag_version.outputs.new_tag }}
-      image_name: ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
+      IMAGE_TAG: ${{ steps.set_image.outputs.image_tag }}
+      GHCR_IMAGE: ${{ steps.set_image.outputs.ghcr_image }}
 
     steps:
       - name: Checkout repository
@@ -98,16 +95,8 @@ jobs:
           echo "OWNER_LC=${OWNER,,}" >> $GITHUB_ENV
           echo "REPO_LC=${REPO,,}" >> $GITHUB_ENV
         env:
-          OWNER: '${{ github.repository_owner }}'
-          REPO: '${{ github.repository }}'
-
-      # ------------ LOGIN TO GHCR ------------ 
-      - name: Login to Docker Hub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN}}
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.repository }}
 
       # ------------ VERSION TAGGING ------------ 
       - name: Bump version and push tag
@@ -119,6 +108,23 @@ jobs:
           release_branches: release
           default_bump: patch
           dry_run: false
+      
+      # ------------ SET IMAGE VARIABLES ------------ 
+      - name: Set image variables
+        id: set_image
+        run: |
+          IMAGE_TAG="${{ steps.tag_version.outputs.new_tag }}"
+          GHCR_IMAGE="ghcr.io/${{ github.repository_owner }}"/travelapp-backend:${IMAGE_TAG}"
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+          echo "ghcr_image=$GHCR_IMAGE" >> $FITHUB_OUTPUT
+
+      # ------------ LOGIN TO GHCR ------------ 
+      - name: Login to Docker Hub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       # ------------ BUILDX PRODUCTION IMAGE ------------ 
       - name: Build and push production image to GHCR
@@ -129,8 +135,8 @@ jobs:
           platforms: linux/amd64, linux/arm64
           push: true
           tags: |
-            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:latest
-            ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ steps.tag_version.outputs.new_tag }}
+             ${{ steps.set_image.outputs.ghcr_image }}
+             ghcr.io/${{ github.repository_owner }}/travelapp-backend:latest
 
       # ------------ CREATE GITHUB RELEASE ------------ 
       - name: Create a GitHub release
@@ -167,40 +173,46 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }} 
 
-      - name: Login to Amazon ECR
-        id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+      - name: Set lowercase repo
+        run: echo "REPO_LC=${GITHUB_REPOSITORY,,}" .. $GITHUB_ENV
 
-      - name: Login to Docker Hub Container Registry
+      # ------------ LOGIN TO GHCR & ECR ------------ 
+      - name: Login to GHCR
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN}}
 
-      - name: Pull image from GHCR
-        run: |
-          docker pull ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ needs.tag-and-publish.outputs.image_tag }}"
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Tag image for ECR
+      # ------------ DEFINE ECR IMAGE ------------ 
+      - name: Set ECR image
+        id: set-ecr
         run: |
-          docker tag \ 
-          ghcr.io/${{ env.REPO_LC }}/travelapp-backend:${{ needs.tag-and-publish.outputs.image_tag }} \
-          ${{ steps.login-ecr.outputs.registry }}/travel-backend:${{ needs.tag-and-publish.outputs.image_tag }}
+          IMAGE_TAG="${{ needs.tag-and-publish.outputs.IMAGE_TAG }}"
+          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travel-backend:${IMAGE_TAG}"
+          echo "ecr_image=$ECR_IMAGE" >> $GITHUB_OUTPUT
 
-      - name: Push image to ECR
+      # ------------ PULL GHCR IMAGE AND PUSH TO ECR ------------ 
+      - name: Pull GHCR and push to ECR
         run: |
-          docker push \ 
-          ${{ steps.login-ecr.outputs.registry }}/travel-backend:${{ needs.tag-and-publish.outputs.image_tag }}
+          docker pull "${{ needs.tag-and-publish.outputs.IMAGE_TAG }}"
+          docker tag "${{ needs.tag-and-publish.outputs.IMAGE_TAG }}" "$ECR_IMAGE"
+          docker push "$ECR_IMAGE"
 
+      # ------------ RENDER ECS TASK ------------
       - name: Render ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .github/ecs/task-definition.json
           container-name: ${{ env.ECS_CONTAINER_NAME }}
-          image: ${{ steps.login-ecr.outputs.registry }}/travel-backend:${{ needs.tag-and-publish.outputs.image_tag }}
+          image: ${{ steps.set-ecr.outputs.ecr_image }}
 
+      # ------------ DEPLOY TO ECS ------------
       - name: Deploy to ECS 
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
