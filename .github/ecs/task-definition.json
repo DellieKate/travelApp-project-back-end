@@ -1,0 +1,72 @@
+{
+    "containerDefinitions": [
+        {
+            "name": "travelapp-container",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "travelapp-container-3000-tcp",
+                    "containerPort": 3000,
+                    "hostPort": 3000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "NODE_ENV",
+                    "value": "production"
+                },
+                {
+                    "name": "MONGO_URL_TEST",
+                    "value": "mongodb://127.0.0.1:27017/travelApp_test"
+                },
+                {
+                    "name": "MONGO_URL_DEV",
+                    "value": "mongodb://localhost:27017/travelApp-project-backend"
+                },
+                {
+                    "name": "JWT_SECRET",
+                    "value": "CoderAcademyCharliInnaKate"
+                },
+                {
+                    "name": "MONGO_URL_PROD",
+                    "value": "mongodb://mongodb:27017/travelApp-project-backend"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/travelapp-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "travelapp-task",
+    "executionRoleArn": "arn:aws:iam::304619557163:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "volumes": [],
+    "placementConstraints": [],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "enableFaultInjection": false,
+    "tags": []
+}
