@@ -50,8 +50,37 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": []
-        }
+            "systemControls": [],
+            "dependsOn": [
+                {
+                "containerName": "mongodb",
+                "condition": "START"
+                }
+            ]
+        },
+        {
+            "name": "seed",
+            "image": "123456789012.dkr.ecr.ap-southeast-2.amazonaws.com/travel-seed:latest",
+            "essential": false,
+            "command": ["npm", "run", "seed-prod"],
+            "environment": [
+                {
+                "name": "MONGO_URL_PROD",
+                "value": "mongodb://localhost:27017/travelApp-project-backend"
+                }
+            ],
+            "dependsOn": [
+                {
+                "containerName": "mongodb",
+                "condition": "START"
+                }
+            ]
+        },
+        {
+            "name": "mongodb",
+            "image": "mongo:latest",
+            "essential": true
+        }    
     ],
     "family": "travelapp-task",
     "executionRoleArn": "arn:aws:iam::304619557163:role/ecsTaskExecutionRole",
