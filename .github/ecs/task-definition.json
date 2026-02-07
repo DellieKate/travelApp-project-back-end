@@ -31,7 +31,15 @@
                     "name": "MONGO_URL_PROD",
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
                 }
-            ]
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/travelapp-task",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "seeder"
+                }
+            }
         },
         {
             "name": "travelapp-container",
