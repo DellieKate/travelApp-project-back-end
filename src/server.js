@@ -48,6 +48,10 @@ app.get("/", (request, response) => {
     });
 });
 
+app.get("/healthcheck", (request, response) => {
+    response.status(200).send("ok");
+});
+
 app.get("/databaseHealth", (request, response) => {
     response.json({
         models: mongoose.connection.modelNames(),

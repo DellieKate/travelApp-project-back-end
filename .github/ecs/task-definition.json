@@ -87,6 +87,13 @@
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
                 }
             ],
+            "healthCheck" : {
+                "command": ["CMD-SHELL", "curl -f http://localhost:3000/healthcheck || exit 1"],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3,
+                "startPeriod": 30
+            },
             "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
