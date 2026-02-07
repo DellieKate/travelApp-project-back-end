@@ -219,21 +219,30 @@ jobs:
           docker tag "${GHCR_IMAGE}" "$ECR_IMAGE"
           docker push "$ECR_IMAGE"
 
-      # ------------ RENDER ECS TASK ------------
+      # ------------ RENDER ECS TASKS ------------
       - name: Render ECS task definition for app
-        id: task-def
+        id: task-def-app
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .github/ecs/task-definition.json
           container-name: ${{ env.ECS_CONTAINER_NAME }}
           image: ${{ steps.set-ecr.outputs.ecr_image }}   
 
+      - name: Render ECS task definition for seeder
+        id: task-def-seeder
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-app.outputs.task-definition }}
+          container-name: seeder
+          image: ${{ steps.set-ecr.outputs.ecr_image }}   
+
       # ------------ DEPLOY TO ECS ------------
       - name: Deploy to ECS 
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-seeder.outputs.task-definition }}
           service: ${{ env.ECS_SERVICE }}
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
+      
         
