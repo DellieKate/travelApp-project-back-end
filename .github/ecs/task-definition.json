@@ -1,6 +1,16 @@
 {
     "containerDefinitions": [
         {
+            "name" : "mongodb",
+            "image" : "mongo:latest",
+            "portMappings" :[
+                {
+                    "containerPort" : 27017,
+                    "hostPort" : 27017
+                }
+            ]
+        },
+        {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "essential": true,
@@ -33,12 +43,10 @@
                 {
                     "name": "MONGO_URL_DEV",
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
-                }
-            ],
-            "secrets": [
-            {
+                },
+                {
                     "name": "MONGO_URL_PROD",
-                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-2:304619557163:secret:travelapp/prod/mongo"
+                    "value": "mongodb://localhost:27017/travelApp-project-backend"
                 }
             ],
             "environmentFiles": [],
