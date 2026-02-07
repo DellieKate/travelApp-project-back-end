@@ -1,5 +1,5 @@
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000; 
 
 import { dbConnect } from "./database/connectionManager.js";
 import { app } from "./server.js";
@@ -9,7 +9,7 @@ import { app } from "./server.js";
 dbConnect().then(() => {
 
   // 2. Activate the Express server
-  app.listen(PORT, () => {
+  app.listen(PORT, "0.0.0.0", () => {
     console.log("The server is running in port: " + PORT);
   });
 });

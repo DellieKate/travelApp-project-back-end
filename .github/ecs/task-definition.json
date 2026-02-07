@@ -3,6 +3,7 @@
         {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "essential": true,
             "portMappings": [
                 {
                     "name": "travelapp-container-3000-tcp",
@@ -12,19 +13,14 @@
                     "appProtocol": "http"
                 }
             ],
-            "essential": true,
             "environment": [
                 {
                     "name": "NODE_ENV",
                     "value": "production"
                 },
                 {
-                    "name": "MONGO_URL_TEST",
-                    "value": "mongodb://127.0.0.1:27017/travelApp_test"
-                },
-                {
-                    "name": "MONGO_URL_DEV",
-                    "value": "mongodb://localhost:27017/travelApp-project-backend"
+                    "name": "PORT",
+                    "value": "3000"
                 },
                 {
                     "name": "JWT_SECRET",
@@ -32,6 +28,14 @@
                 },
                 {
                     "name": "MONGO_URL_PROD",
+                    "valueFROM": "arn:aws:secretsmanager:ap-southeast-2:304619557163:secret:travelapp/prod/mongo"
+                },
+                {
+                    "name": "MONGO_URL_TEST",
+                    "value": "mongodb://127.0.0.1:27017/travelApp_test"
+                },
+                {
+                    "name": "MONGO_URL_DEV",
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
                 }
             ],
@@ -49,44 +53,8 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": [],
-            "dependsOn": [
-                {
-                "containerName": "mongodb",
-                "condition": "START"
-                }
-            ]
-        },
-        {
-            "name": "seed",
-            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
-            "essential": false,
-            "command": ["npm", "run", "seed-prod"],
-            "environment": [
-                {
-                "name": "MONGO_URL_PROD",
-                "value": "mongodb://localhost:27017/travelApp-project-backend"
-                }
-            ],
-            "dependsOn": [
-                {
-                "containerName": "mongodb",
-                "condition": "START"
-                }
-            ]
-        },
-        {
-            "name": "mongodb",
-            "image": "public.ecr.aws/docker/library/mongo:latest",
-            "essential": true,
-            "portMappings":[
-                {
-                    "containerPort" : 27017,
-                    "hostPort" : 27017,
-                    "protocol" : "tcp"
-                }
-            ]
-        }    
+            "systemControls": []
+        }
     ],
     "family": "travelapp-task",
     "executionRoleArn": "arn:aws:iam::304619557163:role/ecsTaskExecutionRole",
