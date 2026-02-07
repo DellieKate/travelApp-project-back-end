@@ -220,13 +220,21 @@ jobs:
           docker push "$ECR_IMAGE"
 
       # ------------ RENDER ECS TASK ------------
-      - name: Render ECS task definition
+      - name: Render ECS task definition for app
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: .github/ecs/task-definition.json
           container-name: ${{ env.ECS_CONTAINER_NAME }}
           image: ${{ steps.set-ecr.outputs.ecr_image }}
+
+      - name: Render ECS task definition for seeder
+        id: task-def-seeder
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          container-name: seeder
+          image: ${{ steps.set-ecr.outputs.ecr_image }}    
 
       # ------------ DEPLOY TO ECS ------------
       - name: Deploy to ECS 
