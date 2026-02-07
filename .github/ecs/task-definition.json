@@ -11,24 +11,6 @@
             ]
         },
         {
-            "name" : "seed",
-            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
-            "essential": false,
-            "command": ["npm", "run", "seed-prod"],
-            "dependsOn":[
-                {
-                    "containerName" : "travelapp-container",
-                    "condition" : "START"
-                }
-            ],
-            "environment": [
-                {
-                    "name": "MONGO_URL_PROD",
-                    "value": "mongodb://localhost:27017/travelApp-project-backend"
-                }
-            ]
-        },
-        {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "essential": true,
