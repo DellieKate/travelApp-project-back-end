@@ -11,13 +11,24 @@
             ]
         },
         {
+            "name" : "seeder",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "essential": false,
+            "dependsOn":[
+                {
+                    "containerName" : "mongodb",
+                    "condition" : "HEALTHY"
+                }
+            ]
+        },
+        {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "essential": true,
             "dependsOn":[
                 {
-                    "containerName" : "mongodb",
-                    "condition" : "START"
+                    "containerName" : "seeder",
+                    "condition" : "SUCCESS"
                 }
             ],
             "portMappings": [
