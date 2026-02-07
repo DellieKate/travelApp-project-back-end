@@ -19,7 +19,7 @@
         {
             "name" : "seeder",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend:travelApp-v0.1.3-deployment.2",
-            "essential": true,
+            "essential": false,
             "dependsOn":[
                 {
                     "containerName" : "mongodb",
