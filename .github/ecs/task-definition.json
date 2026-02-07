@@ -11,6 +11,12 @@
             ]
         },
         {
+            "name" : "seed",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "essential": false,
+            "command": ["npm", "run", "seed-prod"]
+        },
+        {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "essential": true,
