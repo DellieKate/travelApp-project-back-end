@@ -27,16 +27,18 @@
                     "value": "CoderAcademyCharliInnaKate"
                 },
                 {
-                    "name": "MONGO_URL_PROD",
-                    "valueFROM": "arn:aws:secretsmanager:ap-southeast-2:304619557163:secret:travelapp/prod/mongo"
-                },
-                {
                     "name": "MONGO_URL_TEST",
                     "value": "mongodb://127.0.0.1:27017/travelApp_test"
                 },
                 {
                     "name": "MONGO_URL_DEV",
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
+                }
+            ],
+            "secrets": [
+            {
+                    "name": "MONGO_URL_PROD",
+                    "valueFrom": "arn:aws:secretsmanager:ap-southeast-2:304619557163:secret:travelapp/prod/mongo"
                 }
             ],
             "environmentFiles": [],
