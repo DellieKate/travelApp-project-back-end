@@ -8,7 +8,13 @@
                     "containerPort" : 27017,
                     "hostPort" : 27017
                 }
-            ]
+            ],
+            "healthCheck" : {
+                "command": ["CMD-SHELL", "mongosh --eval 'db.runCommand({ping:1})'"],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+            }
         },
         {
             "name" : "seeder",
