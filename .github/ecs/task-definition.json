@@ -20,6 +20,12 @@
                     "containerName" : "travelapp-container",
                     "condition" : "START"
                 }
+            ],
+            "environment": [
+                {
+                    "name": "MONGO_URL_PROD",
+                    "value": "mongodb://localhost:27017/travelApp-project-backend"
+                }
             ]
         },
         {
