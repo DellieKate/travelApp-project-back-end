@@ -20,8 +20,8 @@ ENV PORT=3000
 EXPOSE 3000
 
 # Healthcheck
-HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
-  CMD wget -q0- http://localhost:3000/health || exit 1
+HEALTHCHECK --interval=30s --timeout=30s --start-period=60s --retries=3 \
+  CMD wget -qO- http://localhost:3000/health || exit 1
 
 # Start the app
 CMD ["node", "src/index.js"]
