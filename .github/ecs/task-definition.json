@@ -3,6 +3,8 @@
         {
             "name" : "mongodb",
             "image" : "mongo:latest",
+            "memoryReservation": 1536,
+            "memory": 2048,
             "portMappings" :[
                 {
                     "containerPort" : 27017,
@@ -19,6 +21,8 @@
         {
             "name" : "seeder",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "memoryReservation": 512,
+            "memory": 1024,
             "essential": false,
             "command" : ["npm", "run", "seed-prod"],
             "dependsOn":[
@@ -45,6 +49,8 @@
         {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "memoryReservation": 1536,
+            "memory": 2048,
             "essential": true,
             "dependsOn":[
                 {
@@ -93,9 +99,9 @@
                     "node -e \"require('http').get('http://localhost:3000/health', r => process.exit(r.statusCode===200?0:1)).on('error',()=>process.exit(1))"
                 ],
                 "interval": 30,
-                "timeout": 5,
+                "timeout": 10,
                 "retries": 3,
-                "startPeriod": 30
+                "startPeriod": 60
             },
             "environmentFiles": [],
             "mountPoints": [],
@@ -122,8 +128,8 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "1024",
-    "memory": "2048",
+    "cpu": "2048",
+    "memory": "6144",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
