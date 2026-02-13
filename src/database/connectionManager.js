@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 let DatabaseUri;
 
 console.log("DB Connection Env", process.env.NODE_ENV)
-if (process.env.NODE_ENV == "test") {
+if (process.env.NODE_ENV == "Cluster0") {
+  DatabaseUri = process.env.MONGO_URL_TEST || "mongodb+srv://katem_db_user:<mysunshine>@cluster0.elmox5y.mongodb.net/travelApp-project-backend"
+} else if (process.env.NODE_ENV == "test") {
   DatabaseUri = process.env.MONGO_URL_TEST || "mongodb://127.0.0.1:27017/travelApp_test"
 } else if (process.env.NODE_ENV == "dev") {
   DatabaseUri = process.env.MONGO_URL_DEV
