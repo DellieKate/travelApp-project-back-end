@@ -9,7 +9,7 @@
     "dev": "node --env-file-if-exists=.env --watch-path=./ --watch-preserve-output ./src/index.js",
     "seed": "NODE_ENV=dev node --env-file=.env src/database/seed.js",
     "seed-prod": "NODE_ENV=prod node src/database/seed.js",
-    "test": "NODE_ENV=test node ./node_modules/.bin/jest --detectOpenHandles"
+    "test": "NODE_ENV=test node ./node_modules/.bin/jest --detectOpenHandles --coverage"
   },
   "repository": {
     "type": "git",
@@ -38,6 +38,7 @@
     "@babel/core": "^7.28.6",
     "@babel/preset-env": "^7.28.6",
     "jest": "^30.2.0",
+    "jest-junit": "^16.0.0",
     "supertest": "^7.1.4"
   }
 }
