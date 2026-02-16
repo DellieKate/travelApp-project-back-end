@@ -49,7 +49,7 @@ app.get("/", (request, response) => {
 });
 
 app.get("/health", (request, response) => {
-    response.status(200).send("ok");
+    response.status(200).json({ status: 'healthy' });
 });
 
 app.get("/databaseHealth", (request, response) => {
