@@ -6,3 +6,10 @@ export default {
   },
 };
 
+// jest.config.js
+module.exports = {
+  reporters: [
+    'default',
+    ['jest-junit', { outputDirectory: 'coverage', outputName: 'junit.xml' }],
+  ],
+}
