@@ -1,6 +1,6 @@
 {
     "containerDefinitions": [
-        {
+        /*{
             "name" : "mongodb",
             "image" : "mongo:latest",
             "memoryReservation": 1536,
@@ -18,7 +18,7 @@
                 "retries": 3
             }
         },
-        {
+       /* {
             "name" : "seeder",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "memoryReservation": 512,
@@ -45,7 +45,7 @@
                     "awslogs-stream-prefix": "seeder"
                 }
             }
-        },
+        }, */
         {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
@@ -54,8 +54,8 @@
             "essential": true,
             "dependsOn":[
                 {
-                    "containerName" : "seeder",
-                    "condition" : "SUCCESS"
+                    "containerName" : "mongodb",
+                    "condition" : "HEALTHY"
                 }
             ],
             "portMappings": [
@@ -91,6 +91,10 @@
                 {
                     "name": "MONGO_URL_PROD",
                     "value": "mongodb://localhost:27017/travelApp-project-backend"
+                },
+                {
+                    "name": "MONGO_URL",
+                    "value": "mongodb+srv://katem_db_user:Sblnz0GJlSJ1vq3w@cluster0.elmox5y.mongodb.net/travelApp-project-backend"
                 }
             ],
             "healthCheck" : {
