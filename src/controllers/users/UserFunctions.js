@@ -12,7 +12,7 @@ async function registerUser(userData) {
   }
 
   // Check if username already exists
-  if (await UserModel.findOne({ username: userData.name })) {
+  if (await UserModel.findOne({ name: userData.name })) {
     const error = new Error("Username already in use. Try another one.");
     error.status = 409;
     throw error;

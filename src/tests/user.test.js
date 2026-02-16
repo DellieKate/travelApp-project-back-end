@@ -16,6 +16,7 @@ describe("User API Endpoints", () => {
   }
 
   beforeAll(async () => {
+    process.env.JWT_SECRET = "testsecret123";
     const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
     await mongoose.connect(MONGO_URL);
   });
@@ -24,7 +25,7 @@ describe("User API Endpoints", () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
-/*
+
   test("POST /users/register - register a new user", async () => {
     const response = await request(app)
       .post("/users/register")
@@ -53,16 +54,16 @@ describe("User API Endpoints", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.user).toHaveProperty("_id", userId);
-    expect(response.body.user.username).toBe(testUser.username);
+    expect(response.body.user.name).toBe(testUser.name);
   });
 
   test("PATCH /users/:userId - update user info", async () => {
     const response = await request(app)
       .patch(`/users/${userId}`)
-      .send({ username: "charlisseUpdated" });
+      .send({ name: "charlisseUpdated" });
 
     expect(response.status).toBe(200);
-    expect(response.body.updatedUser.username).toBe("charlisseUpdated");
+    expect(response.body.updatedUser.name).toBe("charlisseUpdated");
   });
 
   test("DELETE /users/:userId - delete user", async () => {
@@ -71,5 +72,5 @@ describe("User API Endpoints", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe("User deleted successfully!");
-  }); */
+  }); 
 });
