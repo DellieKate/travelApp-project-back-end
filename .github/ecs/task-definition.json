@@ -1,6 +1,52 @@
 {
     "containerDefinitions": [
         {
+            "name" : "mongodb",
+            "image" : "mongo:latest",
+            "memoryReservation": 1536,
+            "memory": 2048,
+            "portMappings" :[
+                {
+                    "containerPort" : 27017,
+                    "hostPort" : 27017
+                }
+            ],
+            "healthCheck" : {
+                "command": ["CMD-SHELL", "mongosh --eval 'db.runCommand({ping:1})'"],
+                "interval": 30,
+                "timeout": 5,
+                "retries": 3
+            }
+        },
+        {
+            "name" : "seeder",
+            "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
+            "memoryReservation": 512,
+            "memory": 1024,
+            "essential": false,
+            "command" : ["npm", "run", "seed-prod"],
+            "dependsOn":[
+                {
+                    "containerName" : "mongodb",
+                    "condition" : "HEALTHY"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "MONGO_URL_PROD",
+                    "value": "mongodb://localhost:27017/travelApp-project-backend"
+                }
+            ],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/travelapp-task",
+                    "awslogs-region": "ap-southeast-2",
+                    "awslogs-stream-prefix": "seeder"
+                }
+            }
+        }, 
+        {
             "name": "travelapp-container",
             "image": "304619557163.dkr.ecr.ap-southeast-2.amazonaws.com/travel-backend",
             "memoryReservation": 1536,
