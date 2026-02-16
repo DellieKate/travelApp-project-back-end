@@ -8,24 +8,24 @@ import { dbConnect, dbClose } from "../database/connectionManager.js";
 
 process.env.JWT_SECRET = ""
 
-describe("Vax API Endpoints", () => {
-  let vaxId;
+const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
 
-  beforeAll(async () => {
-      const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
-      await mongoose.connect(MONGO_URL);
-    });
-  
-  afterAll(async () => {
-    try {
-      if (mongoose.connection.readyState === 1) {
-        await mongoose.connection.dropDatabase();
-      }
-    } finally {
-      await dbClose();
+beforeAll(async () => {
+    await mongoose.connect(MONGO_URL);
+  });
+
+afterAll(async () => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
     }
+  } finally {
+    await dbClose();
+  }
 });
 
+describe("Vax API Endpoints", () => {
+  let vaxId;
 
   test("POST /vax - create new vax requirement", async () => {
     const response = await request(app).post("/vax").send({
