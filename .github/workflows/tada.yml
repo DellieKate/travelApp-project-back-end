@@ -76,7 +76,22 @@ jobs:
         uses: MishaKav/jest-coverage-comment@main
         with: 
           junitxml-path: ./coverage/junit/xml
-          junitxml-title: Test Results
+          junitxml-title: JUNit Results
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-summary-path: ./coverage/coverage-summary.json
+          title: TravelApp Jest Coverage Result
+          summary-title: Jest Coverage Result
+          badge-title: Coverage
+          text-instead-badge: false
+          hide-comment: false
+          create-new-comment: false
+          hide-summary: false
+          remove-links-to-files: false
+          remove-links-to-lines: false
+          coverage-title: Jest Coverage Result
+          coverage-path: ./coverage.txt
+          coverage-path-prefix: .
+          report-only-changed-files: false
 
       - name: Creating blank .env file
         run: touch .env  
