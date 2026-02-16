@@ -7,6 +7,7 @@ on:
       - release
       - deployment
       - revision3
+      - revision4
     tags: 
       - 'v*'  
   pull_request:
@@ -14,6 +15,7 @@ on:
       - release
       - deployment
       - revision3
+      - revision4
 
 env:
   REGISTRY: ghcr.io
