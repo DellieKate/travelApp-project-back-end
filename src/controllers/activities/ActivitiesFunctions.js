@@ -36,7 +36,9 @@ export const updateActivityById = async (request, response) => {
       request.body,
       { new: true } 
     );
-    if (!activity) return response.status(404).json({ message: "Activity not found" });
+    if (!activity) {
+      return response.status(404).json({ message: "Activity not found" });
+    }
     response.json(activity);
   } catch (error) {
     response.status(400).json({ message: error.message });
@@ -46,7 +48,9 @@ export const updateActivityById = async (request, response) => {
 export const deleteActivityById = async (request, response) => {
   try {
     const activity = await ActivitiesModel.findByIdAndDelete(request.params.id);
-    if (!activity) return response.status(404).json({ message: "Activity not found" });
+    if (!activity) {
+      return response.status(404).json({ message: "Activity not found" });
+    }
     response.json({ message: "Activity deleted successfully" });
   } catch (error) {
     response.status(500).json({ message: error.message });

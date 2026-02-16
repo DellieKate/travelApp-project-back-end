@@ -25,7 +25,9 @@ export const getCountries = async (request, response) => {
 export const getCountryById = async (request, response) => {
   try {
     const country = await CountryModel.findById(request.params.id);
-    if (!country) return response.status(404).json({ message: "Country not found" });
+    if (!country) {
+      return response.status(404).json({ message: "Country not found" });
+    }
     response.json(country);
   } catch (error) {
     response.status(500).json({ message: error.message });
@@ -36,7 +38,9 @@ export const getCountryById = async (request, response) => {
 export const updateCountryById = async (request, response) => {
   try {
     const country = await CountryModel.findByIdAndUpdate(request.params.id, request.body, { new: true });
-    if (!country) return response.status(404).json({ message: "Country not found" });
+    if (!country) {
+      return response.status(404).json({ message: "Country not found" });
+    }
     response.json(country);
   } catch (error) {
     response.status(400).json({ message: error.message });
@@ -47,7 +51,9 @@ export const updateCountryById = async (request, response) => {
 export const deleteCountryById = async (request, response) => {
   try {
     const country = await CountryModel.findByIdAndDelete(request.params.id);
-    if (!country) return response.status(404).json({ message: "Country not found" });
+    if (!country) {
+      return response.status(404).json({ message: "Country not found" });
+    }
     response.json({ message: "Country deleted successfully" });
   } catch (error) {
     response.status(500).json({ message: error.message });

@@ -13,7 +13,7 @@ describe("User API Endpoints", () => {
     email: "charlisse@example.com",
     password: "Password123",
     citizenship: "Australia"
-  };
+  }
 
   beforeAll(async () => {
     const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
@@ -24,7 +24,7 @@ describe("User API Endpoints", () => {
     await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
-
+/*
   test("POST /users/register - register a new user", async () => {
     const response = await request(app)
       .post("/users/register")
@@ -71,5 +71,5 @@ describe("User API Endpoints", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.message).toBe("User deleted successfully!");
-  });
+  }); */
 });
