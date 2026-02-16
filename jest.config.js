@@ -2,14 +2,19 @@
 export default {
   testEnvironment: "node",
   transform: {
-    "^.+\\js$": "babel-jest"
+    "^.+\\js$": "babel-jest",     //Transform JS files with Babel
   },
+  reporters: [
+    "default",
+    [
+      "jest-junit", 
+      { 
+        outputDirectory: "coverage", 
+        outputName: "junit.xml" 
+      }
+    ],
+  ],
+  moduleFileExtensions: ["js", "json", "node"],
+  coverageDirectory: "coverage",
 };
 
-// jest.config.js
-module.exports = {
-  reporters: [
-    'default',
-    ['jest-junit', { outputDirectory: 'coverage', outputName: 'junit.xml' }],
-  ],
-}
