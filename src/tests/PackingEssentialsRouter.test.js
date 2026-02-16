@@ -7,7 +7,7 @@ import { jest } from "@jest/globals";
 
 jest.setTimeout(20000);
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
 
 beforeAll(async () => {
     await mongoose.connect(MONGO_URL);

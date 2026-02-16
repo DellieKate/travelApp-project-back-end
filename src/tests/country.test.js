@@ -6,7 +6,7 @@ import request from "supertest";
 import { app } from "../server.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
 
 beforeAll(async () => {
   await mongoose.connect(MONGO_URL);

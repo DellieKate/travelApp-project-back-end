@@ -8,7 +8,7 @@ import { dbConnect, dbClose } from "../database/connectionManager.js";
 
 process.env.JWT_SECRET = ""
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
 
 beforeAll(async () => {
     await mongoose.connect(MONGO_URL);
