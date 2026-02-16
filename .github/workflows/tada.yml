@@ -28,7 +28,7 @@ env:
   ECS_TASK_DEFINITION: .github/ecs/task-definition.json
                                              
 permissions:
-  contents: read
+  contents: write
   packages: write
   pull-requests: write
 
