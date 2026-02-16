@@ -9,15 +9,11 @@ import { jest } from "@jest/globals";
 jest.setTimeout(20000);
 
 beforeAll(async () => {
-  try {
-    await dbClose();
-    await dbConnect();
-  } catch (error) {
-    console.log(error);
-  }
-});
+    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
+    await mongoose.connect(MONGO_URL);
+  });
 
-afterAll(async () => {
+  afterAll(async () => {
   try {
     if (mongoose.connection.readyState === 1) {
       await mongoose.connection.dropDatabase();

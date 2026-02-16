@@ -11,18 +11,18 @@ describe("Vax API Endpoints", () => {
   let vaxId;
 
   beforeAll(async () => {
-    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
-    await mongoose.connect(MONGO_URL);
-  });
-
-  afterAll(async () => {
-  try {
-    if (mongoose.connection.readyState === 1) {
-      await mongoose.connection.dropDatabase();
+      const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
+      await mongoose.connect(MONGO_URL);
+    });
+  
+    afterAll(async () => {
+    try {
+      if (mongoose.connection.readyState === 1) {
+        await mongoose.connection.dropDatabase();
+      }
+    } finally {
+      await dbClose();
     }
-  } finally {
-    await dbClose();
-  }
 });
 
 
