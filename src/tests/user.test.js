@@ -1,7 +1,7 @@
 import { jest } from "@jest/globals";
 import request from "supertest";
 import mongoose from "mongoose";
-import app from "../server.js";
+import { app } from "../server.js";
 import { UserModel } from "../database/entities/User.js";
 
 jest.setTimeout(20000);
