@@ -4,25 +4,22 @@ import { app } from "../server.js";
 import { WishListModel } from "../database/entities/WishList.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 import { jest } from "@jest/globals";
+
 jest.setTimeout(20000);
 
-beforeAll(async () => {
-  try {
-    await dbClose();
-    await dbConnect();
-  } catch (error) {
-      console.log(error);
-  }
-});
-
-afterAll(async () => {
-  try {
-    if (mongoose.connection.readyState === 1) {
-      await mongoose.connection.dropDatabase();
+  beforeAll(async () => {
+      const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+      await mongoose.connect(MONGO_URL);
+    });
+  
+  afterAll(async () => {
+    try {
+      if (mongoose.connection.readyState === 1) {
+        await mongoose.connection.dropDatabase();
+      }
+    } finally {
+      await dbClose();
     }
-  } finally {
-    await dbClose();
-  }
 });
 
 describe("WishList Operations", () => {
