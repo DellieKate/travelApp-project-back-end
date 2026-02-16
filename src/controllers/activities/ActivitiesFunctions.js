@@ -43,7 +43,6 @@ export const updateActivityById = async (request, response) => {
   }
 };
 
-
 export const deleteActivityById = async (request, response) => {
   try {
     const activity = await ActivitiesModel.findByIdAndDelete(request.params.id);

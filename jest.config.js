@@ -6,15 +6,3 @@ export default {
   },
 };
 
-module.exports = {
-  reporters: [
-    'default',
-    [
-      'jest-junit',
-      {
-        outputDirectory: './src/tests',
-        outputName: 'junit-testresults.xml',
-      },
-    ],
-  ],
-};

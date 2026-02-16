@@ -44,16 +44,6 @@ const UserSchema = new mongoose.Schema(
           `${props.value} is a weak password. Please use a mix of upper, lower, and numbers.`,
       },
   },
- /* isAdmin: {
-			type: Boolean,
-			required: false,
-      default: false,
-		},
-	isBanned: {
-			type: Boolean,
-			required: false,
-      default: false
-    }, */
   }, 
   {timestamps: true }
 );
