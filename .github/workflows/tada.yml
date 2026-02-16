@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     env: 
-      MONGO_URL: ${{ secrets.MONGO_URL }}
+      MONGO_URL_TEST: ${{ secrets.MONGO_URL }}
 
     services:
       mongo: 
