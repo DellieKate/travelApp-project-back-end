@@ -2,10 +2,10 @@
 export default {
   verbose: true,
   testEnvironment: "node",
+  testSequencer: "./testSequencer.js",
   transform: {
     "^.+\\js$": "babel-jest",     //Transform JS files with Babel
-  testSequencer: ".testSequencer.js"
-  },
+    },
   reporters: [
     "default",
     [
