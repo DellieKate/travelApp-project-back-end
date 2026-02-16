@@ -36,8 +36,8 @@ jobs:
   build-and-verify:
     runs-on: ubuntu-latest
     environment: prod
-    env: 
-      MONGO_URL: ${{ secrets.MONGO_URL }}
+    env:
+      MONGO_URL_TEST: mongodb://127.0.0.1:27017/travelApp_test
 
     services:
       mongo: 
@@ -68,9 +68,6 @@ jobs:
       # ------------ TESTING ------------ 
       - name: Run tests with coverage
         run: npx jest --coverage --coverageReporters json-summary
-        env: 
-          NODE_ENV: test
-          MONGO_URL: ${{ secrets.MONGO_URL }}
 
       - name: Jest Coverage Comment
         uses: MishaKav/jest-coverage-comment@main
