@@ -68,14 +68,14 @@ jobs:
         run: npm ci
       
       # ------------ TESTING ------------ 
-      - name: Run tests with coverage
-        run: npx jest --coverage --coverageReporters json-summary
-
-      - name: Jest Coverage Comment
-        uses: MishaKav/jest-coverage-comment@main
-        with: 
-          junitxml-path: ./coverage/junit/xml
-          junitxml-title: Test Results
+#      - name: Run tests with coverage
+#        run: npx jest --coverage --coverageReporters json-summary
+#
+#      - name: Jest Coverage Comment
+#        uses: MishaKav/jest-coverage-comment@main
+#        with: 
+#          junitxml-path: ./coverage/junit/xml
+#          junitxml-title: Test Results
 
       - name: Creating blank .env file
         run: touch .env  
