@@ -5,7 +5,7 @@ let DatabaseUri;
 console.log("DB Connection Env", process.env.NODE_ENV)
 
 if (process.env.NODE_ENV === "test") {
-  DatabaseUri = process.env.MONGO_URL_TEST || "mongodb://127.0.0.1:27017/travelApp_test"
+  DatabaseUri = process.env.MONGO_URL_TEST || process.env.MONGO_URL || "mongodb://127.0.0.1:27017/travelApp_test"
 } else if (process.env.NODE_ENV == "dev") {
   DatabaseUri = process.env.MONGO_URL_DEV
 } else 
