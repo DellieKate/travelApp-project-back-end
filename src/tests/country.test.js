@@ -6,26 +6,19 @@ import request from "supertest";
 import { app } from "../server.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
+const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
 
+beforeAll(async () => {
+  await mongoose.connect(MONGO_URL);
+});
+
+afterAll(async () => {
+  await mongoose.connection.dropDatabase();
+  await dbClose();
+});
 
 describe("Country API Endpoints", () => {
   let countryId;
-
-  beforeAll(async () => {
-    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
-    await mongoose.connect(MONGO_URL);
-  });
-
-  afterAll(async () => {
-  try {
-    if (mongoose.connection.readyState === 1) {
-      await mongoose.connection.dropDatabase();
-    }
-  } finally {
-    await dbClose();
-  }
-});
-
 
   test("POST /countries - create a new country", async () => {
     const response = await request(app).post("/countries").send({
