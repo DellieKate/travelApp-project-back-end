@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     env: 
-      MONGO_URL_TEST: ${{ secrets.MONGO_URL }}
+      MONGO_URL: ${{ secrets.MONGO_URL }}
 
     services:
       mongo: 
@@ -70,7 +70,7 @@ jobs:
         run: npx jest --coverage --coverageReporters json-summary
         env: 
           NODE_ENV: test
-          MONGO_URL_TEST: ${{ secrets.MONGO_URL }}
+          MONGO_URL: ${{ secrets.MONGO_URL }}
 
       - name: Jest Coverage Comment
         uses: MishaKav/jest-coverage-comment@main
