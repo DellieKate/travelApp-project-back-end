@@ -16,7 +16,7 @@ env:
 jobs:
   build-and-verify:
     runs-on: ubuntu-latest
-    environment: prod
+    environment: production
 
     env:
       MONGO_URL_TEST: mongodb://127.0.0.1:27017/travelApp_test
