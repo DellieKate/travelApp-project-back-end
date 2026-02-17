@@ -3,18 +3,10 @@ name: CI
 on: 
   push:
     branches:
-      - main
-      - release
-      - deployment
-      - revision3
-      - revision4
+      - '**'
   pull_request:
     branches:
-      - main
-      - release
-      - deployment
-      - revision3
-      - revision4
+      - '**'
   schedule:
     - cron: '19 4  * * 1' 
 
