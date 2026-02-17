@@ -5,6 +5,13 @@ on:
     workflows: ["CI"]
     types:
       - completed
+  push:
+    branches:
+      - main
+      - release
+      - deployment
+      - revision3
+      - revision4
              
 permissions:
   contents: write
@@ -19,7 +26,7 @@ env:
 
 jobs:
   tag-and-publish:
-    if: >
+    if: 
       github.event.workflow_run.conclusion == 'success'
 
     runs-on: ubuntu-latest
