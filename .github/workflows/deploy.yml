@@ -1,0 +1,112 @@
+name: Deploy to ECS
+
+on: 
+  workflow_run:
+    workflows: ["Release and Publish"]
+    types:
+      - completed 
+
+env:
+  AWS_REGION: ap-southeast-2                                   
+  ECS_SERVICE: travelapp-task-service-m5fybvnr    
+  ECS_CLUSTER: able-flamingo-sp803j            
+  ECS_CONTAINER_NAME: travelapp-container
+  ECS_TASK_DEFINITION: .github/ecs/task-definition.json
+                      
+jobs:
+  deploy:
+    if: 
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: prod
+
+    steps:
+      # ------------ CHECKOUT REPO ------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v6
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ------------ LOWERCASE FOR DOCKER TAGS ------------ 
+      - name: Set lowercase repository name
+        run: |
+          echo "OWNER_LC=${OWNER,,}" >> $GITHUB_ENV
+          echo "REPO_LC=${REPO,,}" >> $GITHUB_ENV
+        env:
+          OWNER: ${{ github.repository_owner }}
+          REPO: ${{ github.repository }}
+
+      # ------------ LOGIN TO GHCR & ECR ------------ 
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+        id: login-ecr
+      
+      # ------------ GET LATEST TAG FROM RELEASE ------------
+      - name: Get latest git tag
+        id: get_tag
+        run: |
+          IMAGE_TAG=$(git describe --tags --abbrev=0)
+          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # ------------ DEFINE ECR IMAGE ------------ 
+      - name: Set ECR image
+        id: set-ecr
+        run: |
+          OWNER_LC="${GITHUB_REPOSITORY_OWNER,,}"
+
+          GHCR_IMAGE="ghcr.io/${OWNER_LC}/travel-backend:${IMAGE_TAG}"
+          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travel-backend:${IMAGE_TAG}"
+
+          echo "ghcr_image=$GHCR_IMAGE" >> $GITHUB_OUTPUT
+          echo "ecr_image=$ECR_IMAGE" >> $GITHUB_OUTPUT
+         
+
+      # ------------ PULL GHCR IMAGE AND PUSH TO ECR ------------ 
+      - name: Pull GHCR and push to ECR
+        run: |
+          docker pull "${{ steps.set-ecr.outputs.ghcr_image }}"
+          docker tag "${{ steps.set-ecr.outputs.ghcr_image }}" "${{ steps.set-ecr.outputs.ecr_image }}"
+          docker push "${{ steps.set-ecr.outputs.ecr_image }}"
+
+      # ------------ RENDER ECS TASKS ------------
+      - name: Render ECS task definition for app
+        id: task-def-app
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: .github/ecs/task-definition.json
+          container-name: ${{ env.ECS_CONTAINER_NAME }}
+          image: ${{ steps.set-ecr.outputs.ecr_image }}   
+
+      - name: Render ECS task definition for seeder
+        id: task-def-seeder
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-app.outputs.task-definition }}
+          container-name: seeder
+          image: ${{ steps.set-ecr.outputs.ecr_image }}   
+
+      # ------------ DEPLOY TO ECS ------------
+      - name: Deploy to ECS 
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-seeder.outputs.task-definition }}
+          service: ${{ env.ECS_SERVICE }}
+          cluster: ${{ env.ECS_CLUSTER }}
+          wait-for-service-stability: true
+      
+        

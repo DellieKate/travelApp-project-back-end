@@ -1,0 +1,85 @@
+name: CI
+
+on: 
+  push:
+    branches:
+      - main
+      - release
+      - deployment
+      - revision3
+      - revision4
+  pull_request:
+    branches:
+      - main
+      - release
+      - deployment
+      - revision3
+      - revision4
+  schedule:
+    - cron: '19 4  * * 1' 
+
+env:
+  IS_CI: true
+                                             
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    environment: prod
+
+    env:
+      MONGO_URL_TEST: mongodb://127.0.0.1:27017/travelApp_test
+
+    services:
+      mongo: 
+        image: mongo:6
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.adminCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      # ------------ GIT + NODE ------------ 
+      - uses: actions/checkout@v4
+        with: 
+            fetch-depth: 0
+      - run: echo "Running CI"
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with: 
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm ci
+      
+      # ------------ TESTING ------------ 
+#      - name: Run tests with coverage
+#        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-unit
+#        env:
+#          JEST_JUNIT_OUTPUT_DIR: "./coverage/junit"
+#          JEST_JUNIT_OUTPUT_NAME: "junit.xml"
+
+#      - name: Jest Coverage Comment
+#        uses: MishaKav/jest-coverage-comment@main
+#        with: 
+#          junitxml-path: ./coverage/junit/junit/xml
+#          junitxml-title: Test Results
+#        coverage-summary-path: ./coverage/coverage-summary.json
+
+      - name: Create blank .env file
+        run: touch .env  
+      
+      # ------------ DOCKER COMPOSE TEST PHASE ------------ 
+
+      - name: Setup Docker
+        uses: docker/setup-buildx-action@v3  
+
+      - name: Build and start services for verification
+        run:  docker compose -f Docker-compose.yaml up -d --build
+
+      - name: Stop Docker services after verification
+        run: docker compose -f Docker-compose.yaml down
+      
