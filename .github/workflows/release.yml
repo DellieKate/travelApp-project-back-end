@@ -5,6 +5,9 @@ on:
     workflows: ["CI"]
     types:
       - completed
+  push:
+    branches:
+      - '**'
              
 permissions:
   contents: write
