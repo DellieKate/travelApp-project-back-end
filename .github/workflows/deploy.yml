@@ -1,9 +1,10 @@
 name: Deploy to ECS
 
 on: 
-  release:
-    types: [published]
-
+  workflow_run:
+    workflows: ["Release and Publish "]
+    types:
+      - completed
 env:
   AWS_REGION: ap-southeast-2                                   
   ECS_SERVICE: travelapp-task-service-m5fybvnr    
@@ -13,6 +14,7 @@ env:
                       
 jobs:
   deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production
 
