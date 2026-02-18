@@ -1,10 +1,8 @@
 name: Deploy to ECS
 
 on: 
-  workflow_run:
-    workflows: ["Release and Publish"]
-    types:
-      - completed 
+  release:
+    types: [published]
 
 env:
   AWS_REGION: ap-southeast-2                                   
@@ -15,7 +13,6 @@ env:
                       
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: production
 
@@ -23,9 +20,7 @@ jobs:
       # ------------ CHECKOUT REPO ------------
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 
-
+       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v6
         with:
@@ -54,23 +49,20 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v2
         id: login-ecr
       
-      # ------------ GET LATEST TAG FROM RELEASE ------------
-      - name: Get latest git tag
+      # ------------ SET IMAGE TAG FROM RELEASE ------------
+      - name: Set image tag
         id: get_tag
-        run: |
-          IMAGE_TAG=$(git describe --tags --abbrev=0)
-
-          echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
-          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
-
+        run:
+          echo "IMAGE_TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          
       # ------------ DEFINE ECR IMAGE ------------ 
       - name: Set ECR image
         id: set-ecr
         run: |
           OWNER_LC="${GITHUB_REPOSITORY_OWNER,,}"
 
-          GHCR_IMAGE="ghcr.io/${OWNER_LC}/travel-backend:${IMAGE_TAG}"
-          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travel-backend:${IMAGE_TAG}"
+          GHCR_IMAGE="ghcr.io/${OWNER_LC}/travelapp-backend:${IMAGE_TAG}"
+          ECR_IMAGE="${{ steps.login-ecr.outputs.registry }}/travelapp-backend:${IMAGE_TAG}"
 
           echo "ghcr_image=$GHCR_IMAGE" >> $GITHUB_OUTPUT
           echo "ecr_image=$ECR_IMAGE" >> $GITHUB_OUTPUT
