@@ -8,15 +8,14 @@ on:
     branches:
       - '**'
   schedule:
-    - cron: '19 4  * * 1' 
-
+    - cron: '19 4  * * 1'
 env:
   IS_CI: true
                                              
 jobs:
   build-and-verify:
     runs-on: ubuntu-latest
-    environment: production
+    environment: prod
 
     env:
       MONGO_URL_TEST: mongodb://127.0.0.1:27017/travelApp_test
