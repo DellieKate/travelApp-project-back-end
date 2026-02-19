@@ -48,7 +48,7 @@ jobs:
       
       # ------------ TESTING ------------ 
       - name: Run tests with coverage
-        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-unit
+        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-junit
         env:
           JEST_JUNIT_OUTPUT_DIR: "./coverage/junit"
           JEST_JUNIT_OUTPUT_NAME: "junit.xml"
