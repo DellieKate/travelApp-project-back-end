@@ -47,18 +47,18 @@ jobs:
         run: npm ci
       
       # ------------ TESTING ------------ 
-#      - name: Run tests with coverage
-#        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-unit
-#        env:
-#          JEST_JUNIT_OUTPUT_DIR: "./coverage/junit"
-#          JEST_JUNIT_OUTPUT_NAME: "junit.xml"
+      - name: Run tests with coverage
+        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-unit
+        env:
+          JEST_JUNIT_OUTPUT_DIR: "./coverage/junit"
+          JEST_JUNIT_OUTPUT_NAME: "junit.xml"
 
-#      - name: Jest Coverage Comment
-#        uses: MishaKav/jest-coverage-comment@main
-#        with: 
-#          junitxml-path: ./coverage/junit/junit/xml
-#          junitxml-title: Test Results
-#        coverage-summary-path: ./coverage/coverage-summary.json
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
+        with: 
+          junitxml-path: ./coverage/junit/junit/xml
+          junitxml-title: Test Results
+          coverage-summary-path: ./coverage/coverage-summary.json
 
       - name: Create blank .env file
         run: touch .env  
