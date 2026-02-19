@@ -45,6 +45,9 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Seed database
+        run: npm run seed
       
       # ------------ TESTING ------------ 
       - name: Run tests with coverage
