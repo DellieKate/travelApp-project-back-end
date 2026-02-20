@@ -7,7 +7,7 @@ class CustomSequencer extends Sequencer {
 
     tests.forEach(test => {
       // Any test file containing "city" (case-insensitive) goes last
-      if (/city/i.test(test.path)) {
+      if (test.path.includes('CityRouter.test.js')) {
         cityTests.push(test);
       } else {
         otherTests.push(test);

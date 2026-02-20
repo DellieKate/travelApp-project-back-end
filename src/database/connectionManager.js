@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "test") {
 } else 
   DatabaseUri = process.env.MONGO_URL_PROD || process.env.MONGO_URL;
 
-//console.log(mongoose.connection.db.databaseName);
+//console.log(mongoose.connection.db.travelApp-project-backend);
 
 if (!DatabaseUri) {
   throw new Error ("Database URI is not set! Please define which to database to use.");

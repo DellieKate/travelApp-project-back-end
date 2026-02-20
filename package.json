@@ -10,7 +10,7 @@
     "seed": "NODE_ENV=dev node --env-file=.env src/database/seed.js",
     "seed-test": "NODE_ENV=test node src/database/seed.js",
     "seed-prod": "NODE_ENV=prod node src/database/seed.js",
-    "test": "NODE_ENV=test node ./node_modules/.bin/jest --runInBand --detectOpenHandles --coverage"
+    "test": "NODE_ENV=test node --experimental-vm-modules ./node_modules/.bin/jest --runInBand --detectOpenHandles"
   },
   "repository": {
     "type": "git",
