@@ -51,17 +51,30 @@ jobs:
       
       # ------------ TESTING ------------ 
       - name: Run tests with coverage
-        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-junit
+        run: npx jest --coverage --coverageReporters=json-summary --reporters=default --reporters=jest-junit
         env:
-          JEST_JUNIT_OUTPUT_DIR: "./coverage/junit"
-          JEST_JUNIT_OUTPUT_NAME: "junit.xml"
+          JEST_JUNIT_OUTPUT_DIR: ./coverage/junit
+          JEST_JUNIT_OUTPUT_NAME: junit.xml
 
-      - name: Jest Coverage Comment
+      - name: Post Coverage Comment to PR
         uses: MishaKav/jest-coverage-comment@main
         with: 
           junitxml-path: ./coverage/junit/junit/xml
           junitxml-title: Test Results
           coverage-summary-path: ./coverage/coverage-summary.json
+      
+      # ------------ UPLOAD TEST ARTIFACTS ------------ 
+      - name: Upload coverage report artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+          name: coverage-report
+          path: ./coverage/
+
+      - name: Upload JUnit Test result artifacts
+        uses: actions/upload-artifact@v4
+        with: 
+          name: junit-results
+          path: ./coverage/junit/
 
       - name: Create blank .env file
         run: touch .env  
