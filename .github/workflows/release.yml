@@ -25,7 +25,7 @@ env:
                                              
 jobs: 
   tag-and-publish:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    #if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     environment: prod
     outputs:
@@ -108,7 +108,7 @@ jobs:
     name: Deploy to Amazon ECS
     runs-on: ubuntu-latest
     needs: tag-and-publish
-    environment: production
+    environment: prod
 
     steps:
       - name: Checkout
@@ -186,4 +186,19 @@ jobs:
           cluster: ${{ env.ECS_CLUSTER }}
           wait-for-service-stability: true
       
-        
+      # ------------ SAVE DEPLOYMENT METADATA ------------
+      - name: Save deploymeny metadata 
+        run: |
+          echo "IMAGE_TAG=${{ needs.tag-and-publish.outputs.IMAGE_TAG}}" >> deployment-info.txt
+          echo "COMMIT_SHA=${{ github.sha }}" >> deployment-info.txt
+          echo "BRANCH=${{ github.ref_name }}" >> deployment-info.txt
+          echo "DEPLOY_TIME=$(date -u)" >> deployment-info.txt
+          echo "ENVIRONMENT=prod" >> deployment-info.txt
+          echo "SERVICE=travelapp-backend" >> deployment-info.txt
+
+      # ------------ UPLOAD DEPLOYMENT ARTIFACT ------------
+      - name: Upload deployment artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-metadata-${{ github.run_number }}
+          path: artifacts/deployment-info.txt
