@@ -2,7 +2,9 @@
 
 Repo link: https://github.com/DellieKate/travelApp-project-back-end 
 
-Back End Deployment link: https://travelapp-project-back-end.onrender.com
+Back End Deployment link:
+- https://travelapp-project-back-end.onrender.com
+- http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com
                    
 
 This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
@@ -182,3 +184,5 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 1. The app uses **MongoAtlas**, a fully managed cloud database, to store and manage all travel data. 
 
 2. The backend server is hosted on **Render**, a cloud-based hosting platform that offers continuous deployment and automatic scaling.
+
+3. The app is also deployed in **AWS** using **Fargate**, with link [http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com](http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com/)  still awaiting AWS certificate to be able to use custom name [https://mytravelapp.com](https://mytravelapp.com/)
