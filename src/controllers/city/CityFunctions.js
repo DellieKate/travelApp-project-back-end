@@ -20,7 +20,8 @@ async function createCity(targetCity) {
 
 // Update one city
 async function updateOneCitybyId(targetCityId, newData) {
-  let updateResult = await CityModel.findByIdAndUpdate(targetCityId, newData, { new: true });
+  let updateResult = await CityModel.findByIdAndUpdate(targetCityId, newData, { returnDocument: "after" });
+  if (!updateResult) throw new Error("City not found");
   return updateResult;
 };
 
