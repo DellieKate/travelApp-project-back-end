@@ -9,32 +9,14 @@ jest.setTimeout(20000);
 
 beforeAll(async () => {
     await dbConnect()
-    // const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test-CityRouterTest";
-    // await mongoose.connect(MONGO_URL);
     await mongoose.connection.dropDatabase();
   });
 
 afterAll(async () => {
-  // try {
-  //   if (mongoose.connection.readyState === 1) {
-  //     await mongoose.connection.dropDatabase();
-  //   }
-  // } finally {
-  //   await dbClose();
-  // }
   await mongoose.disconnect()
 });
 
-// In order to create a city for the test database, a country needs to be created
-// first, because the CityModel states that Country is a required field by ObjectID
 describe("City Operations", () => {
-
-  // const genericCountry = CountryModel.create({
-  //       name: "Generic Country",
-  //       visaReq: "No",
-  //       currency: "Euro",
-  //       language: "German"
-  //     });
 
   // CREATE ONE city
   it("POST /cities should create a new city", async () => {

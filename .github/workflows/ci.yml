@@ -16,10 +16,7 @@ jobs:
   build-and-verify:
     runs-on: ubuntu-latest
     environment: prod
-
-    # env:
-    #   MONGO_URL_TEST: mongodb://127.0.0.1:27017/travelApp_test
-
+    
     services:
       mongo: 
         image: mongo:6
@@ -48,31 +45,50 @@ jobs:
       
       # ------------ TESTING ------------ 
       - name: Run tests with coverage
-        run: npx jest --coverage --coverageReporters=json-summary --reporters=default --reporters=jest-junit
+        run: npx jest --coverage --coverageReporters json-summary --reporters=default --reporters=jest-junit
         env:
           NODE_ENV: test
-          JEST_JUNIT_OUTPUT_DIR: .artifacts/coverage/junit
-          JEST_JUNIT_OUTPUT_NAME: junit.xml
+
+      - name: Jest Coverage Comment
+        uses: MishaKav/jest-coverage-comment@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          coverage-summary-path: ./coverage/coverage-summary.json
+          title: travelApp Jest Coverage Comment
+          summary-title: travelApp Summary
+          badge-title: Coverage
+          text-instead-badge: false
+          hide-comment: false
+          create-new-comment: false
+          hide-summary: false
+          remove-links-to-files: false
+          remove-links-to-lines: false
+          junitxml-path: ./coverage/junit.xml
+          junitxml-title: travelApp JUnit Results
+          coverage-path: ./coverage.txt
+          coverage-title: travelApp Coverage Report
+          coverage-path-prefix: src/
+          report-only-changed-files: false
 
       - name: Post Coverage Comment to PR
         uses: MishaKav/jest-coverage-comment@main
         with: 
-          junitxml-path: .artifacts/coverage/junit/junit/xml
+          junitxml-path: ./coverage/junit/junit.xml
           junitxml-title: Test Results
-          coverage-summary-path: .artifacts/coverage/coverage-summary.json
+          coverage-summary-path: ./coverage/coverage-summary.json
       
       # ------------ UPLOAD TEST ARTIFACTS ------------ 
       - name: Upload coverage report artifacts
         uses: actions/upload-artifact@v4
         with: 
           name: coverage-report
-          path: ./artifacts/coverage/
+          path: ./coverage/
 
       - name: Upload JUnit Test result artifacts
         uses: actions/upload-artifact@v4
         with: 
           name: junit-results
-          path: ./artifacts/coverage/junit/
+          path: ./coverage/junit/
 
   container-build:
     runs-on: ubuntu-latest

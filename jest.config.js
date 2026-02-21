@@ -10,13 +10,12 @@ export default {
     "default",
     [
       "jest-junit", 
-      { 
-        outputDirectory: "coverage", 
-        outputName: "junit.xml" 
-      }
+      { outputDirectory: "coverage", outputName: "junit.xml" }
     ],
   ],
   moduleFileExtensions: ["js", "json", "node"],
+  collectCoverage: true,
+  coverageReporters: ["json-summary", "text", "html"],
   coverageDirectory: "coverage",
 };
 

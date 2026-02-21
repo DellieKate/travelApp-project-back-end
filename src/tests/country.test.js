@@ -1,32 +1,22 @@
 import { jest } from "@jest/globals";
-jest.setTimeout(20000);
-
 import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
 import { CountryModel } from "../database/entities/Country.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
+jest.setTimeout(20000);
+
 describe("Country API Endpoints", () => {
   let countryId;
 
   beforeAll(async () => {
-    // const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-Country";
-    // await mongoose.connect(MONGO_URL);
-    // await mongoose.connection.dropDatabase();
     await dbConnect()
     await mongoose.connection.dropDatabase();
   });
 
   afterAll(async () => {
-  // try {
-  //   if (mongoose.connection.readyState === 1) {
-  //     await mongoose.connection.dropDatabase();
-  //   }
-  // } finally {
-  //   await dbClose();
-  // }
-  await mongoose.disconnect()
+    await mongoose.disconnect()
 });
 
   test("POST /countries - create a new country", async () => {
