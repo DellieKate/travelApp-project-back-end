@@ -14,16 +14,18 @@ describe("Vax API Endpoints", () => {
   beforeAll(async () => {
       const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
       await mongoose.connect(MONGO_URL);
+      await mongoose.connection.dropDatabase();
     });
   
   afterAll(async () => {
-    try {
-      if (mongoose.connection.readyState === 1) {
-        await mongoose.connection.dropDatabase();
-      }
-    } finally {
-      await dbClose();
-    }
+    // try {
+    //   if (mongoose.connection.readyState === 1) {
+    //     await mongoose.connection.dropDatabase();
+    //   }
+    // } finally {
+    //   await dbClose();
+    // }
+    await dbClose();
 });
 
   test("POST /vax - create new vax requirement", async () => {

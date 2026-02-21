@@ -32,7 +32,6 @@ function autoPopulateCity (next) {
         populate: { path: "vaxReq", select: "vaxReq -_id" }})
     .populate({ path: "activities", select: "name description -_id"})
     .populate({ path: "packingEssentials", select: "season items -_id" });
-  next();
 };
 
 CitySchema.pre(/^find/, autoPopulateCity);

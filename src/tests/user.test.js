@@ -19,10 +19,10 @@ describe("User API Endpoints", () => {
     process.env.JWT_SECRET = "testsecret123";
     const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
     await mongoose.connect(MONGO_URL);
+    await mongoose.connection.dropDatabase();
   });
 
   afterAll(async () => {
-    await mongoose.connection.dropDatabase();
     await mongoose.connection.close();
   });
 
