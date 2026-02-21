@@ -28,6 +28,9 @@ async function registerUser(userData) {
 async function loginUser({ email, password }) {
   console.log ("Email and password received.", email, password);
   const user = await UserModel.findOne({ email });
+
+  console.log('user', user)
+
   if (!user) {
     const error = new Error("Invalid email!");
     error.status = 401;

@@ -60,7 +60,10 @@ UserSchema.methods.comparePassword = async function (inputPassword) {
 /*  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
   console.log("inputPassword, password", inputPassword, this.password); */
-  return bcrypt.compare(inputPassword, this.password);
+  var same = inputPassword == this.password
+  console.log('same password', same)
+  // return bcrypt.compare(inputPassword, this.password);
+  return inputPassword == this.password
 };
 
 // Export the model

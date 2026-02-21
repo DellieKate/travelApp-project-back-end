@@ -11,8 +11,10 @@ describe("Country API Endpoints", () => {
   let countryId;
 
   beforeAll(async () => {
-    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-Country";
-    await mongoose.connect(MONGO_URL);
+    // const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-Country";
+    // await mongoose.connect(MONGO_URL);
+    // await mongoose.connection.dropDatabase();
+    await dbConnect()
     await mongoose.connection.dropDatabase();
   });
 

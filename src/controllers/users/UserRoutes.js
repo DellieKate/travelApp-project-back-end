@@ -35,6 +35,7 @@ router.post("/login", async (request, response, next) => {
       token
     });
   } catch (error) {
+    console.log('login error', error)
     next(error);
   }
 });

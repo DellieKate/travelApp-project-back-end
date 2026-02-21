@@ -9,8 +9,9 @@ import { jest } from "@jest/globals";
 jest.setTimeout(20000);
 
 beforeAll(async () => {
-    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-City";
-    await mongoose.connect(MONGO_URL);
+    await dbConnect()
+    // const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+    // await mongoose.connect(MONGO_URL);
     await mongoose.connection.dropDatabase();
   });
 
@@ -41,12 +42,13 @@ describe("City Operations", () => {
       const res = await request(app)
         .post("/cities")
         .send({
-            name: "Vienna",
+            name: "Novalaise",
             bestMonths: "June to August",
-            bestWeather: "Sunny"
+            bestWeather: "Sunny",
+            // country: genericCountry._id
         });
       expect(res.statusCode).toBe(201);
-      expect(res.body.city.name).toBe("Vienna");
+      expect(res.body.city.name).toBe("Novalaise");
   });
 
   // GET ALL cities
@@ -59,9 +61,6 @@ describe("City Operations", () => {
       })
       const res = await request(app).get("/cities");
       expect(res.statusCode).toBe(200);
-
-      console.log('cities body', res.body)
-
       expect(Array.isArray(res.body.cities)).toBe(true);
       expect(res.body.cities.length).toBeGreaterThan(0);
   });

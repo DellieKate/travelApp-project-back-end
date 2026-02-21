@@ -8,9 +8,10 @@ import { jest } from "@jest/globals";
 jest.setTimeout(20000);
 
 beforeAll(async () => {
-    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-WishList";
-    await mongoose.connect(MONGO_URL);
-    await mongoose.connection.dropDatabase();
+    // const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB-WishList";
+    // await mongoose.connect(MONGO_URL);
+    // await mongoose.connection.dropDatabase();
+    dbConnect()
   });
 
 afterAll(async () => {
