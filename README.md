@@ -1,11 +1,11 @@
 # TravelApp Backend
 
-Repo: [https://github.com/DellieKate/travelApp-project-back-end](https://github.com/DellieKate/travelApp-project-back-end)
+Repo: https://github.com/DellieKate/travelApp-project-back-end
 
 Back End Deployment Links:
 
-- Render: [https://travelapp-project-back-end.onrender.com](https://travelapp-project-back-end.onrender.com)
-- AWS Fargate: [http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com](http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com)
+- **Render**: https://travelapp-project-back-end.onrender.com
+- **AWS Fargate**: http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com
 
 This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
 
