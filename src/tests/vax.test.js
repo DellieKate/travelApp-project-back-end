@@ -27,7 +27,7 @@ describe("Vax API Endpoints", () => {
     // } finally {
     //   await dbClose();
     // }
-    await dbClose();
+    await mongoose.connection.close();
 });
 
   test("POST /vax - create new vax requirement", async () => {

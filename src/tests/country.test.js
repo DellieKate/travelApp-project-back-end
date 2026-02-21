@@ -26,7 +26,7 @@ describe("Country API Endpoints", () => {
   // } finally {
   //   await dbClose();
   // }
-  await dbClose();
+  await mongoose.connection.close();
 });
 
   test("POST /countries - create a new country", async () => {

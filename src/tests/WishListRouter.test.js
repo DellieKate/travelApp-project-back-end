@@ -12,6 +12,7 @@ beforeAll(async () => {
     // await mongoose.connect(MONGO_URL);
     // await mongoose.connection.dropDatabase();
     dbConnect()
+    await mongoose.connection.dropDatabase();
   });
 
 afterAll(async () => {
@@ -22,7 +23,7 @@ afterAll(async () => {
   // } finally {
   //   await dbClose();
   // }
-  await dbClose();
+  await mongoose.connection.close();
 });
 
 describe("WishList Operations", () => {

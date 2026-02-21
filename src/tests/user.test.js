@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 import { app } from "../server.js";
 import { UserModel } from "../database/entities/User.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
-require('dotenv').config({ path: '.env' });
 
 jest.setTimeout(20000);
 
@@ -27,8 +26,7 @@ describe("User API Endpoints", () => {
   });
 
   afterAll(async () => {
-    // await mongoose.connection.close();
-    await dbClose()
+    await mongoose.connection.close();
   });
 
   test("POST /users/register - register a new user", async () => {

@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
 import { CityModel } from "../database/entities/City.js";
-import { CountryModel } from "../database/entities/Country.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 import { jest } from "@jest/globals";
 
@@ -10,7 +9,7 @@ jest.setTimeout(20000);
 
 beforeAll(async () => {
     await dbConnect()
-    // const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+    // const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test-CityRouterTest";
     // await mongoose.connect(MONGO_URL);
     await mongoose.connection.dropDatabase();
   });
@@ -23,19 +22,24 @@ afterAll(async () => {
   // } finally {
   //   await dbClose();
   // }
-  await dbClose();
+  try {
+    await mongoose.connection.close();
+    // await dbClose()
+  } finally {
+    console.warn('Failed to close db')
+  }
 });
 
 // In order to create a city for the test database, a country needs to be created
 // first, because the CityModel states that Country is a required field by ObjectID
 describe("City Operations", () => {
 
-  const genericCountry = CountryModel.create({
-        name: "Generic Country",
-        visaReq: "No",
-        currency: "Euro",
-        language: "German"
-      });
+  // const genericCountry = CountryModel.create({
+  //       name: "Generic Country",
+  //       visaReq: "No",
+  //       currency: "Euro",
+  //       language: "German"
+  //     });
 
   // CREATE ONE city
   it("POST /cities should create a new city", async () => {
@@ -44,8 +48,7 @@ describe("City Operations", () => {
         .send({
             name: "Novalaise",
             bestMonths: "June to August",
-            bestWeather: "Sunny",
-            // country: genericCountry._id
+            bestWeather: "Sunny"
         });
       expect(res.statusCode).toBe(201);
       expect(res.body.city.name).toBe("Novalaise");
@@ -53,12 +56,20 @@ describe("City Operations", () => {
 
   // GET ALL cities
   it("GET /cities should return all cities", async () => {
-      const city = await CityModel.create({
-        name: "Abu Tij", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        country: genericCountry._id
-      })
+      // const city = await CityModel.create({
+      //   name: "Abu Tij", 
+      //   bestMonths: "May to September",
+      //   bestWeather: "Spring to Autumn"
+      // })
+
+      await request(app)
+        .post("/cities")
+        .send({
+            name: "Abu Tij",
+            bestMonths: "May to September",
+            bestWeather: "Spring to Autumn"
+        });
+
       const res = await request(app).get("/cities");
       expect(res.statusCode).toBe(200);
       expect(Array.isArray(res.body.cities)).toBe(true);
@@ -67,27 +78,46 @@ describe("City Operations", () => {
 
   // GET ONE city
   it("GET /cities/:id should return one city", async () => {
-      const city = await CityModel.create({
-        name: "Lubrza", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        country: genericCountry._id
-      })
-      const res = await request(app).get(`/cities/${city._id}`);
+      // const city = await CityModel.create({
+      //   name: "Lubrza", 
+      //   bestMonths: "May to September",
+      //   bestWeather: "Spring to Autumn"
+      // })
+
+      let cityResponse = await request(app)
+        .post("/cities")
+        .send({
+            name: "Lubrza",
+            bestMonths: "May to September",
+            bestWeather: "Spring to Autumn"
+        });
+
+      let testId = cityResponse.body.city._id
+
+      const res = await request(app).get(`/cities/${testId}`);
       expect (res.statusCode).toBe(200);
-      expect(res.body.city._id).toBe(city._id.toString());
+      expect(res.body.city._id).toBe(testId.toString());
   });
 
   // UPDATE ONE city
   it("PATCH /cities/:id should update one city", async () => {
-    const city = await CityModel.create({
-        name: "Mount Airy", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        country: genericCountry._id
-    })
+    // const city = await CityModel.create({
+    //     name: "Mount Airy", 
+    //     bestMonths: "May to September",
+    //     bestWeather: "Spring to Autumn"
+    // })
+
+    let cityResponse = await request(app)
+        .post("/cities")
+        .send({
+            name: "Mount Airy",
+            bestMonths: "May to September",
+            bestWeather: "Spring to Autumn"
+        });
+    let testId = cityResponse.body.city._id
+
     const res = await request(app)
-      .patch(`/cities/${city._id}`)
+      .patch(`/cities/${testId}`)
       .send({ name: "Salzburg" });
 
     expect(res.statusCode).toBe(200);
@@ -96,16 +126,27 @@ describe("City Operations", () => {
 
   // DELETE ONE city
   it("DELETE /cities/:id should delete one city", async () => {
-    const city = await CityModel.create({
-        name: "Challans", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        country: genericCountry._id
-    })
-    const res = await request(app).delete(`/cities/${city._id}`);
+    // const city = await CityModel.create({
+    //     name: "Challans", 
+    //     bestMonths: "May to September",
+    //     bestWeather: "Spring to Autumn"
+    // })
+
+    let cityResponse = await request(app)
+        .post("/cities")
+        .send({
+            name: "Challans",
+            bestMonths: "May to September",
+            bestWeather: "Spring to Autumn"
+        });
+    let testId = cityResponse.body.city._id
+
+    console.log('testId to dleete', testId)
+
+    const res = await request(app).delete(`/cities/${testId}`);
     expect(res.statusCode).toBe(200);
 
-    const deleted = await CityModel.findById(city._id);
+    const deleted = await CityModel.findById(testId);
     expect(deleted).toBeNull();
   });
 });
