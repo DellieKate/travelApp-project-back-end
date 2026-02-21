@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../server.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
+import { VaxReqModel } from "../database/entities/VaxReq.js";
 
 process.env.JWT_SECRET = ""
 
@@ -51,7 +52,11 @@ describe("Vax API Endpoints", () => {
   });
 
   test("PATCH /vax/:id - update vax requirement", async () => {
-    const response = await request(app).patch(`/vax/${vaxId}`).send({
+    const vaxTest = await VaxReqModel.create({
+      vaxReq: ["Yellow Fever", "COVID-19"]
+    })
+
+    const response = await request(app).patch(`/vax/${vaxTest._id.toString()}`).send({
       vaxReq: ["Yellow Fever", "COVID-19", "Hepatitis A"]
     });
     expect(response.status).toBe(200);
@@ -59,7 +64,13 @@ describe("Vax API Endpoints", () => {
   });
 
   test("DELETE /vax/:id - delete vax requirement", async () => {
-    const response = await request(app).delete(`/vax/${vaxId}`);
+    const vaxTest = await VaxReqModel.create({
+      vaxReq: ["Yellow Fever", "COVID-19", "Hepatitis A"]
+    })
+
+    console.log('vax created', vaxTest)
+
+    const response = await request(app).delete(`/vax/${vaxTest._id.toString()}`);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("message", "Vax requirement deleted successfully");
   });
