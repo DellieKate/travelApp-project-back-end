@@ -76,6 +76,10 @@ jobs:
 
       - name: Create blank .env file
         run: touch .env  
+
+  container-build:
+    runs-on: ubuntu-latest
+    steps:
       
       # ------------ DOCKER COMPOSE TEST PHASE ------------ 
       - name: Setup Docker
