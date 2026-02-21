@@ -6,8 +6,6 @@ import request from "supertest";
 import { app } from "../server.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-
-
 describe("Country API Endpoints", () => {
   let countryId;
 
@@ -25,7 +23,6 @@ describe("Country API Endpoints", () => {
     await dbClose();
   }
 });
-
 
   test("POST /countries - create a new country", async () => {
     const response = await request(app).post("/countries").send({

@@ -23,7 +23,6 @@ afterAll(async () => {
   }
 });
 
-
 // In order to create a city for the test database, a country needs to be created
 // first, because the CityModel states that Country is a required field by ObjectID
 describe("City Operations", () => {

@@ -22,7 +22,6 @@ afterAll(async () => {
   }
 });
 
-
 describe("PackingEssentials Operations", () => {
   let fakePackingId;
 

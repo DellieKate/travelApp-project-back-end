@@ -1,6 +1,5 @@
 /** @type {import('jest').Config} */
 export default {
-  verbose: true,
   testEnvironment: "node",
   testSequencer: "./testSequencer.js",
   verbose: true,

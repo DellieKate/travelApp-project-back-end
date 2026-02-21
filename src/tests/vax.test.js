@@ -26,7 +26,6 @@ describe("Vax API Endpoints", () => {
     }
 });
 
-
   test("POST /vax - create new vax requirement", async () => {
     const response = await request(app).post("/vax").send({
       vaxReq: ["Yellow Fever", "COVID-19"]
