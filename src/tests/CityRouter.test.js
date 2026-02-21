@@ -41,30 +41,6 @@ describe("City Operations", () => {
         language: "German"
       });
       fakeCountryId = country._id;
-      const city1 = await CityModel.create({
-        name: "Lublin1", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        countryName: "Poland",
-        country: country
-      })
-      fakeCityId1 = city1._id
-      const city2 = await CityModel.create({
-        name: "Lublin2", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        countryName: "Poland",
-        country: country
-      })
-      fakeCityId2 = city2._id
-      const city3 = await CityModel.create({
-        name: "Lublin3", 
-        bestMonths: "May to September",
-        bestWeather: "Spring to Autumn",
-        countryName: "Poland",
-        country: country
-      })
-      fakeCityId3 = city3._id
   });
 
   // CREATE ONE city
@@ -83,6 +59,11 @@ describe("City Operations", () => {
 
   // GET ALL cities
   it("GET /cities should return all cities", async () => {
+      const city = await CityModel.create({
+        name: "Abu Tij", 
+        bestMonths: "May to September",
+        bestWeather: "Spring to Autumn",
+      })
       const res = await request(app).get("/cities");
       expect(res.statusCode).toBe(200);
       expect(Array.isArray(res.body.cities)).toBe(true);
@@ -91,15 +72,25 @@ describe("City Operations", () => {
 
   // GET ONE city
   it("GET /cities/:id should return one city", async () => {
-      const res = await request(app).get(`/cities/${fakeCityId1}`);
+      const city = await CityModel.create({
+        name: "Lubrza", 
+        bestMonths: "May to September",
+        bestWeather: "Spring to Autumn",
+      })
+      const res = await request(app).get(`/cities/${city._id}`);
       expect (res.statusCode).toBe(200);
-      expect(res.body.city._id).toBe(fakeCityId1.toString());
+      expect(res.body.city._id).toBe(city._id.toString());
   });
 
   // UPDATE ONE city
   it("PATCH /cities/:id should update one city", async () => {
+    const city = await CityModel.create({
+        name: "Mount Airy", 
+        bestMonths: "May to September",
+        bestWeather: "Spring to Autumn",
+    })
     const res = await request(app)
-      .patch(`/cities/${fakeCityId2}`)
+      .patch(`/cities/${city._id}`)
       .send({ name: "Salzburg" });
 
     expect(res.statusCode).toBe(200);
@@ -108,7 +99,12 @@ describe("City Operations", () => {
 
   // DELETE ONE city
   it("DELETE /cities/:id should delete one city", async () => {
-    const res = await request(app).delete(`/cities/${fakeCityId3}`);
+    const city = await CityModel.create({
+        name: "Challans", 
+        bestMonths: "May to September",
+        bestWeather: "Spring to Autumn",
+    })
+    const res = await request(app).delete(`/cities/${city._id}`);
     expect(res.statusCode).toBe(200);
 
     const deleted = await CityModel.findById(fakeCityId3);
