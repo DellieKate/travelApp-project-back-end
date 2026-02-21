@@ -59,12 +59,19 @@ describe("User API Endpoints", () => {
   });
 
   test("GET /users/:userId - retrieve single user", async () => {
+    const user = await UserModel.create({
+      name: "robert",
+      email: "robert@example.com",
+      password: "Password123",
+      citizenship: "Australia"
+    });
+
     const response = await request(app)
-      .get(`/users/${userId}`);
+      .get(`/users/${user._id.toString()}`);
 
     expect(response.status).toBe(200);
-    expect(response.body.user).toHaveProperty("_id", userId);
-    expect(response.body.user.name).toBe(testUser.name);
+    expect(response.body.user).toHaveProperty("_id", user._id.toString());
+    expect(response.body.user.name).toBe(user.name);
   });
 
   test("PATCH /users/:userId - update user info", async () => {

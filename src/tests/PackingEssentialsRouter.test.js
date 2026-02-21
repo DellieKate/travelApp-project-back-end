@@ -67,10 +67,15 @@ describe("PackingEssentials Operations", () => {
 
   // DELETE ONE PackingEssentials List
   it("DELETE /packing/:id should delete one PackingEssentials List", async () => {
-    const res = await request(app).delete(`/packing/${fakePackingId}`);
+    const packingEssential = await PackingEssentialsModel.create({
+      season: "Summer",
+      items: ["Water bottle"]
+    })
+
+    const res = await request(app).delete(`/packing/${packingEssential._id.toString()}`);
     expect(res.statusCode).toBe(200);
 
-    const deleted = await PackingEssentialsModel.findById(fakePackingId);
+    const deleted = await PackingEssentialsModel.findById(packingEssential._id);
     expect(deleted).toBeNull();
   });
 });

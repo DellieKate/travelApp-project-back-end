@@ -68,8 +68,6 @@ describe("Vax API Endpoints", () => {
       vaxReq: ["Yellow Fever", "COVID-19", "Hepatitis A"]
     })
 
-    console.log('vax created', vaxTest)
-
     const response = await request(app).delete(`/vax/${vaxTest._id.toString()}`);
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("message", "Vax requirement deleted successfully");

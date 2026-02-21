@@ -27,12 +27,15 @@ const CitySchema = new mongoose.Schema({
 
 // Auto-populate
 function autoPopulateCity (next) {
-    if (process.env.NODE_ENV !== "test") {
+    if (this.country) {
+        console.log('pre-populating city!')
         this.populate(
             { path: "country", select: "name visaReq currency language -_id", 
                 populate: { path: "vaxReq", select: "vaxReq -_id" }})
             .populate({ path: "activities", select: "name description -_id"})
             .populate({ path: "packingEssentials", select: "season items -_id" });
+    } else {
+        console.log('Skipping pre-population of city fields')
     }
 };
 

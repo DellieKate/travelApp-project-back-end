@@ -65,7 +65,7 @@ describe("Country API Endpoints", () => {
       currency: "Euro",
       language: "German"
     });
-    const response = await request(app).patch(`/countries/${country._id}`).send({ currency: "TSTD" });
+    const response = await request(app).patch(`/countries/${country._id.toString()}`).send({ currency: "TSTD" });
     expect(response.status).toBe(200);
     expect(response.body.currency).toBe("TSTD");
   });
