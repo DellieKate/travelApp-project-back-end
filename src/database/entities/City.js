@@ -27,13 +27,13 @@ const CitySchema = new mongoose.Schema({
 
 // Auto-populate
 function autoPopulateCity (next) {
-    if (this.country) {
+    // if (this.country) {
         this.populate(
             { path: "country", select: "name visaReq currency language -_id", 
                 populate: { path: "vaxReq", select: "vaxReq -_id" }})
             .populate({ path: "activities", select: "name description -_id"})
             .populate({ path: "packingEssentials", select: "season items -_id" });
-    }
+    // }
 };
 
 CitySchema.pre(/^find/, async function () {
