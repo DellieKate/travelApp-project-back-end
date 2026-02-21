@@ -23,6 +23,7 @@ This project is part of a full-stack web application built using the MERN stack 
 6. [Usage](#usage)
 7. [CI/CD Pipeline](#cicd-pipeline)
 8. [Deployment](#deployment)
+9. [Alternative Technologies for Deployment](#alternative-technologies-for-deployment)
 
 # Project Overview
 
@@ -202,13 +203,13 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 **Triggers**
 
-- Push to `revision4` branch
-- Pull requests on any branch
-- Scheduled weekly (Monday 04:19 UTC)
+    - Push to `revision4` branch
+    - Pull requests on any branch
+    - Scheduled weekly (Monday 04:19 UTC)
 
 **Workflow Overview**
 
-- See attached [Workflow](/documents/SystemOverview.md)
+    - Workflow is fully discussed here. [Workflow](/documents/WorkflowOverview.md) 
 
 **Security and Secrets**
 
@@ -218,9 +219,15 @@ All secrets stored in Github secrets (AWS credentials, GHCR token) including env
 
 # Deployment
 
-1. **MondoDB Atlas**: Cloud Database for all travel data
-2. **Render**: Cloud backend hosting
-3. **AWS Fargate**: Container orchestration will rolling deployments
-4. **ECS Tasks**: New revisions deployed, old tasks drained, service updated automatically
+    1. **MondoDB Atlas**: Cloud Database for all travel data
+    2. **Render**: Cloud backend hosting
+    3. **AWS Fargate**: Container orchestration will rolling deployments
+    4. **ECS Tasks**: New revisions deployed, old tasks drained, service updated automatically
+
+[back](#top)
+
+# Alternative Technologies for Deployment 
+
+    - Comparisons are discussed here. [Workflow](/documents/TechnologyComparison.md) 
 
 [back](#top)

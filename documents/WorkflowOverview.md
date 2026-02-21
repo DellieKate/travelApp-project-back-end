@@ -19,7 +19,7 @@ The pipeline is separated into three clear stages: **CI, Release and Deploy**. T
  - GitHub to GitHub Actions
  - GitHub actions to Node.js Runtime
 
-The CI workflow runs when code is pushed to the `revision4` branch, a pull request is opened and a weekly cron schedule runs.
+The CI workflow runs when code is pushed to `revision4` branch, a pull request is opened and a weekly cron schedule runs.
 When triggered, GitHub actions provides a temporary Ubuntu runner. If GitHub is unavailable, CI/CD cannot run.  Automation fully depends on source control integration.
 
 What happens:
@@ -73,6 +73,6 @@ All AWS credentials, database URLs, and tokens are stored securely in GitHub Sec
   - updates ECS task definition
   - creates task revision
   - performs rolling update
-6. New container becomes active while old container is drained
+6. New container becomes active while old container is drained.
 
 
