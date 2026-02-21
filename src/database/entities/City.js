@@ -34,7 +34,7 @@ function autoPopulateCity (next) {
     .populate({ path: "packingEssentials", select: "season items -_id" });
 };
 
-CitySchema.pre(/^find/, autoPopulateCity);
+// CitySchema.pre(/^find/, autoPopulateCity);
 
 const CityModel = mongoose.model("City", CitySchema);
 
