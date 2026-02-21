@@ -28,20 +28,13 @@ afterAll(async () => {
 // In order to create a city for the test database, a country needs to be created
 // first, because the CityModel states that Country is a required field by ObjectID
 describe("City Operations", () => {
-  let fakeCityId1;
-  let fakeCityId2;
-  let fakeCityId3;
-  let fakeCountryId;
 
-  beforeAll(async () => {
-      const country = await CountryModel.create({
-        name: "France",
+  const genericCountry = CountryModel.create({
+        name: "Generic Country",
         visaReq: "No",
         currency: "Euro",
         language: "German"
       });
-      fakeCountryId = country._id;
-  });
 
   // CREATE ONE city
   it("POST /cities should create a new city", async () => {
@@ -50,8 +43,7 @@ describe("City Operations", () => {
         .send({
             name: "Vienna",
             bestMonths: "June to August",
-            bestWeather: "Sunny",
-            country: fakeCountryId
+            bestWeather: "Sunny"
         });
       expect(res.statusCode).toBe(201);
       expect(res.body.city.name).toBe("Vienna");
@@ -63,9 +55,13 @@ describe("City Operations", () => {
         name: "Abu Tij", 
         bestMonths: "May to September",
         bestWeather: "Spring to Autumn",
+        country: genericCountry._id
       })
       const res = await request(app).get("/cities");
       expect(res.statusCode).toBe(200);
+
+      console.log('cities body', res.body)
+
       expect(Array.isArray(res.body.cities)).toBe(true);
       expect(res.body.cities.length).toBeGreaterThan(0);
   });
@@ -76,6 +72,7 @@ describe("City Operations", () => {
         name: "Lubrza", 
         bestMonths: "May to September",
         bestWeather: "Spring to Autumn",
+        country: genericCountry._id
       })
       const res = await request(app).get(`/cities/${city._id}`);
       expect (res.statusCode).toBe(200);
@@ -88,6 +85,7 @@ describe("City Operations", () => {
         name: "Mount Airy", 
         bestMonths: "May to September",
         bestWeather: "Spring to Autumn",
+        country: genericCountry._id
     })
     const res = await request(app)
       .patch(`/cities/${city._id}`)
@@ -103,11 +101,12 @@ describe("City Operations", () => {
         name: "Challans", 
         bestMonths: "May to September",
         bestWeather: "Spring to Autumn",
+        country: genericCountry._id
     })
     const res = await request(app).delete(`/cities/${city._id}`);
     expect(res.statusCode).toBe(200);
 
-    const deleted = await CityModel.findById(fakeCityId3);
+    const deleted = await CityModel.findById(city._id);
     expect(deleted).toBeNull();
   });
 });
