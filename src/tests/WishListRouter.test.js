@@ -7,6 +7,21 @@ import { jest } from "@jest/globals";
 
 jest.setTimeout(20000);
 
+beforeAll(async () => {
+    const MONGO_URL = "mongodb://127.0.0.1:27017/TravelAppTestDB";
+    await mongoose.connect(MONGO_URL);
+  });
+
+afterAll(async () => {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      await mongoose.connection.dropDatabase();
+    }
+  } finally {
+    await dbClose();
+  }
+});
+
 describe("WishList Operations", () => {
   let fakeWishListId;
 

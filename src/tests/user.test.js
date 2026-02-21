@@ -8,13 +8,23 @@ jest.setTimeout(20000);
 
 describe("User API Endpoints", () => {
   let userId;
-  process.env.JWT_SECRET = "testsecret123";
   const testUser = {
     name: "charlisse",
     email: "charlisse@example.com",
     password: "Password123",
     citizenship: "Australia"
   }
+
+  beforeAll(async () => {
+    process.env.JWT_SECRET = "testsecret123";
+    const MONGO_URL = "mongodb://127.0.0.1:27017/travelApp_test";
+    await mongoose.connect(MONGO_URL);
+  });
+
+  afterAll(async () => {
+    await mongoose.connection.dropDatabase();
+    await mongoose.connection.close();
+  });
 
   test("POST /users/register - register a new user", async () => {
     const response = await request(app)

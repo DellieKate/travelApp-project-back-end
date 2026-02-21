@@ -1,12 +1,12 @@
 /** @type {import('jest').Config} */
 export default {
+  verbose: true,
   testEnvironment: "node",
   testSequencer: "./testSequencer.js",
   verbose: true,
   transform: {
     "^.+\\.js$": "babel-jest",     //Transform JS files with Babel
-  },
-  setupFilesAfterEnv: ["src/tests/setup.js"],
+    },
   reporters: [
     "default",
     [
