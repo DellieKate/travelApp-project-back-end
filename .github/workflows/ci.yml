@@ -79,6 +79,7 @@ jobs:
 
   container-build:
     runs-on: ubuntu-latest
+    needs: build-and-verify
     steps:
       
       # ------------ DOCKER COMPOSE TEST PHASE ------------ 
