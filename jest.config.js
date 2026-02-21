@@ -6,7 +6,7 @@ export default {
   transform: {
     "^.+\\.js$": "babel-jest",     //Transform JS files with Babel
   },
-  setupFilesAfterEnv: ["<rootDir>src/tests/setup.js"],
+  setupFilesAfterEnv: ["src/tests/setup.js"],
   reporters: [
     "default",
     [
