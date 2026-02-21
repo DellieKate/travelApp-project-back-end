@@ -23,7 +23,7 @@ afterAll(async () => {
   // } finally {
   //   await dbClose();
   // }
-  await mongoose.connection.close();
+  await mongoose.disconnect()
 });
 
 describe("PackingEssentials Operations", () => {

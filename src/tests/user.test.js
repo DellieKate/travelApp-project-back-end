@@ -26,7 +26,7 @@ describe("User API Endpoints", () => {
   });
 
   afterAll(async () => {
-    await mongoose.connection.close();
+    await mongoose.disconnect()
   });
 
   test("POST /users/register - register a new user", async () => {

@@ -22,13 +22,7 @@ afterAll(async () => {
   // } finally {
   //   await dbClose();
   // }
-  try {
-    if (mongoose.connection.readyState === 1) {
-      await dbClose();
-    }
-  } finally {
-    console.warn('Failed to close db from city rounter test')
-  }
+  await mongoose.disconnect()
 });
 
 // In order to create a city for the test database, a country needs to be created
