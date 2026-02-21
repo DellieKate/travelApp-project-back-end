@@ -1,75 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="30" failures="0" errors="0" time="21.502">
-  <testsuite name="WishList Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="19.461" tests="5">
-    <testcase classname="WishList Operations POST /wishlist should create a new WishList" name="WishList Operations POST /wishlist should create a new WishList" time="15.058">
+<testsuites name="jest tests" tests="30" failures="0" errors="0" time="19.038">
+  <testsuite name="Vax API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="15.982" tests="5">
+    <testcase classname="Vax API Endpoints POST /vax - create new vax requirement" name="Vax API Endpoints POST /vax - create new vax requirement" time="4.158">
     </testcase>
-    <testcase classname="WishList Operations GET /wishlist should return all WishLists" name="WishList Operations GET /wishlist should return all WishLists" time="0.024">
+    <testcase classname="Vax API Endpoints GET /vax - get all vax requirements" name="Vax API Endpoints GET /vax - get all vax requirements" time="0.012">
     </testcase>
-    <testcase classname="WishList Operations GET /wishlist/:id should return one WishList" name="WishList Operations GET /wishlist/:id should return one WishList" time="0.007">
+    <testcase classname="Vax API Endpoints GET /vax/:id - get single vax requirement" name="Vax API Endpoints GET /vax/:id - get single vax requirement" time="0.008">
     </testcase>
-    <testcase classname="WishList Operations PATCH /wishlist/:id should update one WishList" name="WishList Operations PATCH /wishlist/:id should update one WishList" time="1.519">
+    <testcase classname="Vax API Endpoints PATCH /vax/:id - update vax requirement" name="Vax API Endpoints PATCH /vax/:id - update vax requirement" time="2.274">
     </testcase>
-    <testcase classname="WishList Operations DELETE /wishlist/:id should delete one WishList" name="WishList Operations DELETE /wishlist/:id should delete one WishList" time="0.021">
-    </testcase>
-  </testsuite>
-  <testsuite name="Country API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="19.533" tests="5">
-    <testcase classname="Country API Endpoints POST /countries - create a new country" name="Country API Endpoints POST /countries - create a new country" time="11.322">
-    </testcase>
-    <testcase classname="Country API Endpoints GET /countries - get all countries" name="Country API Endpoints GET /countries - get all countries" time="0.011">
-    </testcase>
-    <testcase classname="Country API Endpoints GET /countries/:id - get single country" name="Country API Endpoints GET /countries/:id - get single country" time="0.009">
-    </testcase>
-    <testcase classname="Country API Endpoints PATCH /countries/:id - update country" name="Country API Endpoints PATCH /countries/:id - update country" time="0.01">
-    </testcase>
-    <testcase classname="Country API Endpoints DELETE /countries/:id - delete country" name="Country API Endpoints DELETE /countries/:id - delete country" time="0.007">
+    <testcase classname="Vax API Endpoints DELETE /vax/:id - delete vax requirement" name="Vax API Endpoints DELETE /vax/:id - delete vax requirement" time="0.254">
     </testcase>
   </testsuite>
-  <testsuite name="City Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="19.628" tests="5">
-    <testcase classname="City Operations POST /cities should create a new city" name="City Operations POST /cities should create a new city" time="10.307">
+  <testsuite name="WishList Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="15.978" tests="5">
+    <testcase classname="WishList Operations POST /wishlist should create a new WishList" name="WishList Operations POST /wishlist should create a new WishList" time="11.424">
     </testcase>
-    <testcase classname="City Operations GET /cities should return all cities" name="City Operations GET /cities should return all cities" time="0.023">
+    <testcase classname="WishList Operations GET /wishlist should return all WishLists" name="WishList Operations GET /wishlist should return all WishLists" time="0.013">
     </testcase>
-    <testcase classname="City Operations GET /cities/:id should return one city" name="City Operations GET /cities/:id should return one city" time="0.011">
+    <testcase classname="WishList Operations GET /wishlist/:id should return one WishList" name="WishList Operations GET /wishlist/:id should return one WishList" time="0.006">
     </testcase>
-    <testcase classname="City Operations PATCH /cities/:id should update one city" name="City Operations PATCH /cities/:id should update one city" time="0.011">
+    <testcase classname="WishList Operations PATCH /wishlist/:id should update one WishList" name="WishList Operations PATCH /wishlist/:id should update one WishList" time="1.173">
     </testcase>
-    <testcase classname="City Operations DELETE /cities/:id should delete one city" name="City Operations DELETE /cities/:id should delete one city" time="0.023">
+    <testcase classname="WishList Operations DELETE /wishlist/:id should delete one WishList" name="WishList Operations DELETE /wishlist/:id should delete one WishList" time="1.403">
     </testcase>
   </testsuite>
-  <testsuite name="PackingEssentials Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="19.966" tests="5">
-    <testcase classname="PackingEssentials Operations POST /packing should create a new PackingEssentials entry" name="PackingEssentials Operations POST /packing should create a new PackingEssentials entry" time="7.928">
+  <testsuite name="PackingEssentials Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="16.159" tests="5">
+    <testcase classname="PackingEssentials Operations POST /packing should create a new PackingEssentials entry" name="PackingEssentials Operations POST /packing should create a new PackingEssentials entry" time="5.382">
     </testcase>
-    <testcase classname="PackingEssentials Operations GET /packing should return all PackingEssentials Lists" name="PackingEssentials Operations GET /packing should return all PackingEssentials Lists" time="0.026">
+    <testcase classname="PackingEssentials Operations GET /packing should return all PackingEssentials Lists" name="PackingEssentials Operations GET /packing should return all PackingEssentials Lists" time="0.019">
     </testcase>
     <testcase classname="PackingEssentials Operations GET /packing/:id should return one PackingEssentials List" name="PackingEssentials Operations GET /packing/:id should return one PackingEssentials List" time="0.007">
     </testcase>
-    <testcase classname="PackingEssentials Operations PATCH /packing/:id should update one PackingEssentials List" name="PackingEssentials Operations PATCH /packing/:id should update one PackingEssentials List" time="0.009">
+    <testcase classname="PackingEssentials Operations PATCH /packing/:id should update one PackingEssentials List" name="PackingEssentials Operations PATCH /packing/:id should update one PackingEssentials List" time="0.008">
     </testcase>
-    <testcase classname="PackingEssentials Operations DELETE /packing/:id should delete one PackingEssentials List" name="PackingEssentials Operations DELETE /packing/:id should delete one PackingEssentials List" time="0.01">
-    </testcase>
-  </testsuite>
-  <testsuite name="Vax API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="20.019" tests="5">
-    <testcase classname="Vax API Endpoints POST /vax - create new vax requirement" name="Vax API Endpoints POST /vax - create new vax requirement" time="5.907">
-    </testcase>
-    <testcase classname="Vax API Endpoints GET /vax - get all vax requirements" name="Vax API Endpoints GET /vax - get all vax requirements" time="0.013">
-    </testcase>
-    <testcase classname="Vax API Endpoints GET /vax/:id - get single vax requirement" name="Vax API Endpoints GET /vax/:id - get single vax requirement" time="0.009">
-    </testcase>
-    <testcase classname="Vax API Endpoints PATCH /vax/:id - update vax requirement" name="Vax API Endpoints PATCH /vax/:id - update vax requirement" time="0.055">
-    </testcase>
-    <testcase classname="Vax API Endpoints DELETE /vax/:id - delete vax requirement" name="Vax API Endpoints DELETE /vax/:id - delete vax requirement" time="0.042">
+    <testcase classname="PackingEssentials Operations DELETE /packing/:id should delete one PackingEssentials List" name="PackingEssentials Operations DELETE /packing/:id should delete one PackingEssentials List" time="0.009">
     </testcase>
   </testsuite>
-  <testsuite name="User API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T15:55:26" time="20.591" tests="5">
-    <testcase classname="User API Endpoints POST /users/register - register a new user" name="User API Endpoints POST /users/register - register a new user" time="17.333">
+  <testsuite name="Country API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="17.112" tests="5">
+    <testcase classname="Country API Endpoints POST /countries - create a new country" name="Country API Endpoints POST /countries - create a new country" time="5.703">
     </testcase>
-    <testcase classname="User API Endpoints POST /users/login - login with correct credentials" name="User API Endpoints POST /users/login - login with correct credentials" time="0.101">
+    <testcase classname="Country API Endpoints GET /countries - get all countries" name="Country API Endpoints GET /countries - get all countries" time="0.013">
     </testcase>
-    <testcase classname="User API Endpoints GET /users/:userId - retrieve single user" name="User API Endpoints GET /users/:userId - retrieve single user" time="0.07">
+    <testcase classname="Country API Endpoints GET /countries/:id - get single country" name="Country API Endpoints GET /countries/:id - get single country" time="0.012">
     </testcase>
-    <testcase classname="User API Endpoints PATCH /users/:userId - update user info" name="User API Endpoints PATCH /users/:userId - update user info" time="0.07">
+    <testcase classname="Country API Endpoints PATCH /countries/:id - update country" name="Country API Endpoints PATCH /countries/:id - update country" time="0.039">
     </testcase>
-    <testcase classname="User API Endpoints DELETE /users/:userId - delete user" name="User API Endpoints DELETE /users/:userId - delete user" time="0.13">
+    <testcase classname="Country API Endpoints DELETE /countries/:id - delete country" name="Country API Endpoints DELETE /countries/:id - delete country" time="0.008">
+    </testcase>
+  </testsuite>
+  <testsuite name="City Operations" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="17.6" tests="5">
+    <testcase classname="City Operations POST /cities should create a new city" name="City Operations POST /cities should create a new city" time="8.291">
+    </testcase>
+    <testcase classname="City Operations GET /cities should return all cities" name="City Operations GET /cities should return all cities" time="0.015">
+    </testcase>
+    <testcase classname="City Operations GET /cities/:id should return one city" name="City Operations GET /cities/:id should return one city" time="0.009">
+    </testcase>
+    <testcase classname="City Operations PATCH /cities/:id should update one city" name="City Operations PATCH /cities/:id should update one city" time="0.024">
+    </testcase>
+    <testcase classname="City Operations DELETE /cities/:id should delete one city" name="City Operations DELETE /cities/:id should delete one city" time="0.01">
+    </testcase>
+  </testsuite>
+  <testsuite name="User API Endpoints" errors="0" failures="0" skipped="0" timestamp="2026-02-21T16:01:50" time="18.414" tests="5">
+    <testcase classname="User API Endpoints POST /users/register - register a new user" name="User API Endpoints POST /users/register - register a new user" time="3.563">
+    </testcase>
+    <testcase classname="User API Endpoints POST /users/login - login with correct credentials" name="User API Endpoints POST /users/login - login with correct credentials" time="1.163">
+    </testcase>
+    <testcase classname="User API Endpoints GET /users/:userId - retrieve single user" name="User API Endpoints GET /users/:userId - retrieve single user" time="1.354">
+    </testcase>
+    <testcase classname="User API Endpoints PATCH /users/:userId - update user info" name="User API Endpoints PATCH /users/:userId - update user info" time="0.635">
+    </testcase>
+    <testcase classname="User API Endpoints DELETE /users/:userId - delete user" name="User API Endpoints DELETE /users/:userId - delete user" time="0.656">
     </testcase>
   </testsuite>
 </testsuites>
