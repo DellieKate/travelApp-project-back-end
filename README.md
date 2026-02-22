@@ -107,7 +107,7 @@ This ensures readable, maintainable and scalable code with no breaches in coding
 
 1. Clone the repository
 
-    `git clone https://github.com/DellieKate/travelApp-project-back-end`
+    `git clone https://github.com/DellieKate\travelApp-project-back-end\revision4`
 
     `cd travelApp`
 
@@ -199,35 +199,42 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 [back](#top)
 
-## CI/CD Pipeline
+## DevOps
 
-### **Triggers**
+TravelApp backend is managed through a fully automated CI/CD pipeline that integrates modern DevOps tools into a structured deployment workflow.
 
-    - Push to `revision4` branch
-    - Pull requests on any branch
-    - Scheduled weekly (Monday 04:19 UTC)
+The main technologies used are:
 
-### **Workflow Overview**
+- GitHub - stores the source code
+- GitHub Actions - runs the automation workflows
+- Docker - packages the application into containers
+- Amazon Elastic Container Registry (ECR) - stores Docker Images
+- Amazon ECS with Fargate (serverless) - run containers in the cloud
+- MongoDB Atlas - database service
+- AWS Identity and Access Management (IAM) - manages secure access
+- Amazon Route 53 - DNS management
+- Application Load Balancer (ALB) - Traffic distribution
 
-    - Workflow is fully discussed here. [Workflow](/documents/WorkflowOverview.md) 
+## DevOps Architecture
 
-### **Security and Secrets**
-
-All secrets stored in Github secrets (AWS credentials, GHCR token) including environment variables used for dynamic configuration.
+- Architecture is discussed here. [DevOps](/documents/DevOps%20Architecture.md)
 
 [back](#top)
 
-## Deployment
+## CI/CD Pipeline
 
-1. **MondoDB Atlas**: Cloud Database for all travel data
-2. **Render**: Cloud backend hosting
-3. **AWS Fargate**: Container orchestration will rolling deployments
-4. **ECS Tasks**: New revisions deployed, old tasks drained, service updated automatically
+- Workflows are discussed here. [Workflow](/documents/WorkflowOverview.md)
+
+[back](#top)
+
+## **Security and Secrets**
+
+All secrets are stored in Github secrets (AWS credentials, GHCR token, etc.), including environment variables used for dynamic configuration.
 
 [back](#top)
 
 ## Alternative Technologies for Deployment
 
-    - Comparisons are discussed here. [Workflow](/documents/TechnologyComparison.md) 
+- Comparisons are discussed here. [Comparisons](/documents/TechnologyComparison.md)
 
 [back](#top)
