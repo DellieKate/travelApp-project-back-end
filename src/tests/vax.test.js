@@ -5,7 +5,7 @@ import { app } from "../server.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 import { VaxReqModel } from "../database/entities/VaxReq.js";
 
-jest.setTimeout(20000);
+jest.setTimeout(2000);
 
 process.env.JWT_SECRET = ""
 

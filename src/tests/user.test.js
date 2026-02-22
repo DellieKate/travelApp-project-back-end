@@ -5,7 +5,7 @@ import { app } from "../server.js";
 import { UserModel } from "../database/entities/User.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-jest.setTimeout(20000);
+jest.setTimeout(2000);
 
 describe("User API Endpoints", () => {
   let userId;

@@ -5,7 +5,7 @@ import { CityModel } from "../database/entities/City.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 import { jest } from "@jest/globals";
 
-jest.setTimeout(20000);
+jest.setTimeout(2000);
 
 beforeAll(async () => {
     await dbConnect()

@@ -5,7 +5,7 @@ import { app } from "../server.js";
 import { CountryModel } from "../database/entities/Country.js";
 import { dbConnect, dbClose } from "../database/connectionManager.js";
 
-jest.setTimeout(20000);
+jest.setTimeout(2000);
 
 describe("Country API Endpoints", () => {
   let countryId;
