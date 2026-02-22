@@ -1,15 +1,15 @@
 # TravelApp Backend
 
-Repo: https://github.com/DellieKate/travelApp-project-back-end
+Repo: <https://github.com/DellieKate/travelApp-project-back-end>
 
 Back End Deployment Links:
 
-- **Render**: https://travelapp-project-back-end.onrender.com
-- **AWS Fargate**: http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com
+- **Render**: <https://travelapp-project-back-end.onrender.com>
+- **AWS Fargate**: <http://travelapp-balancer-2100525416.ap-southeast-2.elb.amazonaws.com>
 
 This project is part of a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to explore cities, activities, and travel essentials for different countries. It includes features for creating, reading, updating and deleting (CRUD) travel-related data.
 
-# Table of Contents
+## Table of Contents
 
 1. [Project Overview](#project-overview)
 2. [Technologies Used](#technologies-used)
@@ -25,7 +25,7 @@ This project is part of a full-stack web application built using the MERN stack 
 8. [Deployment](#deployment)
 9. [Alternative Technologies for Deployment](#alternative-technologies-for-deployment)
 
-# Project Overview
+## Project Overview
 
 **TravelApp** simplifies travel planning by allowing users to:
 
@@ -37,9 +37,9 @@ The application uses MERN stack architecture with RESTful APIs. A responsive REA
 
 [back](#top)
 
-# Technologies Used
+## Technologies Used
 
-## Software and Packages
+### Software and Packages
 
 1. **MongoDB**, a NoSQL document-based database that allows flexible schema design for varying travel-related data. Scalable and widely used in web applications like Uber and ebay.
 2. **Express.js** provides a lightweight backend framework optimized for REST APIs. It is an industry standard in Node.js apps, supported by a massive open-source community.
@@ -54,7 +54,7 @@ The application uses MERN stack architecture with RESTful APIs. A responsive REA
 
 [back](#top)
 
-## Hardware Requirements
+### Hardware Requirements
 
 - Minimum: 4GB RAM, dual-core CPU, 10GB free disk space
 - Recommended: 8GB+ RAM, quad-core CPU, SSD storage for faster build times
@@ -62,7 +62,7 @@ The application uses MERN stack architecture with RESTful APIs. A responsive REA
 
 [back](#top)
 
-## Alternatives & Comparison
+### Alternatives & Comparison
 
 1. **Database:** MongoDB vs PostgreSQL, MySQL
     - MongoDb is schema-less, making it ideal for evolving data models, while PostgreSQL is relational and  enforces strict schemas.
@@ -78,7 +78,7 @@ The application uses MERN stack architecture with RESTful APIs. A responsive REA
 
 [back](#top)
 
-## Licensing
+### Licensing
 
 1. MongoDB - server side public license (SSPL)
 2. Express.js, Node.js, Mongoose, bcrypt, CORS, Helmet, JWT, Jest, Supertest - MIT License
@@ -87,7 +87,7 @@ All technologies used are open-source with permissive licenses that allow reuse,
 
 [back](#top)
 
-# Code Style and Conventions
+## Code Style and Conventions
 
 The project applies consistent code style and conventions across all files (Airbnb's Javascript Style Guide).
 
@@ -103,7 +103,7 @@ This ensures readable, maintainable and scalable code with no breaches in coding
 
 [back](#top)
 
-# Installation and Setup
+## Installation and Setup
 
 1. Clone the repository
 
@@ -121,7 +121,7 @@ This ensures readable, maintainable and scalable code with no breaches in coding
 
 [back](#top)
 
-# Database Seeding
+## Database Seeding
 
 Seed the database with initial travel data:
 
@@ -133,11 +133,11 @@ This populates cities, countries, activities, and packing essentials.
 
 [back](#top)
 
-# Usage
+## Usage
 
 - Access API at `http://localhost:3000`and interact with resources:
 
-## Cities
+### Cities
 
 Description              | Methods    |     Endpoint
 ------------------------ |----------  |----------------------------------
@@ -147,7 +147,7 @@ Get a single city by Id  | GET        | /cities/<int:cities_id>
 Update city              | PATCH      | /cities/<int:cities_id>
 Delete city              | DELETE     | /cities/<int:cities_id>
 
-## Countries
+### Countries
 
 Description                    | Methods    |     Endpoint
 ------------------------------ |----------  |----------------------------------
@@ -157,7 +157,7 @@ Get a single country by Id     | GET        | /countries/<int:countries_id>
 Update country details         | PATCH      | /countries/<int:countries_id>
 Delete country record          | DELETE     | /countries/<int:countries_id>
 
-## Vaccination Requirements (VaxReq)
+### Vaccination Requirements (VaxReq)
 
         Endpoint                              
 |-----------------------------|
@@ -165,7 +165,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 /vax/
 /vax/<int:vax_id>
 
-## Activities
+### Activities
 
        Endpoint                              
 |-----------------------------|
@@ -173,7 +173,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 /activities/
 /activities/<int:activities_id>
 
-## PackingEssentials
+### PackingEssentials
 
         Endpoint                              
 |-----------------------------|
@@ -181,7 +181,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 /packing/
 /packing/<int:packing_id>
 
-## WishList
+### WishList
 
         Endpoint                              
 |-----------------------------|
@@ -189,7 +189,7 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 /wishlist/
 /wishlist/<int:wishlist_id>
 
-## Users
+### Users
 
         Endpoint                              
 |-----------------------------|
@@ -199,34 +199,34 @@ Delete country record          | DELETE     | /countries/<int:countries_id>
 
 [back](#top)
 
-# CI/CD Pipeline
+## CI/CD Pipeline
 
-**Triggers**
+### **Triggers**
 
     - Push to `revision4` branch
     - Pull requests on any branch
     - Scheduled weekly (Monday 04:19 UTC)
 
-**Workflow Overview**
+### **Workflow Overview**
 
     - Workflow is fully discussed here. [Workflow](/documents/WorkflowOverview.md) 
 
-**Security and Secrets**
+### **Security and Secrets**
 
 All secrets stored in Github secrets (AWS credentials, GHCR token) including environment variables used for dynamic configuration.
 
 [back](#top)
 
-# Deployment
+## Deployment
 
-    1. **MondoDB Atlas**: Cloud Database for all travel data
-    2. **Render**: Cloud backend hosting
-    3. **AWS Fargate**: Container orchestration will rolling deployments
-    4. **ECS Tasks**: New revisions deployed, old tasks drained, service updated automatically
+1. **MondoDB Atlas**: Cloud Database for all travel data
+2. **Render**: Cloud backend hosting
+3. **AWS Fargate**: Container orchestration will rolling deployments
+4. **ECS Tasks**: New revisions deployed, old tasks drained, service updated automatically
 
 [back](#top)
 
-# Alternative Technologies for Deployment 
+## Alternative Technologies for Deployment
 
     - Comparisons are discussed here. [Workflow](/documents/TechnologyComparison.md) 
 
